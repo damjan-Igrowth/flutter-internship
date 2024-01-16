@@ -1,47 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_internship/models/shapes.dart';
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
+class OverlappingSquares extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Three Squares in a Frame'),
-        ),
-        body: Center(
-          child: FrameWithSquares(),
-        ),
-      ),
-    );
-  }
-}
-
-class FrameWithSquares extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return const Column(
-      mainAxisAlignment: MainAxisAlignment.center,
+    return const Stack(
+      alignment: Alignment.center,
       children: [
-        Expanded(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Expanded(
-                child: Square(color: Colors.blue),
-              ),
-              Expanded(
-                child: Square(color: Colors.green),
-              ),
-            ],
-          ),
+        Positioned(
+          top: 50,
+          left: 50,
+          child: Square(size: 30, color: Colors.purple),
         ),
-        Expanded(
-          child: Square(color: Colors.red),
+        Positioned(
+          top: 75,
+          left: 75,
+          child: Square(size: 30, color: Colors.blue),
         ),
       ],
     );
