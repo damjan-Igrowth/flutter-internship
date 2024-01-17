@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_internship/models/shapes.dart';
+import 'package:flutter_internship/widgets/shapes/square.dart';
+import 'package:flutter_internship/widgets/shapes/rectangle.dart';
 
 class FlexF extends StatelessWidget {
+  const FlexF({super.key});
+
   @override
   Widget build(BuildContext context) {
     return const Column(
