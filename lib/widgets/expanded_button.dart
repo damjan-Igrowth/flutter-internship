@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 
-class Buttons extends StatelessWidget {
+class ExpandedButton extends StatelessWidget {
   final Color backgroundColor;
   final Color foregroundColor;
-  final Size size;
   final String buttonText;
 
-  const Buttons({
+  const ExpandedButton({
     super.key,
     required this.backgroundColor,
     required this.foregroundColor,
-    required this.size,
     required this.buttonText,
     required this.onTap,
   });
@@ -23,11 +21,9 @@ class Buttons extends StatelessWidget {
       style: OutlinedButton.styleFrom(
         backgroundColor: backgroundColor,
         foregroundColor: foregroundColor,
-        fixedSize: size,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12.0),
         ),
-        padding: const EdgeInsets.all(16.0),
       ),
       child: Text(buttonText),
     );

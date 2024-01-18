@@ -3,7 +3,7 @@ import 'package:flutter_internship/helpers/spacerbetween.dart';
 import 'package:flutter_internship/screens/components.dart';
 import 'package:flutter_internship/screens/layout.dart';
 import 'package:flutter_internship/screens/mobile_app.dart';
-import 'package:flutter_internship/widgets/buttons.dart';
+import 'package:flutter_internship/widgets/expanded_button.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -17,10 +17,9 @@ class HomeScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Buttons(
+              ExpandedButton(
                 backgroundColor: Colors.purple,
                 foregroundColor: Colors.white,
-                size: const Size(340, 56),
                 buttonText: 'Layout',
                 onTap: () {
                   Navigator.push(
@@ -32,10 +31,9 @@ class HomeScreen extends StatelessWidget {
                 },
               ),
               const SpacerBetween(),
-              Buttons(
+              ExpandedButton(
                 backgroundColor: Colors.blue,
                 foregroundColor: Colors.white,
-                size: const Size(340, 56),
                 buttonText: 'Components',
                 onTap: () {
                   Navigator.push(
@@ -47,10 +45,9 @@ class HomeScreen extends StatelessWidget {
                 },
               ),
               const SpacerBetween(),
-              Buttons(
+              ExpandedButton(
                 backgroundColor: Colors.orange,
                 foregroundColor: Colors.white,
-                size: const Size(340, 56),
                 buttonText: 'Mobile App',
                 onTap: () {
                   Navigator.push(
