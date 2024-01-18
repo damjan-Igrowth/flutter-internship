@@ -11,24 +11,25 @@ class PositionOverlap extends StatelessWidget {
       height: 288,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        color: Colors.white,
       ),
       child: const Stack(
         children: [
           Positioned(
-            right: 40,
-            top: 40,
-            child: Square(
-              color: Colors.blue,
-              size: 248,
+            child: Align(
+              alignment: Alignment.bottomLeft,
+              child: Square(
+                color: Colors.blue,
+                size: 248,
+              ),
             ),
           ),
           Positioned(
-            left: 40,
-            bottom: 40,
-            child: Square(
-              color: Colors.purple,
-              size: 248,
+            child: Align(
+              alignment: Alignment.topRight,
+              child: Square(
+                color: Colors.purple,
+                size: 248,
+              ),
             ),
           ),
         ],

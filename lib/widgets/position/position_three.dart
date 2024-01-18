@@ -6,26 +6,25 @@ class PositionThree extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        Container(
-          width: 248,
-          height: 248,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
-            color: Colors.blue,
+    return Container(
+      width: 248,
+      height: 248,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8),
+        color: Colors.blue,
+      ),
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          Transform.rotate(
+            angle: 0.7854,
+            child: const Square(
+              color: Colors.purple,
+              size: 176,
+            ),
           ),
-        ),
-        Transform(
-          alignment: FractionalOffset.center,
-          transform: Matrix4.identity()..rotateZ(45 * 3.1415927 / 180),
-          child: const Square(
-            color: Colors.purple,
-            size: 176,
-          ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

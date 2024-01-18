@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_internship/helpers/texts.dart';
-import 'package:flutter_internship/widgets/position/position.five.dart';
+import 'package:flutter_internship/helpers/header.dart';
+import 'package:flutter_internship/widgets/position/position_five.dart';
 import 'package:flutter_internship/widgets/position/position_four.dart';
 import 'package:flutter_internship/widgets/position/position_right.dart';
 import 'package:flutter_internship/widgets/position/position_three.dart';
@@ -23,30 +23,30 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Texts(text: 'Layout Practice'),
+          title: const Header(text: 'Layout Practice'),
         ),
         body: const SingleChildScrollView(
           child: Column(
             children: [
-              Texts(text: 'Rows'),
+              Header(text: 'Rows'),
               ShapesRow(),
-              Texts(text: 'Column'),
+              Header(text: 'Column'),
               ShapesColumn(),
-              Texts(text: 'Flex'),
+              Header(text: 'Flex'),
               FlexF(),
-              Texts(text: 'Position Inside'),
+              Header(text: 'Position Inside'),
               PositionInside(),
-              Texts(text: 'Position Overlap'),
+              Header(text: 'Position Overlap'),
               PositionOverlap(),
-              Texts(text: 'Position One'),
+              Header(text: 'Position One'),
               PositionOne(),
-              Texts(text: 'Position Two'),
+              Header(text: 'Position Two'),
               PositionTwo(),
-              Texts(text: 'Position Three'),
+              Header(text: 'Position Three'),
               PositionThree(),
-              Texts(text: 'Position Four'),
+              Header(text: 'Position Four'),
               PositionFour(),
-              Texts(text: 'Position Five'),
+              Header(text: 'Position Five'),
               PositionFive(),
             ],
           ),
