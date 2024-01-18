@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class Header extends StatelessWidget {
+class HeaderText extends StatelessWidget {
   final String text;
 
-  const Header({super.key, required this.text});
+  const HeaderText({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {

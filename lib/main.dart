@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_internship/helpers/header.dart';
+import 'package:flutter_internship/helpers/header_text.dart';
 import 'package:flutter_internship/widgets/position/position_five.dart';
 import 'package:flutter_internship/widgets/position/position_four.dart';
 import 'package:flutter_internship/widgets/position/position_right.dart';
@@ -23,30 +23,30 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Header(text: 'Layout Practice'),
+          title: const HeaderText(text: 'Layout Practice'),
         ),
         body: const SingleChildScrollView(
           child: Column(
             children: [
-              Header(text: 'Rows'),
+              HeaderText(text: 'Rows'),
               ShapesRow(),
-              Header(text: 'Column'),
+              HeaderText(text: 'Column'),
               ShapesColumn(),
-              Header(text: 'Flex'),
+              HeaderText(text: 'Flex'),
               FlexF(),
-              Header(text: 'Position Inside'),
+              HeaderText(text: 'Position Inside'),
               PositionInside(),
-              Header(text: 'Position Overlap'),
+              HeaderText(text: 'Position Overlap'),
               PositionOverlap(),
-              Header(text: 'Position One'),
+              HeaderText(text: 'Position One'),
               PositionOne(),
-              Header(text: 'Position Two'),
+              HeaderText(text: 'Position Two'),
               PositionTwo(),
-              Header(text: 'Position Three'),
+              HeaderText(text: 'Position Three'),
               PositionThree(),
-              Header(text: 'Position Four'),
+              HeaderText(text: 'Position Four'),
               PositionFour(),
-              Header(text: 'Position Five'),
+              HeaderText(text: 'Position Five'),
               PositionFive(),
             ],
           ),
