@@ -6,14 +6,10 @@ class PositionTwo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 248,
-      height: 248,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
-        color: Colors.blue,
-      ),
-      child: const Stack(
+    return const Square(
+      size: 248,
+      color: Colors.blue,
+      child: Stack(
         alignment: Alignment.center,
         children: [
           Positioned(

@@ -6,17 +6,15 @@ class PositionInside extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      width: 248,
-      height: 248,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
-        color: Colors.blue,
-      ),
-      child: const Square(
-        color: Colors.purple,
-        size: 176,
+    return const Square(
+      size: 248,
+      color: Colors.blue,
+      child: Align(
+        alignment: Alignment.center,
+        child: Square(
+          color: Colors.purple,
+          size: 176,
+        ),
       ),
     );
   }

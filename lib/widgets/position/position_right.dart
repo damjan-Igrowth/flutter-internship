@@ -6,23 +6,17 @@ class PositionOne extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 248,
-      height: 248,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
-        color: Colors.blue,
-      ),
-      child: const Stack(
+    return const Square(
+      size: 248,
+      color: Colors.blue,
+      child: Stack(
         alignment: Alignment.center,
         children: [
-          Positioned(
-            child: Align(
-              alignment: Alignment.centerRight,
-              child: Square(
-                color: Colors.purple,
-                size: 56,
-              ),
+          Align(
+            alignment: Alignment.centerRight,
+            child: Square(
+              color: Colors.purple,
+              size: 56,
             ),
           ),
         ],

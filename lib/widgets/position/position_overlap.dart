@@ -6,30 +6,23 @@ class PositionOverlap extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 288,
-      height: 288,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: const Stack(
+    return const Square(
+      size: 288,
+      color: Colors.white,
+      child: Stack(
         children: [
-          Positioned(
-            child: Align(
-              alignment: Alignment.bottomLeft,
-              child: Square(
-                color: Colors.blue,
-                size: 248,
-              ),
+          Align(
+            alignment: Alignment.bottomLeft,
+            child: Square(
+              color: Colors.blue,
+              size: 248,
             ),
           ),
-          Positioned(
-            child: Align(
-              alignment: Alignment.topRight,
-              child: Square(
-                color: Colors.purple,
-                size: 248,
-              ),
+          Align(
+            alignment: Alignment.topRight,
+            child: Square(
+              color: Colors.purple,
+              size: 248,
             ),
           ),
         ],
