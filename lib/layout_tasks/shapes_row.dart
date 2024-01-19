@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_internship/helpers/spacerbetween.dart';
+import 'package:flutter_internship/helpers/spacer_height.dart';
 import 'package:flutter_internship/widgets/shapes/square.dart';
 import 'package:flutter_internship/widgets/shapes/rectangle.dart';
 
@@ -19,7 +19,7 @@ class ShapesRow extends StatelessWidget {
             Rectangle(height: 24, width: 260, color: Colors.blue),
           ],
         ),
-        SpacerBetween(),
+        SpacerHeight(),
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -29,7 +29,7 @@ class ShapesRow extends StatelessWidget {
             Rectangle(height: 24, width: 260, color: Colors.blue),
           ],
         ),
-        SpacerBetween(),
+        SpacerHeight(),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -39,7 +39,7 @@ class ShapesRow extends StatelessWidget {
             Rectangle(height: 24, width: 260, color: Colors.blue),
           ],
         ),
-        SpacerBetween(),
+        SpacerHeight(),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -49,7 +49,7 @@ class ShapesRow extends StatelessWidget {
             Rectangle(height: 24, width: 260, color: Colors.blue),
           ],
         ),
-        SpacerBetween(),
+        SpacerHeight(),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -59,7 +59,7 @@ class ShapesRow extends StatelessWidget {
             Rectangle(height: 24, width: 260, color: Colors.blue),
           ],
         ),
-        SpacerBetween(),
+        SpacerHeight(),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -69,7 +69,7 @@ class ShapesRow extends StatelessWidget {
             Rectangle(height: 24, width: 260, color: Colors.blue),
           ],
         ),
-        SpacerBetween(),
+        SpacerHeight(),
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -79,7 +79,7 @@ class ShapesRow extends StatelessWidget {
             Rectangle(height: 24, width: 260, color: Colors.blue),
           ],
         ),
-        SpacerBetween(),
+        SpacerHeight(),
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.end,
@@ -89,7 +89,7 @@ class ShapesRow extends StatelessWidget {
             Rectangle(height: 24, width: 260, color: Colors.blue),
           ],
         ),
-        SpacerBetween(),
+        SpacerHeight(),
       ],
     );
   }

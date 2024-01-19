@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_internship/helpers/spacer_height.dart';
 import 'package:flutter_internship/widgets/shapes/square.dart';
 import 'package:flutter_internship/widgets/shapes/rectangle.dart';
 
@@ -40,9 +41,7 @@ class FlexF extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(
-          height: 40,
-        ),
+        SpacerHeight(),
         //2
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -69,9 +68,7 @@ class FlexF extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(
-          height: 40,
-        ),
+        SpacerHeight(),
         //3
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -96,9 +93,7 @@ class FlexF extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(
-          height: 40,
-        ),
+        SpacerHeight(),
         //4
         Column(
           children: [
@@ -124,9 +119,7 @@ class FlexF extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(
-          height: 5,
-        ),
+        SizedBox(height: 5),
         Column(
           children: [
             Row(
@@ -142,9 +135,7 @@ class FlexF extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(
-          height: 40,
-        ),
+        SpacerHeight(),
         //5
         Row(
           mainAxisAlignment: MainAxisAlignment.center,

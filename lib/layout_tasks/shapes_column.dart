@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_internship/helpers/spacerbetween.dart';
+import 'package:flutter_internship/helpers/spacer_height.dart';
 import 'package:flutter_internship/widgets/shapes/square.dart';
 import 'package:flutter_internship/widgets/shapes/rectangle.dart';
 
@@ -20,7 +20,7 @@ class ShapesColumn extends StatelessWidget {
             Rectangle(height: 24, width: 260, color: Colors.blue),
           ],
         ),
-        const SpacerBetween(),
+        const SpacerHeight(),
 
         //2
         const Column(
@@ -32,7 +32,7 @@ class ShapesColumn extends StatelessWidget {
             Rectangle(height: 24, width: 260, color: Colors.blue),
           ],
         ),
-        const SpacerBetween(),
+        const SpacerHeight(),
 
         //3
         const Column(
@@ -44,7 +44,7 @@ class ShapesColumn extends StatelessWidget {
             Rectangle(height: 24, width: 260, color: Colors.blue),
           ],
         ),
-        const SpacerBetween(),
+        const SpacerHeight(),
 
         //4
         Container(
@@ -60,7 +60,7 @@ class ShapesColumn extends StatelessWidget {
             ],
           ),
         ),
-        const SpacerBetween(),
+        const SpacerHeight(),
 
         //5
         Container(
@@ -76,7 +76,7 @@ class ShapesColumn extends StatelessWidget {
             ],
           ),
         ),
-        const SpacerBetween(),
+        const SpacerHeight(),
       ],
     );
   }

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 
-class Triangle extends CustomPainter {
-  final double size;
+class TrianglePainter extends CustomPainter {
   final Color color;
 
-  const Triangle({required this.size, required this.color});
+  const TrianglePainter({required this.color});
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -19,7 +18,7 @@ class Triangle extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return false;
+  bool shouldRepaint(TrianglePainter oldDelegate) {
+    return oldDelegate.color != color;
   }
 }

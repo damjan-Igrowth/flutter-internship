@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_internship/helpers/spacerbetween.dart';
+import 'package:flutter_internship/helpers/spacer_height.dart';
 import 'package:flutter_internship/screens/component.dart';
 import 'package:flutter_internship/screens/layout.dart';
 import 'package:flutter_internship/screens/mobile_app.dart';
@@ -15,7 +15,7 @@ class HomeScreen extends StatelessWidget {
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               ExpandedButton(
                 backgroundColor: Colors.purple,
@@ -30,7 +30,7 @@ class HomeScreen extends StatelessWidget {
                   );
                 },
               ),
-              const SpacerBetween(),
+              const SpacerHeight(),
               ExpandedButton(
                 backgroundColor: Colors.blue,
                 foregroundColor: Colors.white,
@@ -44,7 +44,7 @@ class HomeScreen extends StatelessWidget {
                   );
                 },
               ),
-              const SpacerBetween(),
+              const SpacerHeight(),
               ExpandedButton(
                 backgroundColor: Colors.orange,
                 foregroundColor: Colors.white,

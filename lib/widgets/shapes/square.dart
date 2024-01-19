@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 
 class Square extends StatelessWidget {
-  final double size;
-  final Color color;
+  final double? size;
+  final Color? color;
+  final Widget? child;
 
-  const Square({super.key, required this.size, required this.color});
+  const Square({
+    super.key,
+    this.child,
+    this.size,
+    this.color,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -15,6 +21,7 @@ class Square extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         color: color,
       ),
+      child: child,
     );
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_internship/helpers/texts.dart';
-import 'package:flutter_internship/widgets/position/position.five.dart';
+import 'package:flutter_internship/helpers/header_text.dart';
+import 'package:flutter_internship/widgets/position/position_five.dart';
 import 'package:flutter_internship/widgets/position/position_four.dart';
 import 'package:flutter_internship/widgets/position/position_right.dart';
 import 'package:flutter_internship/widgets/position/position_three.dart';
@@ -18,30 +18,30 @@ class LayoutScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Texts(text: 'Layout Practice'),
+        title: const HeaderText(text: 'Layout Practice'),
       ),
       body: const SingleChildScrollView(
         child: Column(
           children: [
-            Texts(text: 'Rows'),
+            HeaderText(text: 'Rows'),
             ShapesRow(),
-            Texts(text: 'Column'),
+            HeaderText(text: 'Column'),
             ShapesColumn(),
-            Texts(text: 'Flex'),
+            HeaderText(text: 'Flex'),
             FlexF(),
-            Texts(text: 'Position Inside'),
+            HeaderText(text: 'Position Inside'),
             PositionInside(),
-            Texts(text: 'Position Overlap'),
+            HeaderText(text: 'Position Overlap'),
             PositionOverlap(),
-            Texts(text: 'Position One'),
+            HeaderText(text: 'Position One'),
             PositionOne(),
-            Texts(text: 'Position Two'),
+            HeaderText(text: 'Position Two'),
             PositionTwo(),
-            Texts(text: 'Position Three'),
+            HeaderText(text: 'Position Three'),
             PositionThree(),
-            Texts(text: 'Position Four'),
+            HeaderText(text: 'Position Four'),
             PositionFour(),
-            Texts(text: 'Position Five'),
+            HeaderText(text: 'Position Five'),
             PositionFive(),
           ],
         ),

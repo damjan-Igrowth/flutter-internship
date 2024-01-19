@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_internship/helpers/texts.dart';
+import 'package:flutter_internship/helpers/header_text.dart';
+import 'package:flutter_internship/helpers/spacer_width.dart';
 import 'package:flutter_internship/widgets/components/chip_component.dart';
 import 'package:flutter_internship/widgets/components/circle_icon.dart';
 
@@ -11,14 +12,14 @@ class ComponentClass extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Assignment II'),
+          title: const HeaderText(text: 'Components'),
         ),
         body: const SingleChildScrollView(
           child: Column(
             children: [
-              Texts(text: 'Chip components'),
+              HeaderText(text: 'Chip components'),
               ChipComponentClass(),
-              Texts(text: 'Circle icon'),
+              HeaderText(text: 'Circle icon'),
               Row(
                 children: [
                   CircleIconClass(
@@ -28,15 +29,17 @@ class ComponentClass extends StatelessWidget {
                     backgroundColor: Colors.greenAccent,
                     iconColor: Colors.green,
                   ),
+                  SpacerWidth(),
                   CircleIconClass(
-                    icon: Icons.warning_sharp,
+                    icon: Icons.error,
                     iconSize: 24,
                     containerSize: 48,
                     backgroundColor: Colors.orangeAccent,
                     iconColor: Colors.orange,
                   ),
+                  SpacerWidth(),
                   CircleIconClass(
-                    icon: Icons.remove_circle_outline_rounded,
+                    icon: Icons.cancel,
                     iconSize: 24,
                     containerSize: 48,
                     backgroundColor: Colors.redAccent,
