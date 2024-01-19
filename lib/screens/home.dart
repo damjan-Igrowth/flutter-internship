@@ -12,53 +12,56 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              ExpandedButton(
-                backgroundColor: Colors.purple,
-                foregroundColor: Colors.white,
-                buttonText: 'Layout',
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const LayoutScreen(),
-                    ),
-                  );
-                },
-              ),
-              const SpacerHeight(),
-              ExpandedButton(
-                backgroundColor: Colors.blue,
-                foregroundColor: Colors.white,
-                buttonText: 'Components',
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const ComponentClass(),
-                    ),
-                  );
-                },
-              ),
-              const SpacerHeight(),
-              ExpandedButton(
-                backgroundColor: Colors.orange,
-                foregroundColor: Colors.white,
-                buttonText: 'Mobile App',
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const MobileAppClass(),
-                    ),
-                  );
-                },
-              ),
-            ],
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                ExpandedButton(
+                  backgroundColor: Colors.purple,
+                  foregroundColor: Colors.white,
+                  buttonText: 'Layout',
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const LayoutScreen(),
+                      ),
+                    );
+                  },
+                ),
+                const SpacerHeight(),
+                ExpandedButton(
+                  backgroundColor: Colors.blue,
+                  foregroundColor: Colors.white,
+                  buttonText: 'Components',
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ComponentClass(),
+                      ),
+                    );
+                  },
+                ),
+                const SpacerHeight(),
+                ExpandedButton(
+                  backgroundColor: Colors.orange,
+                  foregroundColor: Colors.white,
+                  buttonText: 'Mobile App',
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const MobileAppClass(),
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_internship/helpers/chip_text.dart';
 import 'package:flutter_internship/helpers/header_text.dart';
 import 'package:flutter_internship/helpers/spacer_width.dart';
+import 'package:flutter_internship/widgets/components/assignment_card.dart';
 import 'package:flutter_internship/widgets/components/chip_component.dart';
 import 'package:flutter_internship/widgets/components/circle_icon.dart';
 
@@ -26,7 +27,6 @@ class ComponentClass extends StatelessWidget {
                     color: Colors.grey,
                     label: ChipText(text: 'Work in Progress'),
                   ),
-                  SpacerWidth(),
                   ChipComponentClass(
                     color: Colors.grey,
                     label: Row(
@@ -41,7 +41,6 @@ class ComponentClass extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SpacerWidth(),
                   ChipComponentClass(
                     color: Colors.white,
                     label: Row(
@@ -56,7 +55,6 @@ class ComponentClass extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SpacerWidth(),
                   ChipComponentClass(
                     color: Colors.white,
                     label: ChipText(text: 'Old collection'),
@@ -91,6 +89,17 @@ class ComponentClass extends StatelessWidget {
                     iconColor: Colors.red,
                   ),
                 ],
+              ),
+              //////////3
+              HeaderText(text: 'Assignment Card'),
+              AssignmentCard(
+                title: 'Assignment V',
+                description:
+                    'Lorem ipsum dolor sit amet consectetur. Cum enim tempus purus condimentum tristique viverra. Ipsum aliquam nisl imperdiet justo arcu nulla tortor cursus suspendisse.',
+                status: ChipComponentClass(
+                  color: Colors.grey,
+                  label: ChipText(text: 'Work in Progress'),
+                ),
               ),
             ],
           ),
