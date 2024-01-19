@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_internship/helpers/spacerbetween.dart';
-import 'package:flutter_internship/screens/components.dart';
+import 'package:flutter_internship/screens/component.dart';
 import 'package:flutter_internship/screens/layout.dart';
 import 'package:flutter_internship/screens/mobile_app.dart';
 import 'package:flutter_internship/widgets/expanded_button.dart';
@@ -39,7 +39,7 @@ class HomeScreen extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const ComponentsClass(),
+                      builder: (context) => const ComponentClass(),
                     ),
                   );
                 },
