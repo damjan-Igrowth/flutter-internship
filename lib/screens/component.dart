@@ -5,6 +5,7 @@ import 'package:flutter_internship/helpers/spacer_width.dart';
 import 'package:flutter_internship/widgets/components/assignment_card.dart';
 import 'package:flutter_internship/widgets/components/chip_component.dart';
 import 'package:flutter_internship/widgets/components/circle_icon.dart';
+import 'package:flutter_internship/widgets/components/discount_card.dart';
 
 class ComponentClass extends StatelessWidget {
   const ComponentClass({super.key});
@@ -27,6 +28,7 @@ class ComponentClass extends StatelessWidget {
                     color: Colors.grey,
                     label: ChipText(text: 'Work in Progress'),
                   ),
+                  SpacerWidth(),
                   ChipComponentClass(
                     color: Colors.grey,
                     label: Row(
@@ -41,6 +43,7 @@ class ComponentClass extends StatelessWidget {
                       ],
                     ),
                   ),
+                  SpacerWidth(),
                   ChipComponentClass(
                     color: Colors.white,
                     label: Row(
@@ -55,6 +58,7 @@ class ComponentClass extends StatelessWidget {
                       ],
                     ),
                   ),
+                  SpacerWidth(),
                   ChipComponentClass(
                     color: Colors.white,
                     label: ChipText(text: 'Old collection'),
@@ -99,6 +103,20 @@ class ComponentClass extends StatelessWidget {
                 status: ChipComponentClass(
                   color: Colors.grey,
                   label: ChipText(text: 'Work in Progress'),
+                ),
+              ),
+              //////////4
+              HeaderText(text: 'Discount Card'),
+              DiscountCard(
+                title: 'Get a discount!',
+                description:
+                    'To unlock an exclusive discount on our stylish sneakers, simply engage with our social media channels by liking, sharing, and tagging friends in our latest posts',
+                iconStatus: CircleIconClass(
+                  icon: Icons.check_circle_outline_rounded,
+                  iconSize: 24.5,
+                  containerSize: 49,
+                  backgroundColor: Colors.greenAccent,
+                  iconColor: Colors.green,
                 ),
               ),
             ],
