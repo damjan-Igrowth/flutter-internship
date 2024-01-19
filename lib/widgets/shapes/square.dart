@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 
 class Square extends StatelessWidget {
   final double? size;
-  final Color color;
+  final Color? color;
   final Widget? child;
 
   const Square({
     super.key,
     this.child,
     this.size,
-    required this.color,
+    this.color,
   });
 
   @override

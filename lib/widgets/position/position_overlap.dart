@@ -8,7 +8,6 @@ class PositionOverlap extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Square(
       size: 288,
-      color: Colors.white,
       child: Stack(
         children: [
           Align(

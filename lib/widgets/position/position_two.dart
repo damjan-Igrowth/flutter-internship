@@ -12,22 +12,18 @@ class PositionTwo extends StatelessWidget {
       child: Stack(
         alignment: Alignment.center,
         children: [
-          Positioned(
-            child: Align(
-              alignment: Alignment.topLeft,
-              child: Square(
-                color: Colors.purple,
-                size: 56,
-              ),
+          Align(
+            alignment: Alignment.topLeft,
+            child: Square(
+              color: Colors.purple,
+              size: 56,
             ),
           ),
-          Positioned(
-            child: Align(
-              alignment: Alignment.bottomRight,
-              child: Square(
-                color: Colors.purple,
-                size: 56,
-              ),
+          Align(
+            alignment: Alignment.bottomRight,
+            child: Square(
+              color: Colors.purple,
+              size: 56,
             ),
           ),
         ],
