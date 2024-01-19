@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_internship/helpers/chip_text.dart';
 import 'package:flutter_internship/helpers/header_text.dart';
 import 'package:flutter_internship/helpers/spacer_width.dart';
 import 'package:flutter_internship/widgets/components/chip_component.dart';
@@ -17,8 +18,52 @@ class ComponentClass extends StatelessWidget {
         body: const SingleChildScrollView(
           child: Column(
             children: [
+              //////////1
               HeaderText(text: 'Chip components'),
-              ChipComponentClass(),
+              Row(
+                children: [
+                  ChipComponentClass(
+                    color: Colors.grey,
+                    label: ChipText(text: 'Work in Progress'),
+                  ),
+                  SpacerWidth(),
+                  ChipComponentClass(
+                    color: Colors.grey,
+                    label: Row(
+                      children: [
+                        ChipText(text: 'Work in Progress'),
+                        SpacerWidth(),
+                        Icon(
+                          Icons.more_horiz,
+                          color: Colors.black,
+                          size: 18,
+                        ),
+                      ],
+                    ),
+                  ),
+                  SpacerWidth(),
+                  ChipComponentClass(
+                    color: Colors.white,
+                    label: Row(
+                      children: [
+                        ChipText(text: 'New'),
+                        SpacerWidth(),
+                        Icon(
+                          Icons.circle,
+                          color: Colors.red,
+                          size: 12,
+                        ),
+                      ],
+                    ),
+                  ),
+                  SpacerWidth(),
+                  ChipComponentClass(
+                    color: Colors.white,
+                    label: ChipText(text: 'Old collection'),
+                  ),
+                ],
+              ),
+              //////////2
               HeaderText(text: 'Circle icon'),
               Row(
                 children: [
