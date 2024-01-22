@@ -5,6 +5,6 @@ class SpacerWidth extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SizedBox(width: 5);
+    return const SizedBox(width: 4);
   }
 }
