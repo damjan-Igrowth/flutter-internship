@@ -22,20 +22,20 @@ class ComponentClass extends StatelessWidget {
               Row(
                 children: [
                   ChipComponent(
-                      chipType: ChipType.Flat, label: 'Work in progress'),
+                      chipType: ChipType.flat, label: 'Work in progress'),
                   SpacerWidth(),
                   ChipComponent(
-                      chipType: ChipType.Flat,
+                      chipType: ChipType.flat,
                       label: 'Work in progress',
                       icon: Icons.more_horiz),
                   SpacerWidth(),
                   ChipComponent(
-                      chipType: ChipType.Clean,
+                      chipType: ChipType.clean,
                       label: 'New',
                       icon: Icons.circle),
                   SpacerWidth(),
                   ChipComponent(
-                      chipType: ChipType.Clean, label: 'Old collection'),
+                      chipType: ChipType.clean, label: 'Old collection'),
                 ],
               ),
               //////////2
@@ -49,6 +49,7 @@ class ComponentClass extends StatelessWidget {
                   CircleIcon.error(),
                 ],
               ),
+              //////////3
             ],
           ),
         ),

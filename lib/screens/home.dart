@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_internship/helpers/spacer_height.dart';
 import 'package:flutter_internship/screens/component.dart';
 import 'package:flutter_internship/screens/layout.dart';
 import 'package:flutter_internship/screens/mobile_app.dart';
@@ -13,52 +12,52 @@ class HomeScreen extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              ExpandedButton(
-                backgroundColor: Colors.purple,
-                foregroundColor: Colors.white,
-                buttonText: 'Layout',
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const LayoutScreen(),
-                    ),
-                  );
-                },
-              ),
-              const SpacerHeight(),
-              ExpandedButton(
-                backgroundColor: Colors.blue,
-                foregroundColor: Colors.white,
-                buttonText: 'Components',
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const ComponentClass(),
-                    ),
-                  );
-                },
-              ),
-              const SpacerHeight(),
-              ExpandedButton(
-                backgroundColor: Colors.orange,
-                foregroundColor: Colors.white,
-                buttonText: 'Mobile App',
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const MobileAppClass(),
-                    ),
-                  );
-                },
-              ),
-            ],
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                ExpandedButton(
+                  backgroundColor: const Color(0xFF7E44F8),
+                  buttonText: 'Layout',
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const LayoutScreen(),
+                      ),
+                    );
+                  },
+                ),
+                const SizedBox(height: 16),
+                ExpandedButton(
+                  backgroundColor: const Color(0xFF44B7F8),
+                  buttonText: 'Components',
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ComponentClass(),
+                      ),
+                    );
+                  },
+                ),
+                const SizedBox(height: 16),
+                ExpandedButton(
+                  backgroundColor: const Color(0xFFF89A44),
+                  buttonText: 'Mobile App',
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const MobileAppClass(),
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),

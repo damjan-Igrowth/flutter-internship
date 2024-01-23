@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_internship/helpers/spacer_width.dart';
+import 'package:flutter_internship/helpers/chip_content.dart';
 
-enum ChipType { Flat, Clean }
+enum ChipType { flat, clean }
 
 class ChipComponent extends StatelessWidget {
   final ChipType chipType;
@@ -9,20 +9,18 @@ class ChipComponent extends StatelessWidget {
   final String label;
 
   const ChipComponent({
-    Key? key,
+    super.key,
     required this.chipType,
     this.icon,
     required this.label,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
-    switch (chipType) {
-      case ChipType.Flat:
-        return FlatChip(label: label, icon: icon);
-      case ChipType.Clean:
-        return CleanChip(label: label, icon: icon);
-    }
+    return switch (chipType) {
+      ChipType.flat => FlatChip(label: label, icon: icon),
+      ChipType.clean => CleanChip(label: label, icon: icon)
+    };
   }
 }
 
@@ -40,36 +38,20 @@ class FlatChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Chip(
-      label: Align(
-        alignment: Alignment.center,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-          child: Row(
-            children: [
-              Text(
-                label,
-                style: const TextStyle(
-                  color: Color(0xFF7B828A),
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              if (icon != null) const SpacerWidth(),
-              if (icon != null)
-                Icon(
-                  icon,
-                  color: const Color(0xFF7B828A),
-                  size: 20,
-                )
-            ],
-          ),
-        ),
+      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+      label: ChipContent(
+        chipType: ChipType.flat,
+        label: label,
+        icon: icon,
+        textColor: const Color(0xFF7B828A),
+        iconColor: const Color(0xFF7B828A),
+        iconSize: 20,
       ),
       backgroundColor: const Color(0xFFEBEBEB),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
-        side: BorderSide.none,
       ),
+      side: BorderSide.none,
     );
   }
 }
@@ -87,35 +69,33 @@ class CleanChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Chip(
-      label: Align(
-        alignment: Alignment.center,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-          child: Row(
-            children: [
-              Text(
-                label,
-                style: const TextStyle(
-                  color: Color(0xFF111111),
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              if (icon != null) const SpacerWidth(),
-              if (icon != null)
-                Icon(
-                  icon,
-                  color: const Color(0xFFEE2636),
-                  size: 8,
-                ),
-            ],
-          ),
-        ),
-      ),
-      backgroundColor: const Color(0Xffffffff),
-      shape: RoundedRectangleBorder(
+    return Container(
+      decoration: BoxDecoration(
+        color: const Color(0Xffffffff),
         borderRadius: BorderRadius.circular(8),
+        boxShadow: const [
+          BoxShadow(
+            color: Color(0x1A000000),
+            offset: Offset(0, 2),
+            blurRadius: 12,
+            spreadRadius: 0,
+          ),
+        ],
+      ),
+      child: Chip(
+        padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+        label: ChipContent(
+          chipType: ChipType.clean,
+          label: label,
+          icon: icon,
+          textColor: const Color(0xFF111111),
+          iconColor: const Color(0xFFEE2636),
+          iconSize: 8,
+        ),
+        backgroundColor: const Color(0Xffffffff),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
         side: BorderSide.none,
       ),
     );
