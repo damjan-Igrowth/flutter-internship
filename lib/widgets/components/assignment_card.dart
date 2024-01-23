@@ -33,7 +33,7 @@ class AssignmentCard extends StatelessWidget {
                   child: Align(
                     alignment: Alignment.topLeft,
                     child: Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 0, 8, 16),
+                      padding: const EdgeInsets.only(right: 8, bottom: 16),
                       child: Text(
                         title,
                         overflow: TextOverflow.ellipsis,
@@ -42,6 +42,7 @@ class AssignmentCard extends StatelessWidget {
                           fontWeight: FontWeight.w600,
                           fontSize: 20,
                           color: Color(0xFF181E25),
+                          fontFamily: 'Inter',
                         ),
                       ),
                     ),
@@ -50,7 +51,7 @@ class AssignmentCard extends StatelessWidget {
                 const Align(
                   alignment: Alignment.topRight,
                   child: Padding(
-                    padding: EdgeInsets.fromLTRB(8, 0, 0, 16),
+                    padding: EdgeInsets.only(left: 8, bottom: 16),
                     child: ChipComponent(
                         chipType: ChipType.flat, label: 'Work in progress'),
                   ),
@@ -58,13 +59,15 @@ class AssignmentCard extends StatelessWidget {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
+              padding: const EdgeInsets.only(top: 16),
               child: Text(
                 description,
                 style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
                   color: Color(0xFF5D5D63),
+                  fontFamily: 'Inter',
+                  fontStyle: FontStyle.normal,
                 ),
               ),
             ),
