@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 
 class ExpandedButton extends StatelessWidget {
   final Color backgroundColor;
-  final Color foregroundColor;
   final String buttonText;
 
   const ExpandedButton({
     super.key,
     required this.backgroundColor,
-    required this.foregroundColor,
     required this.buttonText,
     required this.onTap,
   });
@@ -19,13 +17,24 @@ class ExpandedButton extends StatelessWidget {
     return OutlinedButton(
       onPressed: onTap,
       style: OutlinedButton.styleFrom(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
         backgroundColor: backgroundColor,
-        foregroundColor: foregroundColor,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12.0),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        side: BorderSide.none,
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+        child: Text(
+          buttonText,
+          style: const TextStyle(
+            color: Color(0xFFFFFFFF),
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+          ),
         ),
       ),
-      child: Text(buttonText),
     );
   }
 }

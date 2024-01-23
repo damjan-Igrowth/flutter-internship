@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_internship/helpers/chip_text.dart';
 import 'package:flutter_internship/helpers/header_text.dart';
 import 'package:flutter_internship/helpers/spacer_width.dart';
 import 'package:flutter_internship/widgets/components/assignment_card.dart';
@@ -23,71 +22,32 @@ class ComponentClass extends StatelessWidget {
               HeaderText(text: 'Chip components'),
               Row(
                 children: [
-                  ChipComponentClass(
-                    color: Colors.grey,
-                    label: ChipText(text: 'Work in Progress'),
-                  ),
-                  ChipComponentClass(
-                    color: Colors.grey,
-                    label: Row(
-                      children: [
-                        ChipText(text: 'Work in Progress'),
-                        SpacerWidth(),
-                        Icon(
-                          Icons.more_horiz,
-                          color: Colors.black,
-                          size: 18,
-                        ),
-                      ],
-                    ),
-                  ),
-                  ChipComponentClass(
-                    color: Colors.white,
-                    label: Row(
-                      children: [
-                        ChipText(text: 'New'),
-                        SpacerWidth(),
-                        Icon(
-                          Icons.circle,
-                          color: Colors.red,
-                          size: 12,
-                        ),
-                      ],
-                    ),
-                  ),
-                  ChipComponentClass(
-                    color: Colors.white,
-                    label: ChipText(text: 'Old collection'),
-                  ),
+                  ChipComponent(
+                      chipType: ChipType.flat, label: 'Work in progress'),
+                  SpacerWidth(),
+                  ChipComponent(
+                      chipType: ChipType.flat,
+                      label: 'Work in progress',
+                      icon: Icons.more_horiz),
+                  SpacerWidth(),
+                  ChipComponent(
+                      chipType: ChipType.clean,
+                      label: 'New',
+                      icon: Icons.circle),
+                  SpacerWidth(),
+                  ChipComponent(
+                      chipType: ChipType.clean, label: 'Old collection'),
                 ],
               ),
               //////////2
-              HeaderText(text: 'Circle icon'),
+              HeaderText(text: 'Circle Icon'),
               Row(
                 children: [
-                  CircleIconClass(
-                    icon: Icons.check_circle_outline_rounded,
-                    iconSize: 24,
-                    containerSize: 48,
-                    backgroundColor: Colors.greenAccent,
-                    iconColor: Colors.green,
-                  ),
+                  CircleIcon.success(),
                   SpacerWidth(),
-                  CircleIconClass(
-                    icon: Icons.error,
-                    iconSize: 24,
-                    containerSize: 48,
-                    backgroundColor: Colors.orangeAccent,
-                    iconColor: Colors.orange,
-                  ),
+                  CircleIcon.warning(),
                   SpacerWidth(),
-                  CircleIconClass(
-                    icon: Icons.cancel,
-                    iconSize: 24,
-                    containerSize: 48,
-                    backgroundColor: Colors.redAccent,
-                    iconColor: Colors.red,
-                  ),
+                  CircleIcon.error(),
                 ],
               ),
               //////////3
@@ -96,10 +56,6 @@ class ComponentClass extends StatelessWidget {
                 title: 'Assignment V',
                 description:
                     'Lorem ipsum dolor sit amet consectetur. Cum enim tempus purus condimentum tristique viverra. Ipsum aliquam nisl imperdiet justo arcu nulla tortor cursus suspendisse.',
-                status: ChipComponentClass(
-                  color: Colors.grey,
-                  label: ChipText(text: 'Work in Progress'),
-                ),
               ),
             ],
           ),
