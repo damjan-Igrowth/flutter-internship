@@ -31,6 +31,8 @@ class ChipContent extends StatelessWidget {
             fontSize: 14,
             fontWeight:
                 chipType == ChipType.flat ? FontWeight.w600 : FontWeight.w500,
+            fontFamily: 'Inter',
+            fontStyle: FontStyle.normal,
           ),
         ),
         if (icon != null) const SpacerWidth(),
