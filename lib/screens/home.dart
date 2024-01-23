@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_internship/helpers/spacer_height.dart';
 import 'package:flutter_internship/screens/component.dart';
 import 'package:flutter_internship/screens/layout.dart';
 import 'package:flutter_internship/screens/mobile_app.dart';
@@ -12,16 +11,15 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        body: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Center(
+        body: Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 ExpandedButton(
-                  backgroundColor: Colors.purple,
-                  foregroundColor: Colors.white,
+                  backgroundColor: const Color(0xFF7E44F8),
                   buttonText: 'Layout',
                   onTap: () {
                     Navigator.push(
@@ -32,10 +30,9 @@ class HomeScreen extends StatelessWidget {
                     );
                   },
                 ),
-                const SpacerHeight(),
+                const SizedBox(height: 16),
                 ExpandedButton(
-                  backgroundColor: Colors.blue,
-                  foregroundColor: Colors.white,
+                  backgroundColor: const Color(0xFF44B7F8),
                   buttonText: 'Components',
                   onTap: () {
                     Navigator.push(
@@ -46,10 +43,9 @@ class HomeScreen extends StatelessWidget {
                     );
                   },
                 ),
-                const SpacerHeight(),
+                const SizedBox(height: 16),
                 ExpandedButton(
-                  backgroundColor: Colors.orange,
-                  foregroundColor: Colors.white,
+                  backgroundColor: const Color(0xFFF89A44),
                   buttonText: 'Mobile App',
                   onTap: () {
                     Navigator.push(
