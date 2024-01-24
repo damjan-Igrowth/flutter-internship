@@ -18,7 +18,6 @@ class ProductCardSpecial extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: Container(
-        width: 348,
         padding: const EdgeInsets.fromLTRB(16, 16, 0, 16),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
@@ -34,6 +33,7 @@ class ProductCardSpecial extends StatelessWidget {
           ],
         ),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Column(
@@ -77,15 +77,14 @@ class ProductCardSpecial extends StatelessWidget {
               ],
             ),
             const SizedBox(width: 32),
-            Expanded(
-              child: Container(
-                width: 205.113,
-                height: 100,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage(image),
-                    fit: BoxFit.cover,
-                  ),
+            Container(
+              width: 205.11327,
+              height: 100,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  alignment: Alignment.centerRight,
+                  image: AssetImage(image),
+                  fit: BoxFit.contain,
                 ),
               ),
             ),

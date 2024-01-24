@@ -24,10 +24,7 @@ class DiscountCard extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(
-              width: 49.0,
-              child: CircleIcon.success(),
-            ),
+            const CircleIcon.success(),
             const SizedBox(width: 16),
             Expanded(
               child: Column(
