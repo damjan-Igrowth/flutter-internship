@@ -53,10 +53,10 @@ class ComponentClass extends StatelessWidget {
               //////////3
               HeaderText(text: 'Assignment Card'),
               AssignmentCard(
-                title: 'Assignment V',
-                description:
-                    'Lorem ipsum dolor sit amet consectetur. Cum enim tempus purus condimentum tristique viverra. Ipsum aliquam nisl imperdiet justo arcu nulla tortor cursus suspendisse.',
-              ),
+                  title: 'Assignment V',
+                  description:
+                      'Lorem ipsum dolor sit amet consectetur. Cum enim tempus purus condimentum tristique viverra. Ipsum aliquam nisl imperdiet justo arcu nulla tortor cursus suspendisse.',
+                  status: 'Work in progress'),
             ],
           ),
         ),
