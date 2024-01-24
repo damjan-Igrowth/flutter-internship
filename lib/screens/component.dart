@@ -49,7 +49,6 @@ class ComponentClass extends StatelessWidget {
                   CircleIcon.error(),
                 ],
               ),
-              //////////3
             ],
           ),
         ),
