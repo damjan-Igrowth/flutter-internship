@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_internship/helpers/chip_content.dart';
+import 'package:flutter_internship/helpers/spacer_width.dart';
 
 enum ChipType { flat, clean }
 
@@ -39,7 +39,7 @@ class FlatChip extends StatelessWidget {
   Widget build(BuildContext context) {
     return Chip(
       padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-      label: ChipContent(
+      label: _ChipContent(
         chipType: ChipType.flat,
         label: label,
         icon: icon,
@@ -84,7 +84,7 @@ class CleanChip extends StatelessWidget {
       ),
       child: Chip(
         padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-        label: ChipContent(
+        label: _ChipContent(
           chipType: ChipType.clean,
           label: label,
           icon: icon,
@@ -98,6 +98,50 @@ class CleanChip extends StatelessWidget {
         ),
         side: BorderSide.none,
       ),
+    );
+  }
+}
+
+class _ChipContent extends StatelessWidget {
+  final String label;
+  final IconData? icon;
+  final Color textColor;
+  final Color iconColor;
+  final double iconSize;
+  final ChipType? chipType;
+
+  const _ChipContent({
+    required this.label,
+    this.icon,
+    required this.textColor,
+    required this.iconColor,
+    required this.iconSize,
+    this.chipType,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Text(
+          label,
+          style: TextStyle(
+            color: textColor,
+            fontSize: 14,
+            fontWeight:
+                chipType == ChipType.flat ? FontWeight.w600 : FontWeight.w500,
+            fontFamily: 'Inter',
+            fontStyle: FontStyle.normal,
+          ),
+        ),
+        if (icon != null) const SpacerWidth(),
+        if (icon != null)
+          Icon(
+            icon,
+            color: iconColor,
+            size: iconSize,
+          )
+      ],
     );
   }
 }
