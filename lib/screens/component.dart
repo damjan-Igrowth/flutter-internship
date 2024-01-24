@@ -6,6 +6,7 @@ import 'package:flutter_internship/widgets/components/chip_component.dart';
 import 'package:flutter_internship/widgets/components/circle_icon.dart';
 import 'package:flutter_internship/widgets/components/discount_card.dart';
 import 'package:flutter_internship/widgets/components/product_card.dart';
+import 'package:flutter_internship/widgets/components/product_card_special.dart';
 
 class ComponentClass extends StatelessWidget {
   const ComponentClass({super.key});
@@ -72,6 +73,14 @@ class ComponentClass extends StatelessWidget {
                 title: 'NIKE Dunk Low',
                 image: 'lib/assets/images/imageShoe.jpg',
                 price: '100.00 €',
+              ),
+              //////////5
+              HeaderText(text: 'Product Card - Special'),
+              ProductCardSpecial(
+                image: 'lib/assets/images/shoeImage2.png',
+                title: 'NIKE Air Jordan',
+                description: 'Grab the last pair now',
+                price: '160.00 €',
               ),
             ],
           ),
