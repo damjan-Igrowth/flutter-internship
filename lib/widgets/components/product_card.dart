@@ -16,19 +16,26 @@ class ProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     double maxWidth = 168;
     double maxHeight = 125.516;
+    double cardBorderRadius = 16;
+
     return Card(
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(11.111),
-          topRight: Radius.circular(11.111),
+      color: const Color(0xFFFFFFFF),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(cardBorderRadius),
+        side: const BorderSide(
+          color: Color(0xFFE2E2E2),
+          width: 1,
         ),
       ),
       child: ConstrainedBox(
         constraints: BoxConstraints(maxWidth: maxWidth),
         child: Column(
           children: [
-            Image.asset(image,
-                width: maxWidth, height: maxHeight, fit: BoxFit.fitWidth),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(cardBorderRadius),
+              child: Image.asset(image,
+                  width: maxWidth, height: maxHeight, fit: BoxFit.fill),
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
               child: Column(
