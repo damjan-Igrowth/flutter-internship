@@ -59,6 +59,13 @@ class ComponentClass extends StatelessWidget {
                   description:
                       'Lorem ipsum dolor sit amet consectetur. Cum enim tempus purus condimentum tristique viverra. Ipsum aliquam nisl imperdiet justo arcu nulla tortor cursus suspendisse.',
                   status: 'Work in progress'),
+              //////////4
+              HeaderText(text: 'Discount card'),
+              DiscountCard(
+                title: 'Get a discount!',
+                description:
+                    'To unlock an exclusive discount on our stylish sneakers, simply engage with our social media channels by liking, sharing, and tagging friends in our latest posts.',
+              ),
             ],
           ),
         ),
