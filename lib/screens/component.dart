@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_internship/helpers/header_text.dart';
 import 'package:flutter_internship/helpers/spacer_width.dart';
+import 'package:flutter_internship/widgets/components/assignment_card.dart';
 import 'package:flutter_internship/widgets/components/chip_component.dart';
 import 'package:flutter_internship/widgets/components/circle_icon.dart';
 
@@ -50,6 +51,13 @@ class ComponentClass extends StatelessWidget {
                   CircleIcon.error(),
                 ],
               ),
+              //////////3
+              HeaderText(text: 'Assignment Card'),
+              AssignmentCard(
+                  title: 'Assignment V',
+                  description:
+                      'Lorem ipsum dolor sit amet consectetur. Cum enim tempus purus condimentum tristique viverra. Ipsum aliquam nisl imperdiet justo arcu nulla tortor cursus suspendisse.',
+                  status: 'Work in progress'),
             ],
           ),
         ),
