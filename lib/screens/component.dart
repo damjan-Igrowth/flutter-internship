@@ -4,6 +4,7 @@ import 'package:flutter_internship/helpers/spacer_width.dart';
 import 'package:flutter_internship/widgets/components/assignment_card.dart';
 import 'package:flutter_internship/widgets/components/chip_component.dart';
 import 'package:flutter_internship/widgets/components/circle_icon.dart';
+import 'package:flutter_internship/widgets/components/discount_card.dart';
 
 class ComponentClass extends StatelessWidget {
   const ComponentClass({super.key});
