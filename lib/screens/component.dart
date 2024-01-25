@@ -63,7 +63,7 @@ class ComponentClass extends StatelessWidget {
               DiscountCard(
                 title: 'Get a discount!',
                 description:
-                    'To unlock an exclusive discount on our stylish sneakers, simply engage with our social media channels by liking, sharing, and tagging friends in our latest posts',
+                    'To unlock an exclusive discount on our stylish sneakers, simply engage with our social media channels by liking, sharing, and tagging friends in our latest posts.',
               ),
             ],
           ),
