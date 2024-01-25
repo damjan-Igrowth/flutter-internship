@@ -5,6 +5,7 @@ import 'package:flutter_internship/widgets/components/assignment_card.dart';
 import 'package:flutter_internship/widgets/components/chip_component.dart';
 import 'package:flutter_internship/widgets/components/circle_icon.dart';
 import 'package:flutter_internship/widgets/components/discount_card.dart';
+import 'package:flutter_internship/widgets/components/product_card.dart';
 
 class ComponentClass extends StatelessWidget {
   const ComponentClass({super.key});
@@ -62,9 +63,15 @@ class ComponentClass extends StatelessWidget {
               //////////4
               HeaderText(text: 'Discount card'),
               DiscountCard(
-                title: 'Get a discount!',
-                description:
-                    'To unlock an exclusive discount on our stylish sneakers, simply engage with our social media channels by liking, sharing, and tagging friends in our latest posts.',
+                  title: 'Get a discount!',
+                  description:
+                      'To unlock an exclusive discount on our stylish sneakers, simply engage with our social media channels by liking, sharing, and tagging friends in our latest posts'),
+              //////////5
+              HeaderText(text: 'Product Card'),
+              ProductCard(
+                title: 'NIKE Dunk Low',
+                image: 'lib/assets/images/imageShoe.jpg',
+                price: '100.00 €',
               ),
             ],
           ),
