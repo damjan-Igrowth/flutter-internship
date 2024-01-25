@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class SneakersScreen extends StatelessWidget {
+  const SneakersScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -10,7 +10,7 @@ class HomeScreen extends StatelessWidget {
         title: const Align(
           alignment: Alignment.centerLeft,
           child: Text(
-            'Home',
+            'Sneakers',
             style: TextStyle(
               color: Colors.black,
               fontFamily: 'Inter',
