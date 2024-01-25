@@ -18,19 +18,18 @@ class ChipComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return switch (chipType) {
-      ChipType.flat => FlatChip(label: label, icon: icon),
-      ChipType.clean => CleanChip(label: label, icon: icon)
+      ChipType.flat => _FlatChip(label: label, icon: icon),
+      ChipType.clean => _CleanChip(label: label, icon: icon)
     };
   }
 }
 
 //sivi chip
-class FlatChip extends StatelessWidget {
+class _FlatChip extends StatelessWidget {
   final String label;
   final IconData? icon;
 
-  const FlatChip({
-    super.key,
+  const _FlatChip({
     required this.label,
     this.icon,
   });
@@ -57,12 +56,11 @@ class FlatChip extends StatelessWidget {
 }
 
 //beli chip
-class CleanChip extends StatelessWidget {
+class _CleanChip extends StatelessWidget {
   final String label;
   final IconData? icon;
 
-  const CleanChip({
-    super.key,
+  const _CleanChip({
     required this.label,
     this.icon,
   });
@@ -122,6 +120,7 @@ class _ChipContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisSize: MainAxisSize.min,
       children: [
         Text(
           label,

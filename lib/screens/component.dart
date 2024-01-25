@@ -19,7 +19,8 @@ class ComponentClass extends StatelessWidget {
             children: [
               //////////1
               HeaderText(text: 'Chip components'),
-              Row(
+              Wrap(
+                runSpacing: 8,
                 children: [
                   ChipComponent(
                       chipType: ChipType.flat, label: 'Work in progress'),
