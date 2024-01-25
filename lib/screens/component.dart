@@ -77,7 +77,7 @@ class ComponentClass extends StatelessWidget {
               //////////5
               HeaderText(text: 'Product Card - Special'),
               ProductCardSpecial(
-                image: 'lib/assets/images/pngwing.png',
+                image: 'lib/assets/images/pngwing 2.png',
                 title: 'NIKE Air Jordan',
                 description: 'Grab the last pair now',
                 price: '160.00 €',

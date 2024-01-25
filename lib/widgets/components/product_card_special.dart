@@ -17,6 +17,7 @@ class ProductCardSpecial extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      clipBehavior: Clip.hardEdge,
       child: Container(
         padding: const EdgeInsets.fromLTRB(16, 16, 0, 16),
         decoration: BoxDecoration(
@@ -77,16 +78,10 @@ class ProductCardSpecial extends StatelessWidget {
               ],
             ),
             const SizedBox(width: 32),
-            Container(
-              width: 205.11327,
-              height: 100,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  alignment: Alignment.centerRight,
-                  image: AssetImage(image),
-                  fit: BoxFit.contain,
-                ),
-              ),
+            Align(
+              alignment: Alignment.centerLeft,
+              widthFactor: 0.75,
+              child: Image.asset(image, fit: BoxFit.contain),
             ),
           ],
         ),
