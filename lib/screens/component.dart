@@ -84,8 +84,7 @@ class ComponentClass extends StatelessWidget {
                 price: '160.00 €',
               ),
               //////////6
-              //HeaderText(text: 'Navigation & app bar'),
-              //BottomAppBar(child: NavigationAppBar()),
+              HeaderText(text: 'Navigation & app bar'),
             ],
           ),
         ),
