@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_internship/helpers/header_text.dart';
 import 'package:flutter_internship/helpers/spacer_width.dart';
+import 'package:flutter_internship/widgets/components/navigation_app_bar.dart';
 import 'package:flutter_internship/widgets/components/assignment_card.dart';
 import 'package:flutter_internship/widgets/components/chip_component.dart';
 import 'package:flutter_internship/widgets/components/circle_icon.dart';
@@ -82,9 +83,12 @@ class ComponentClass extends StatelessWidget {
                 description: 'Grab the last pair now',
                 price: '160.00 €',
               ),
+              //////////6
+              HeaderText(text: 'Navigation & app bar'),
             ],
           ),
         ),
+        bottomNavigationBar: const NavigationAppBar(),
       ),
     );
   }

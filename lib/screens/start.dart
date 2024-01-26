@@ -4,8 +4,8 @@ import 'package:flutter_internship/screens/layout.dart';
 import 'package:flutter_internship/screens/mobile_app.dart';
 import 'package:flutter_internship/widgets/expanded_button.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class StartScreen extends StatelessWidget {
+  const StartScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
