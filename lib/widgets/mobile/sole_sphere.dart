@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_internship/helpers/mobile_text.dart';
 import 'package:flutter_internship/widgets/components/discount_card.dart';
-import 'package:flutter_internship/widgets/components/navigation_app_bar.dart';
 import 'package:flutter_internship/widgets/components/product_card.dart';
 import 'package:flutter_internship/widgets/components/product_card_special.dart';
 import 'package:flutter_internship/widgets/mobile/sneakers.dart';
@@ -92,7 +91,6 @@ class SoleSphere extends StatelessWidget {
             ],
           ),
         ),
-        bottomNavigationBar: const NavigationAppBar(),
       ),
     );
   }

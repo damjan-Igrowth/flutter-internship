@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_internship/widgets/components/navigation_app_bar.dart';
 import 'package:flutter_internship/widgets/components/product_card.dart';
 
 class Sneakers extends StatelessWidget {
@@ -25,7 +24,6 @@ class Sneakers extends StatelessWidget {
           ),
         ),
         body: const SneakersGrid(),
-        bottomNavigationBar: const NavigationAppBar(), //pitanje
       ),
     );
   }
