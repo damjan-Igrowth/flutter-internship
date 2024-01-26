@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_internship/helpers/my_flutter_app_icons.dart';
+import 'package:flutter_internship/screens/component.dart';
 import 'package:flutter_internship/screens/sole_sphere.dart';
 import 'package:flutter_internship/screens/sneakers.dart';
 
@@ -27,7 +28,7 @@ class _NavigationAppBarState extends State<NavigationAppBar> {
         if (_currentIndex == 0) {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const SoleSphereScreen()),
+            MaterialPageRoute(builder: (context) => const ComponentClass()),
           );
         } else if (_currentIndex == 1) {
           Navigator.push(
