@@ -46,7 +46,7 @@ class StartScreen extends StatelessWidget {
                 const SizedBox(height: 16),
                 ExpandedButton(
                   backgroundColor: const Color(0xFFF89A44),
-                  buttonText: 'Mobile App',
+                  buttonText: 'Sneakers App',
                   onTap: () {
                     Navigator.push(
                       context,
