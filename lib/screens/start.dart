@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_internship/screens/component.dart';
 import 'package:flutter_internship/screens/layout.dart';
+import 'package:flutter_internship/screens/mobile_app.dart';
 import 'package:flutter_internship/widgets/expanded_button.dart';
-import 'package:flutter_internship/screens/mobile_layout.dart';
 
 class StartScreen extends StatelessWidget {
   const StartScreen({super.key});
@@ -51,7 +51,7 @@ class StartScreen extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const MobileLayout(),
+                        builder: (context) => const MobileAppClass(),
                       ),
                     );
                   },
