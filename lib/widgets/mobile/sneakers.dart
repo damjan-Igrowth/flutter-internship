@@ -6,25 +6,23 @@ class Sneakers extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              'Sneakers',
-              style: TextStyle(
-                color: Colors.black,
-                fontFamily: 'Inter',
-                fontSize: 20,
-                fontStyle: FontStyle.normal,
-                fontWeight: FontWeight.w600,
-              ),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Align(
+          alignment: Alignment.centerLeft,
+          child: Text(
+            'Sneakers',
+            style: TextStyle(
+              color: Colors.black,
+              fontFamily: 'Inter',
+              fontSize: 20,
+              fontStyle: FontStyle.normal,
+              fontWeight: FontWeight.w600,
             ),
           ),
         ),
-        body: const SneakersGrid(),
       ),
+      body: const SneakersGrid(),
     );
   }
 }
@@ -34,6 +32,22 @@ class SneakersGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    int columnsCount;
+
+    double screenWidth = MediaQuery.of(context).size.width;
+
+    if (screenWidth <= 391) {
+      columnsCount = 1;
+    } else if (screenWidth >= 392 && screenWidth <= 575) {
+      columnsCount = 2;
+    } else if (screenWidth >= 576 && screenWidth <= 719) {
+      columnsCount = 3;
+    } else if (screenWidth >= 720 && screenWidth <= 943) {
+      columnsCount = 4;
+    } else {
+      columnsCount = 5;
+    }
+
     List<ProductCard> sneakersList = [
       const ProductCard(
         title: 'NIKE Dunk Low',
@@ -66,9 +80,10 @@ class SneakersGrid extends StatelessWidget {
         price: '140.00 €',
       ),
     ];
+
     return GridView.builder(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: columnsCount,
         crossAxisSpacing: 12,
         mainAxisSpacing: 12,
       ),
