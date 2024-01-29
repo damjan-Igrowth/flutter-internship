@@ -84,8 +84,8 @@ class SneakersGrid extends StatelessWidget {
     return GridView.builder(
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: columnsCount,
-        crossAxisSpacing: 12,
-        mainAxisSpacing: 12,
+        crossAxisSpacing: 16,
+        mainAxisSpacing: 16,
       ),
       itemCount: sneakersList.length,
       itemBuilder: (context, index) {
