@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_internship/helpers/my_flutter_app_icons.dart';
-import 'package:flutter_internship/widgets/mobile/sole_sphere.dart';
-import 'package:flutter_internship/widgets/mobile/sneakers.dart';
+import 'package:flutter_internship/screens/mobile/sole_sphere.dart';
+import 'package:flutter_internship/screens/mobile/sneakers_grid.dart';
 
-class MobileLayout extends StatefulWidget {
-  const MobileLayout({super.key});
+class Shop extends StatefulWidget {
+  const Shop({super.key});
 
   @override
-  State<MobileLayout> createState() => _MobileLayoutState();
+  State<Shop> createState() => _MobileLayoutState();
 }
 
-class _MobileLayoutState extends State<MobileLayout> {
+class _MobileLayoutState extends State<Shop> {
   int _selectedIndex = 0;
   static const List<Widget> _widgetOptions = <Widget>[
     SoleSphere(),
-    Sneakers(),
+    SneakersGrid(),
   ];
 
   void _onItemTapped(int index) {
