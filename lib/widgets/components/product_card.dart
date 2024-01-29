@@ -54,7 +54,7 @@ class ProductCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
                   Align(
-                    alignment: Alignment.centerRight,
+                    alignment: Alignment.bottomRight,
                     child: Text(
                       price,
                       overflow: TextOverflow.ellipsis,

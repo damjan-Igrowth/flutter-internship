@@ -13,37 +13,39 @@ class SoleSphere extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        backgroundColor: const Color(0xFFF8F8F8),
         appBar: _SoleSphereTitle(),
         body: SingleChildScrollView(
-          child: Column(
-            children: [
-              const MobileText(text: 'Best deal'),
-              const ProductCardSpecial(
-                image: 'lib/assets/images/pngwing.png',
-                title: 'NIKE Air Jordan',
-                description: 'Grab the last pair now',
-                price: '160.00 €',
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const MobileText(text: 'Sneakers'),
-                  TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const Sneakers(),
-                          ),
-                        );
-                      },
-                      child: const BlueText(text: 'View all'))
-                ],
-              ),
-              const SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              children: [
+                const MobileText(text: 'Best deal'),
+                const ProductCardSpecial(
+                  image: 'lib/assets/images/pngwing 2.png',
+                  title: 'NIKE Air Jordan',
+                  description: 'Grab the last pair now',
+                  price: '160.00 €',
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
+                    const MobileText(text: 'Sneakers'),
+                    TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const Sneakers(),
+                            ),
+                          );
+                        },
+                        child: const BlueText(text: 'View all'))
+                  ],
+                ),
+                ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: const [
                     ProductCard(
                       title: 'NIKE Dunk Low',
                       image: 'lib/assets/images/imageShoe.jpg',
@@ -81,14 +83,14 @@ class SoleSphere extends StatelessWidget {
                     ),
                   ],
                 ),
-              ),
-              const MobileText(text: 'Discount'),
-              const DiscountCard(
-                title: 'Get a discount!',
-                description:
-                    'To unlock an exclusive discount on our stylish sneakers, simply engage with our social media channels by liking, sharing, and tagging friends in our latest posts',
-              ),
-            ],
+                const MobileText(text: 'Discount'),
+                const DiscountCard(
+                  title: 'Get a discount!',
+                  description:
+                      'To unlock an exclusive discount on our stylish sneakers, simply engage with our social media channels by liking, sharing, and tagging friends in our latest posts',
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -105,26 +107,24 @@ class _SoleSphereTitle extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       leading: SvgPicture.asset('lib/assets/images/logo.svg',
           width: 26, height: 26, fit: BoxFit.contain),
-      title: Align(
-        alignment: Alignment.centerLeft,
-        child: RichText(
-          text: const TextSpan(
-            style: TextStyle(
-              fontSize: 20,
-              fontStyle: FontStyle.normal,
-              fontWeight: FontWeight.w700,
-            ),
-            children: [
-              TextSpan(
-                text: 'Sole',
-                style: TextStyle(color: Color(0xFF1892ED)),
-              ),
-              TextSpan(
-                text: ' Sphere',
-                style: TextStyle(color: Color(0xFFA44DE8)),
-              ),
-            ],
+      centerTitle: false,
+      title: RichText(
+        text: const TextSpan(
+          style: TextStyle(
+            fontSize: 20,
+            fontStyle: FontStyle.normal,
+            fontWeight: FontWeight.w700,
           ),
+          children: [
+            TextSpan(
+              text: 'Sole',
+              style: TextStyle(color: Color(0xFF1892ED)),
+            ),
+            TextSpan(
+              text: ' Sphere',
+              style: TextStyle(color: Color(0xFFA44DE8)),
+            ),
+          ],
         ),
       ),
     );
