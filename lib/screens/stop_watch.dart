@@ -11,8 +11,8 @@ class StopWatch extends StatefulWidget {
 }
 
 class _StopWatchState extends State<StopWatch> {
-  int seconds = 0, minutes = 0, hours = 0;
-  String digitSeconds = '00', digitMinutes = '00', digitHours = '00';
+  int hundredths = 0, seconds = 0, minutes = 0;
+  String digitHundredths = '00', digitSeconds = '00', digitMinutes = '00';
   Timer? timer;
   bool started = false;
   List laps = [];
@@ -27,13 +27,13 @@ class _StopWatchState extends State<StopWatch> {
   void reset() {
     timer!.cancel();
     setState(() {
+      hundredths = 0;
       seconds = 0;
       minutes = 0;
-      hours = 0;
 
+      digitHundredths = '00';
       digitSeconds = '00';
       digitMinutes = '00';
-      digitHours = '00';
 
       started = false;
       laps.clear();
@@ -41,7 +41,8 @@ class _StopWatchState extends State<StopWatch> {
   }
 
   void addLaps() {
-    String lap = '$digitHours:$digitMinutes.$digitSeconds';
+    String lap = '$digitMinutes:$digitSeconds.$digitHundredths';
+
     setState(() {
       laps.add(lap);
     });
@@ -49,27 +50,27 @@ class _StopWatchState extends State<StopWatch> {
 
   void start() {
     started = true;
-    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      int localSeconds = seconds + 1;
+    timer = Timer.periodic(const Duration(milliseconds: 10), (timer) {
+      int localHundredths = hundredths + 1;
+      int localSeconds = seconds;
       int localMinutes = minutes;
-      int localHours = hours;
 
-      if (localSeconds > 59) {
-        if (localMinutes > 59) {
-          localHours++;
-          localMinutes = 0;
-        } else {
+      if (localHundredths > 99) {
+        if (localSeconds > 59) {
           localMinutes++;
           localSeconds = 0;
+        } else {
+          localSeconds++;
+          localHundredths = 0;
         }
       }
       setState(() {
+        hundredths = localHundredths;
         seconds = localSeconds;
         minutes = localMinutes;
-        hours = localHours;
+        digitHundredths = (hundredths >= 10) ? '$hundredths' : '0$hundredths';
         digitSeconds = (seconds >= 10) ? '$seconds' : '0$seconds';
         digitMinutes = (minutes >= 10) ? '$minutes' : '0$minutes';
-        digitHours = (hours >= 10) ? '$hours' : '0$hours';
       });
     });
   }
@@ -106,7 +107,7 @@ class _StopWatchState extends State<StopWatch> {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 54),
               child: Text(
-                '$digitHours:$digitMinutes.$digitSeconds',
+                '$digitMinutes:$digitSeconds.$digitHundredths',
                 overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
                     color: Color(0xFFFFFFFF),
@@ -154,34 +155,38 @@ class _StopWatchState extends State<StopWatch> {
           const SizedBox(height: 40),
           SingleChildScrollView(
             child: Container(
-              height: 510,
+              height: 350,
               decoration: const BoxDecoration(color: Color(0xFF0B0D15)),
               child: ListView.builder(
                 itemCount: laps.length,
                 itemBuilder: (context, index) {
+                  final reversedIndex = laps.length - 1 - index;
+
                   return Padding(
                     padding: const EdgeInsets.all(20),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Lap ${index + 1}',
+                          'Lap ${reversedIndex + 1}',
                           style: const TextStyle(
                               color: Color(0xFFFFFFFF),
                               fontFamily: 'Inter',
                               fontSize: 16,
                               fontStyle: FontStyle.normal,
-                              fontWeight: FontWeight.w500),
+                              fontWeight: FontWeight.w500,
+                              decoration: TextDecoration.none),
                         ),
                         Text(
-                          '${laps[index]}',
+                          '${laps[reversedIndex]}',
                           textAlign: TextAlign.right,
                           style: const TextStyle(
                               color: Color(0xFFFFFFFF),
                               fontFamily: 'Inter',
                               fontSize: 16,
                               fontStyle: FontStyle.normal,
-                              fontWeight: FontWeight.w500),
+                              fontWeight: FontWeight.w500,
+                              decoration: TextDecoration.none),
                         ),
                       ],
                     ),
