@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_internship/screens/component.dart';
 import 'package:flutter_internship/screens/layout.dart';
+import 'package:flutter_internship/screens/stop_watch.dart';
 import 'package:flutter_internship/widgets/expanded_button.dart';
 import 'package:flutter_internship/screens/mobile/shop.dart';
 
@@ -52,6 +53,19 @@ class StartScreen extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) => const Shop(),
+                      ),
+                    );
+                  },
+                ),
+                const SizedBox(height: 16),
+                ExpandedButton(
+                  backgroundColor: Colors.blueAccent,
+                  buttonText: 'StopWatch',
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const StopWatch(),
                       ),
                     );
                   },

@@ -68,7 +68,9 @@ flutter:
     - family:  MyFlutterApp
       fonts:
         - asset: lib/assets/icons/MyFlutterApp.ttf
-
+    - family:  MyApp1
+      fonts:
+        - asset: lib/assets/icons/MyApp1.ttf
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 
