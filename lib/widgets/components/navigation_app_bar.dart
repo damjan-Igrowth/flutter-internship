@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_internship/helpers/my_flutter_app_icons.dart';
 import 'package:flutter_internship/screens/component.dart';
-import 'package:flutter_internship/widgets/mobile/sneakers.dart';
+import 'package:flutter_internship/screens/mobile/sneakers_grid.dart';
 
 class NavigationAppBar extends StatefulWidget {
   const NavigationAppBar({super.key});
@@ -32,7 +32,7 @@ class _NavigationAppBarState extends State<NavigationAppBar> {
         } else if (_currentIndex == 1) {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const Sneakers()),
+            MaterialPageRoute(builder: (context) => const SneakersGrid()),
           );
         }
       },

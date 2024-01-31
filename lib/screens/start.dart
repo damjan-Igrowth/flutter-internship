@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_internship/screens/component.dart';
 import 'package:flutter_internship/screens/layout.dart';
 import 'package:flutter_internship/widgets/expanded_button.dart';
-import 'package:flutter_internship/screens/mobile_layout.dart';
+import 'package:flutter_internship/screens/mobile/shop.dart';
 
 class StartScreen extends StatelessWidget {
   const StartScreen({super.key});
@@ -46,12 +46,12 @@ class StartScreen extends StatelessWidget {
                 const SizedBox(height: 16),
                 ExpandedButton(
                   backgroundColor: const Color(0xFFF89A44),
-                  buttonText: 'Mobile App',
+                  buttonText: 'Sneakers App',
                   onTap: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const MobileLayout(),
+                        builder: (context) => const Shop(),
                       ),
                     );
                   },
