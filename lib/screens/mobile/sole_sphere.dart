@@ -115,7 +115,7 @@ class _ProductListView extends StatelessWidget {
     }
 
     return SizedBox(
-      height: 216,
+      height: isWideScreen ? 432 : 216,
       child: productListView,
     );
   }
