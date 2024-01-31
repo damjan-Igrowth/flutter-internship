@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_internship/layout_tasks/shapes/square.dart';
-import 'package:flutter_internship/layout_tasks/shapes/circle.dart';
+import 'package:flutter_internship/layout_tasks/widgets/shapes/square.dart';
+import 'package:flutter_internship/layout_tasks/widgets/shapes/circle.dart';
 import 'dart:math';
 
 class PositionFour extends StatelessWidget {

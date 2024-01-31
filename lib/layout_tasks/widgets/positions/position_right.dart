@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_internship/layout_tasks/shapes/square.dart';
+import 'package:flutter_internship/layout_tasks/widgets/shapes/square.dart';
 
 class PositionOne extends StatelessWidget {
   const PositionOne({super.key});

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_internship/layout_tasks/helpers/spacer_height.dart';
-import 'package:flutter_internship/layout_tasks/shapes/square.dart';
-import 'package:flutter_internship/layout_tasks/shapes/rectangle.dart';
+import 'package:flutter_internship/layout_tasks/widgets/shapes/square.dart';
+import 'package:flutter_internship/layout_tasks/widgets/shapes/rectangle.dart';
 
 class ShapesRow extends StatelessWidget {
   const ShapesRow({super.key});

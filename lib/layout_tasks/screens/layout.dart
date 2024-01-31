@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_internship/layout_tasks/helpers/header_text.dart';
-import 'package:flutter_internship/layout_tasks/positions/position_five.dart';
-import 'package:flutter_internship/layout_tasks/positions/position_four.dart';
-import 'package:flutter_internship/layout_tasks/positions/position_right.dart';
-import 'package:flutter_internship/layout_tasks/positions/position_three.dart';
-import 'package:flutter_internship/layout_tasks/positions/position_two.dart';
+import 'package:flutter_internship/layout_tasks/widgets/positions/position_five.dart';
+import 'package:flutter_internship/layout_tasks/widgets/positions/position_four.dart';
+import 'package:flutter_internship/layout_tasks/widgets/positions/position_right.dart';
+import 'package:flutter_internship/layout_tasks/widgets/positions/position_three.dart';
+import 'package:flutter_internship/layout_tasks/widgets/positions/position_two.dart';
 import 'package:flutter_internship/layout_tasks/widgets/shapes_column.dart';
 import 'package:flutter_internship/layout_tasks/widgets/shapes_row.dart';
 import 'package:flutter_internship/layout_tasks/widgets/flex_f.dart';
-import 'package:flutter_internship/layout_tasks/positions/position_overlap.dart';
-import 'package:flutter_internship/layout_tasks/positions/position_inside.dart';
+import 'package:flutter_internship/layout_tasks/widgets/positions/position_overlap.dart';
+import 'package:flutter_internship/layout_tasks/widgets/positions/position_inside.dart';
 
 class LayoutScreen extends StatelessWidget {
   const LayoutScreen({super.key});

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_internship/layout_tasks/helpers/triangle_painter.dart';
-import 'package:flutter_internship/layout_tasks/shapes/square.dart';
+import 'package:flutter_internship/layout_tasks/widgets/shapes/square.dart';
 
 class PositionFive extends StatelessWidget {
   const PositionFive({
