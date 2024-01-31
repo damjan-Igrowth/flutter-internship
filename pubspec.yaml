@@ -62,15 +62,15 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - lib/assets/images/
+    - assets/images/
 
   fonts:
     - family:  MyFlutterApp
       fonts:
-        - asset: lib/assets/icons/MyFlutterApp.ttf
+        - asset: assets/icons/MyFlutterApp.ttf
     - family:  MyApp1
       fonts:
-        - asset: lib/assets/icons/MyApp1.ttf
+        - asset: assets/icons/MyApp1.ttf
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 
