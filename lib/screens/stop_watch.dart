@@ -10,12 +10,40 @@ class StopWatch extends StatefulWidget {
   State<StopWatch> createState() => _StopWatchState();
 }
 
+Duration durationFromLapString(String lap) {
+  List<String> parts = lap.split(':');
+  int minutes = int.parse(parts[0]);
+  List<String> secondsAndMilliseconds = parts[1].split('.');
+  int seconds = int.parse(secondsAndMilliseconds[0]);
+  int milliseconds = int.parse(
+      secondsAndMilliseconds.length > 1 ? secondsAndMilliseconds[1] : '0');
+
+  return Duration(
+      minutes: minutes, seconds: seconds, milliseconds: milliseconds);
+}
+
+double lapDifference(String lap1, String lap2) {
+  final lap1Duration = durationFromLapString(lap1);
+  final lap2Duration = durationFromLapString(lap2);
+  return lap2Duration.inMilliseconds.toDouble() -
+      lap1Duration.inMilliseconds.toDouble();
+}
+
+List<double> calculateLapDifferences(List<String> laps) {
+  List<double> differences = [];
+  for (int i = 1; i < laps.length; i++) {
+    double difference = lapDifference(laps[i - 1], laps[i]);
+    differences.add(difference);
+  }
+  return differences;
+}
+
 class _StopWatchState extends State<StopWatch> {
   int hundredths = 0, seconds = 0, minutes = 0;
   String digitHundredths = '00', digitSeconds = '00', digitMinutes = '00';
   Timer? timer;
   bool started = false;
-  List laps = [];
+  List<String> laps = [];
 
   void stop() {
     timer!.cancel();
@@ -77,6 +105,14 @@ class _StopWatchState extends State<StopWatch> {
 
   @override
   Widget build(BuildContext context) {
+    final differences = calculateLapDifferences(laps);
+    final longestDifference = differences.isNotEmpty
+        ? differences.reduce((a, b) => a > b ? a : b)
+        : 0.0;
+    final shortestDifference = differences.isNotEmpty
+        ? differences.reduce((a, b) => a < b ? a : b)
+        : 0.0;
+
     return Container(
       color: const Color(0xFF0E111C),
       child: Column(
@@ -162,6 +198,18 @@ class _StopWatchState extends State<StopWatch> {
                 itemBuilder: (context, index) {
                   final reversedIndex = laps.length - 1 - index;
 
+                  Color textColor = const Color(0xFFFFFFFF);
+
+                  if (index < differences.length) {
+                    if (differences[index] == longestDifference) {
+                      textColor = const Color(0xFFF13F3F);
+                    }
+
+                    if (differences[index] == shortestDifference) {
+                      textColor = const Color(0xFF4AE575);
+                    }
+                  }
+
                   return Padding(
                     padding: const EdgeInsets.all(20),
                     child: Row(
@@ -169,8 +217,8 @@ class _StopWatchState extends State<StopWatch> {
                       children: [
                         Text(
                           'Lap ${reversedIndex + 1}',
-                          style: const TextStyle(
-                              color: Color(0xFFFFFFFF),
+                          style: TextStyle(
+                              color: textColor,
                               fontFamily: 'Inter',
                               fontSize: 16,
                               fontStyle: FontStyle.normal,
@@ -178,10 +226,10 @@ class _StopWatchState extends State<StopWatch> {
                               decoration: TextDecoration.none),
                         ),
                         Text(
-                          '${laps[reversedIndex]}',
+                          laps[reversedIndex],
                           textAlign: TextAlign.right,
-                          style: const TextStyle(
-                              color: Color(0xFFFFFFFF),
+                          style: TextStyle(
+                              color: textColor,
                               fontFamily: 'Inter',
                               fontSize: 16,
                               fontStyle: FontStyle.normal,

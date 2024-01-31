@@ -59,7 +59,7 @@ class StartScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 ExpandedButton(
-                  backgroundColor: Colors.blueAccent,
+                  backgroundColor: const Color(0xFF0E111C),
                   buttonText: 'StopWatch',
                   onTap: () {
                     Navigator.push(
