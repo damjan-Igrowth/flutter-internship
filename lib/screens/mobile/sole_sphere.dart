@@ -5,7 +5,6 @@ import 'package:flutter_internship/widgets/components/discount_card.dart';
 import 'package:flutter_internship/widgets/components/product_card.dart';
 import 'package:flutter_internship/widgets/components/product_card_special.dart';
 import 'package:flutter_internship/screens/mobile/sneakers_grid.dart';
-import 'package:flutter_svg/svg.dart';
 
 class SoleSphere extends StatelessWidget {
   const SoleSphere({super.key});
@@ -17,7 +16,6 @@ class SoleSphere extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _SoleSphereTitle(),
           Expanded(
             child: SingleChildScrollView(
               child: Column(
@@ -49,10 +47,7 @@ class SoleSphere extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 20),
-                    child: _buildProductListView(context),
-                  ),
+                  _ProductListView(),
                   const MobileText(text: 'Discount'),
                   const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 20),
@@ -72,87 +67,56 @@ class SoleSphere extends StatelessWidget {
   }
 }
 
-Widget _buildProductListView(BuildContext context) {
-  double screenWidth = MediaQuery.sizeOf(context).width;
-  bool isWideScreen = screenWidth > 500;
-
-  Widget productListView;
-
-  if (isWideScreen) {
-    productListView = GridView.builder(
-      scrollDirection: Axis.horizontal,
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        crossAxisSpacing: 16,
-        mainAxisSpacing: 16,
-      ),
-      itemCount: sneakersList.length,
-      itemBuilder: (context, index) {
-        return ProductCard(
-          title: sneakersList[index].title,
-          image: sneakersList[index].image,
-          price: sneakersList[index].price,
-        );
-      },
-    );
-  } else {
-    productListView = ListView.builder(
-      scrollDirection: Axis.horizontal,
-      itemCount: sneakersList.length,
-      itemBuilder: (context, index) {
-        return ProductCard(
-          title: sneakersList[index].title,
-          image: sneakersList[index].image,
-          price: sneakersList[index].price,
-        );
-      },
-    );
-  }
-  return SizedBox(
-    height: 216,
-    child: productListView,
-  );
-}
-
-class _SoleSphereTitle extends StatelessWidget implements PreferredSizeWidget {
-  @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
-
+class _ProductListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return AppBar(
-      leading: Container(
-        width: 32,
-        height: 32,
-        padding: const EdgeInsets.fromLTRB(2.667, 1.333, 2.667, 0.19),
-        child: SvgPicture.asset(
-          'lib/assets/images/logo.svg',
-          fit: BoxFit.contain,
-          width: double.infinity,
-          height: double.infinity,
+    double screenWidth = MediaQuery.of(context).size.width;
+    bool isWideScreen = screenWidth > 500;
+    int itemsPerRow = isWideScreen ? 2 : 1;
+
+    Widget productListView;
+
+    if (isWideScreen) {
+      productListView = GridView.builder(
+        scrollDirection: Axis.horizontal,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: itemsPerRow,
+          crossAxisSpacing: 12,
+          mainAxisSpacing: 12,
         ),
-      ),
-      titleSpacing: 8,
-      centerTitle: false,
-      title: RichText(
-        text: const TextSpan(
-          style: TextStyle(
-            fontSize: 20,
-            fontStyle: FontStyle.normal,
-            fontWeight: FontWeight.w700,
-          ),
-          children: [
-            TextSpan(
-              text: 'Sole',
-              style: TextStyle(color: Color(0xFF1892ED)),
+        itemCount: sneakersList.length,
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: const EdgeInsets.only(left: 20),
+            child: ProductCard(
+              title: sneakersList[index].title,
+              image: sneakersList[index].image,
+              price: sneakersList[index].price,
             ),
-            TextSpan(
-              text: ' Sphere',
-              style: TextStyle(color: Color(0xFFA44DE8)),
+          );
+        },
+      );
+    } else {
+      productListView = ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: sneakersList.length,
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: EdgeInsets.symmetric(
+                horizontal: index % itemsPerRow == 0 ? 20 : 0),
+            child: ProductCard(
+              title: sneakersList[index].title,
+              image: sneakersList[index].image,
+              price: sneakersList[index].price,
             ),
-          ],
-        ),
-      ),
+          );
+        },
+      );
+    }
+
+    return SizedBox(
+      height: isWideScreen ? 432 : 216,
+      child: productListView,
     );
   }
 }

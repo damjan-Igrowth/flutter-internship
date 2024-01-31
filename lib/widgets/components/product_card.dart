@@ -20,6 +20,7 @@ class ProductCard extends StatelessWidget {
     double maxHeight = 125.516;
 
     return FittedBox(
+      clipBehavior: Clip.hardEdge,
       child: Card(
         clipBehavior: Clip.hardEdge,
         color: const Color(0xFFFFFFFF),
