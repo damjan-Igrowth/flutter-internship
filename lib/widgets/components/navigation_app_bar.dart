@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_internship/helpers/my_flutter_app_icons.dart';
+import 'package:flutter_internship/helpers/shop_icons_icons.dart';
 import 'package:flutter_internship/screens/component.dart';
 import 'package:flutter_internship/screens/mobile/sneakers_grid.dart';
 
@@ -39,7 +39,7 @@ class _NavigationAppBarState extends State<NavigationAppBar> {
       items: [
         BottomNavigationBarItem(
           icon: Icon(
-            MyFlutterApp.akar_icons_home,
+            ShopIcons.akar_icons_home,
             color: _currentIndex == 0
                 ? const Color(0xFF007BFF)
                 : const Color(0xFF757575),
@@ -48,7 +48,7 @@ class _NavigationAppBarState extends State<NavigationAppBar> {
         ),
         BottomNavigationBarItem(
           icon: Icon(
-            MyFlutterApp.ph_sneaker_move,
+            ShopIcons.ph_sneaker_move,
             color: _currentIndex == 1
                 ? const Color(0xFF007BFF)
                 : const Color(0xFF757575),

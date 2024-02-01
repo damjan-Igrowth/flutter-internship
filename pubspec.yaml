@@ -37,6 +37,9 @@ dependencies:
   cupertino_icons: ^1.0.2
   remove_background: ^0.0.1
   flutter_svg: ^2.0.9
+  google_fonts: ^6.1.0
+  
+
 
 dev_dependencies:
   flutter_test:
@@ -65,12 +68,10 @@ flutter:
     - lib/assets/images/
 
   fonts:
-    - family:  MyFlutterApp
+    - family:  ShopIcons
       fonts:
-        - asset: lib/assets/icons/MyFlutterApp.ttf
-    - family:  MyApp1
-      fonts:
-        - asset: lib/assets/icons/MyApp1.ttf
+        - asset: lib/assets/icons/ShopIcons.ttf
+    
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 
