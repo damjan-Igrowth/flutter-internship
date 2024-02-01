@@ -41,7 +41,7 @@ class PhoneCard extends StatelessWidget {
         padding: const EdgeInsets.all(12),
         child: Row(
           children: [
-            Image.asset(image, width: maxWidth, fit: BoxFit.fill),
+            Image.asset(image, width: maxWidth, fit: BoxFit.contain),
             const SizedBox(width: 12),
             Column(
               mainAxisAlignment: MainAxisAlignment.start,
