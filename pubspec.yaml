@@ -70,15 +70,8 @@ flutter:
   fonts:
     - family:  ShopIcons
       fonts:
-<<<<<<< HEAD
-        - asset: lib/assets/icons/ShopIcons.ttf
+        - asset: assets/icons/ShopIcons.ttf
     
-=======
-        - asset: assets/icons/MyFlutterApp.ttf
-    - family:  MyApp1
-      fonts:
-        - asset: assets/icons/MyApp1.ttf
->>>>>>> feature/int-13-cleanup-folder-structure-of-project
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 
