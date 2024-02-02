@@ -48,7 +48,8 @@ class _StopWatchState extends State<StopWatch> {
     setState(() {
       laps.add(lap);
 
-      List<double> differences = calculateLapDifferences(laps);
+      List<double> differences = [laps[0].inMilliseconds / 10];
+      differences.addAll(calculateLapDifferences(laps));
       longestDifference = differences.isNotEmpty
           ? differences.reduce((a, b) => a > b ? a : b)
           : 0.0;
@@ -84,9 +85,9 @@ class _StopWatchState extends State<StopWatch> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: const Color(0xFF0E111C),
-      child: Column(
+    return Scaffold(
+      backgroundColor: const Color(0xFF0E111C),
+      body: Column(
         children: [
           Padding(
             padding: const EdgeInsets.all(40),
@@ -134,9 +135,7 @@ class _StopWatchState extends State<StopWatch> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     _CircularButton(
-                      onPressed: () {
-                        (!started) ? reset() : addLaps();
-                      },
+                      onPressed: !started ? reset : addLaps,
                       data: (!started) ? 'Reset' : 'Lap',
                       circleColor: (!started)
                           ? const Color(0xFF1C2135)
@@ -146,9 +145,7 @@ class _StopWatchState extends State<StopWatch> {
                           : const Color(0xFF8190CD),
                     ),
                     _CircularButton(
-                      onPressed: () {
-                        (!started) ? start() : stop();
-                      },
+                      onPressed: !started ? start : stop,
                       data: (!started) ? 'Start' : 'Stop',
                       circleColor: (!started)
                           ? const Color(0xFF1C3531)
@@ -170,19 +167,20 @@ class _StopWatchState extends State<StopWatch> {
                 itemCount: laps.length,
                 itemBuilder: (context, index) {
                   final reversedIndex = laps.length - 1 - index;
-
+                  Duration firstLap =
+                      const Duration(minutes: 0, seconds: 0, milliseconds: 0);
+                  Duration secondlap = laps[reversedIndex];
+                  if (reversedIndex > 0) {
+                    firstLap = laps[reversedIndex - 1];
+                  }
+                  final difference =
+                      calculateLapDifference(firstLap, secondlap);
                   Color textColor = const Color(0xFFFFFFFF);
 
-                  if (reversedIndex > 0 && reversedIndex < laps.length) {
-                    if (calculateLapDifference(
-                            laps[reversedIndex - 1], laps[reversedIndex]) ==
-                        longestDifference) {
+                  if (laps.length > 1) {
+                    if (difference == longestDifference) {
                       textColor = const Color(0xFFF13F3F);
-                    }
-
-                    if (calculateLapDifference(
-                            laps[reversedIndex - 1], laps[reversedIndex]) ==
-                        shortestDifference) {
+                    } else if (difference == shortestDifference) {
                       textColor = const Color(0xFF4AE575);
                     }
                   }
