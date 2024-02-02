@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_internship/shop/helpers/my_flutter_app_icons.dart';
+import 'package:flutter_internship/shop/helpers/my_app1_icons.dart';
 import 'package:flutter_internship/shop/widgets/sole_sphere.dart';
 import 'package:flutter_internship/shop/widgets/sneakers_grid.dart';
 import 'package:flutter_svg/svg.dart';
@@ -43,12 +43,12 @@ class _ShopState extends State<Shop> {
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(MyFlutterApp.akar_icons_home),
+            icon: Icon(ShopIcons.akar_icons_home),
             label: 'Home',
             backgroundColor: Color(0xFF757575),
           ),
           BottomNavigationBarItem(
-            icon: Icon(MyFlutterApp.ph_sneaker_move),
+            icon: Icon(ShopIcons.ph_sneaker_move),
             label: 'Sneakers',
             backgroundColor: Color(0xFF757575),
           ),
