@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_internship/components/screens/component.dart';
 import 'package:flutter_internship/layout_tasks/screens/layout.dart';
 import 'package:flutter_internship/phone_store/screens/tech_byte.dart';
-import 'package:flutter_internship/phone_store/widgets/text_field_template.dart';
-
 import 'package:flutter_internship/shop/screens/shop.dart';
 import 'package:flutter_internship/stopwatch/stop_watch.dart';
 

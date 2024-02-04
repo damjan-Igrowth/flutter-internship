@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_internship/phone_store/widgets/dialogs.dart';
 import 'package:flutter_internship/phone_store/widgets/phone_card.dart';
+import 'package:flutter_internship/phone_store/widgets/phone_tile.dart';
 import 'package:flutter_internship/phone_store/widgets/text_field_template.dart';
 
 class TechByte extends StatelessWidget {
@@ -13,40 +15,34 @@ class TechByte extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
-            child: Column(
-              children: [
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
-                  child: Column(
-                    children: [
-                      PhoneCard(
-                        image: 'assets/images/thumbnail 1.png',
-                        category: Category.smartphones,
-                        stars: '4.69',
-                        productName: 'Iphone 15 Pro',
-                        price: '999.00 €',
-                        discount: '-12.44%',
-                      ),
-                      PhoneCard(
-                        image: 'assets/images/thumbnail 1.png',
-                        category: Category.smartphones,
-                        stars: '4.69',
-                        productName: 'Iphone 15 Pro',
-                        price: '999.00 €',
-                        discount: '-12.44%',
-                      ),
-                      PhoneCard(
-                        image: 'assets/images/thumbnail 1.png',
-                        category: Category.smartphones,
-                        stars: '4.69',
-                        productName: 'Iphone 15 Pro',
-                        price: '999.00 €',
-                        discount: '-12.44%',
-                      ),
-                    ],
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    child: Column(
+                      children: [
+                        PhoneTile(
+                            productName: 'Iphone 15 Pro',
+                            reviewScore: 4.69,
+                            image: 'assets/images/thumbnail 1.png',
+                            discount: '-12.96%',
+                            price: '\$149.00 \$'),
+                        PhoneCard(
+                            productName: 'Iphone 15 Pro',
+                            image: 'assets/images/thumbnail 1.png',
+                            discount: '-12.96%',
+                            price: '\$149.00 \$',
+                            stars: '4.00',
+                            category: Category.smartphones),
+                        ErrorDialog(),
+                        SuccessDialog(),
+                        //TextFieldExample(),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ],
