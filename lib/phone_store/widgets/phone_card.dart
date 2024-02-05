@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-enum Category { smartphones, laptops, videogames, audio, appliances }
-
 class CategoryStrings {
   static const String smartphones = 'Smartphones';
   static const String laptops = 'Laptops';
@@ -13,10 +11,11 @@ class CategoryStrings {
 class PhoneCard extends StatelessWidget {
   final String image;
   final String productName;
-  final Category category;
+  final String category;
   final String stars;
   final String discount;
   final String price;
+  final double reviewScore;
 
   const PhoneCard({
     super.key,
@@ -26,6 +25,7 @@ class PhoneCard extends StatelessWidget {
     required this.category,
     required this.discount,
     required this.stars,
+    required this.reviewScore,
   });
 
   @override
@@ -34,7 +34,6 @@ class PhoneCard extends StatelessWidget {
 
     return FittedBox(
       child: Card(
-        clipBehavior: Clip.hardEdge,
         color: const Color(0xFFFFFFFF),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
@@ -46,7 +45,25 @@ class PhoneCard extends StatelessWidget {
           padding: const EdgeInsets.all(12),
           child: Row(
             children: [
-              Image.asset(image, width: maxWidth, fit: BoxFit.contain),
+              Container(
+                width: 79,
+                height: 79,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: const Color(0xFFF3F3F3),
+                    width: 1,
+                  ),
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: Image.asset(
+                    image,
+                    width: maxWidth,
+                    height: maxWidth,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
               const SizedBox(width: 12),
               Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -68,10 +85,10 @@ class PhoneCard extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            CategoryStrings.smartphones,
+                          Text(
+                            category,
                             overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Color(0xFF34A4E3),
                                 fontSize: 12,
                                 fontWeight: FontWeight.w500,
@@ -79,15 +96,31 @@ class PhoneCard extends StatelessWidget {
                                 fontFamily: 'Inter'),
                           ),
                           const SizedBox(height: 4),
-                          Text(
-                            stars,
-                            overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(
-                                color: Color(0xFF4A4949),
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500,
-                                fontStyle: FontStyle.normal,
-                                fontFamily: 'Inter'),
+                          Row(
+                            children: [
+                              Text(
+                                '$reviewScore',
+                                style: const TextStyle(
+                                    color: Color(0xFFFFC046),
+                                    fontFamily: 'Poppins',
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w600,
+                                    fontStyle: FontStyle.normal),
+                              ),
+                              const SizedBox(width: 4),
+                              ...List.generate(
+                                5,
+                                (index) => Icon(
+                                  index < reviewScore.ceil()
+                                      ? Icons.star
+                                      : Icons.star_border,
+                                  color: index < reviewScore.floor()
+                                      ? const Color(0xFFFFC046)
+                                      : const Color(0xFFC0C0C0),
+                                  size: 10,
+                                ),
+                              ),
+                            ],
                           ),
                           const SizedBox(height: 4),
                           const Text(
@@ -102,32 +135,35 @@ class PhoneCard extends StatelessWidget {
                         ],
                       ),
                       const SizedBox(width: 66),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Text(
-                            discount,
-                            textAlign: TextAlign.right,
-                            style: const TextStyle(
-                                color: Color(0xFF43C16E),
-                                fontSize: 12,
-                                fontWeight: FontWeight.w600,
-                                fontStyle: FontStyle.normal,
-                                fontFamily: 'Inter'),
-                          ),
-                          const SizedBox(height: 6),
-                          Text(
-                            price,
-                            textAlign: TextAlign.right,
-                            style: const TextStyle(
-                                color: Color(0xFFE33434),
-                                fontSize: 16,
-                                fontWeight: FontWeight.w700,
-                                fontStyle: FontStyle.normal,
-                                fontFamily: 'Inter'),
-                          ),
-                        ],
+                      Align(
+                        alignment: Alignment.bottomRight,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Text(
+                              discount,
+                              textAlign: TextAlign.right,
+                              style: const TextStyle(
+                                  color: Color(0xFF43C16E),
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w600,
+                                  fontStyle: FontStyle.normal,
+                                  fontFamily: 'Inter'),
+                            ),
+                            const SizedBox(height: 6),
+                            Text(
+                              price,
+                              textAlign: TextAlign.right,
+                              style: const TextStyle(
+                                  color: Color(0xFFE33434),
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w700,
+                                  fontStyle: FontStyle.normal,
+                                  fontFamily: 'Inter'),
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
