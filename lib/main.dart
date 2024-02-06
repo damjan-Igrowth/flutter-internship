@@ -76,19 +76,6 @@ class MyApp extends StatelessWidget {
                       );
                     },
                   ),
-                  const SizedBox(height: 16),
-                  // _ExpandedButton(
-                  //   backgroundColor: const Color(0xFF8A93A0),
-                  //   buttonText: 'Phone store',
-                  //   // onTap: () {
-                  //   //   Navigator.push(
-                  //   //     context,
-                  //   //     MaterialPageRoute(
-                  //   //       builder: (context) => const TechByte(),
-                  //   //     ),
-                  //   //   );
-                  //   // },
-                  // ),
                 ],
               ),
             ),

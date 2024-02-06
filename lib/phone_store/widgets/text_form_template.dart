@@ -23,16 +23,6 @@ class _TextFormTemplateState extends State<TextFormTemplate> {
     const Color focusedColor = Color(0xFF7E44F8);
     const Color disabledColor = Color(0xFFC9D2DE);
 
-    Color getBorderColor() {
-      if (_formKey.currentState?.validate() == false) {
-        return errorColor;
-      } else if (_textController.text.isNotEmpty) {
-        return focusedColor;
-      } else {
-        return enabledColor;
-      }
-    }
-
     return Padding(
       padding: const EdgeInsets.all(50),
       child: Form(

@@ -12,7 +12,6 @@ class PhoneCard extends StatelessWidget {
   final String image;
   final String productName;
   final String category;
-  final String stars;
   final String discount;
   final String price;
   final double reviewScore;
@@ -24,7 +23,6 @@ class PhoneCard extends StatelessWidget {
     required this.productName,
     required this.category,
     required this.discount,
-    required this.stars,
     required this.reviewScore,
   });
 
@@ -142,7 +140,7 @@ class PhoneCard extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             Text(
-                              discount,
+                              '-$discount%',
                               textAlign: TextAlign.right,
                               style: const TextStyle(
                                   color: Color(0xFF43C16E),
@@ -153,7 +151,7 @@ class PhoneCard extends StatelessWidget {
                             ),
                             const SizedBox(height: 6),
                             Text(
-                              price,
+                              '$price \$',
                               textAlign: TextAlign.right,
                               style: const TextStyle(
                                   color: Color(0xFFE33434),
