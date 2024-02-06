@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 
 class TextFormTemplate extends StatefulWidget {
   final bool isDisabled;
+  final Widget? icon;
 
   const TextFormTemplate({
-    Key? key,
+    super.key,
     required this.isDisabled,
-  }) : super(key: key);
+    this.icon,
+  });
 
   @override
   State<TextFormTemplate> createState() => _TextFormTemplateState();
@@ -34,6 +36,7 @@ class _TextFormTemplateState extends State<TextFormTemplate> {
               readOnly: widget.isDisabled,
               enabled: !widget.isDisabled,
               decoration: InputDecoration(
+                suffixIcon: widget.icon,
                 labelText: 'Text',
                 labelStyle: MaterialStateTextStyle.resolveWith(
                   (Set<MaterialState> states) {
