@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_internship/shop/data/sneakers_list.dart';
+import 'package:flutter_internship/sneakers_shop/data/sneakers_list.dart';
 import 'package:flutter_internship/components/widgets/product_card.dart';
 
 class SneakersGrid extends StatelessWidget {

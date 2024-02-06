@@ -1,4 +1,4 @@
-import 'package:flutter_internship/shop/models/sneakers.dart';
+import 'package:flutter_internship/sneakers_shop/models/sneakers.dart';
 
 const sneakersList = [
   Sneakers(

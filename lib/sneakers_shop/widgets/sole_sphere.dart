@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_internship/shop/data/sneakers_list.dart';
-import 'package:flutter_internship/shop/helpers/mobile_text.dart';
+import 'package:flutter_internship/sneakers_shop/data/sneakers_list.dart';
+import 'package:flutter_internship/sneakers_shop/helpers/mobile_text.dart';
 import 'package:flutter_internship/components/widgets/discount_card.dart';
 import 'package:flutter_internship/components/widgets/product_card.dart';
 import 'package:flutter_internship/components/widgets/product_card_special.dart';
-import 'package:flutter_internship/shop/widgets/sneakers_grid.dart';
+import 'package:flutter_internship/sneakers_shop/widgets/sneakers_grid.dart';
 
 class SoleSphere extends StatelessWidget {
   const SoleSphere({super.key});

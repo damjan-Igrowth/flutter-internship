@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_internship/shop/helpers/my_app1_icons.dart';
-import 'package:flutter_internship/shop/widgets/sole_sphere.dart';
-import 'package:flutter_internship/shop/widgets/sneakers_grid.dart';
+import 'package:flutter_internship/sneakers_shop/helpers/my_app1_icons.dart';
+import 'package:flutter_internship/sneakers_shop/widgets/sole_sphere.dart';
+import 'package:flutter_internship/sneakers_shop/widgets/sneakers_grid.dart';
 import 'package:flutter_svg/svg.dart';
 
 class Shop extends StatefulWidget {

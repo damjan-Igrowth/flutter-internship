@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_internship/shop/helpers/my_app1_icons.dart';
+import 'package:flutter_internship/sneakers_shop/helpers/my_app1_icons.dart';
 
 class StopWatch extends StatefulWidget {
   const StopWatch({super.key});
