@@ -5,22 +5,19 @@ class CircleIcon extends StatelessWidget {
   final Color backgroundColor;
   final Color iconColor;
 
-  const CircleIcon.success({Key? key})
+  const CircleIcon.success({super.key})
       : icon = Icons.check_circle_outline_rounded,
         backgroundColor = const Color(0xFFD1FADF),
-        iconColor = const Color(0xFF18B815),
-        super(key: key);
-  const CircleIcon.warning({Key? key})
+        iconColor = const Color(0xFF18B815);
+  const CircleIcon.warning({super.key})
       : icon = Icons.error,
         backgroundColor = const Color(0xFFFAEAD1),
-        iconColor = const Color(0xFFFFA218),
-        super(key: key);
+        iconColor = const Color(0xFFFFA218);
 
-  const CircleIcon.error({Key? key})
+  const CircleIcon.error({super.key})
       : icon = Icons.cancel,
         backgroundColor = const Color(0xFFFAD1D1),
-        iconColor = const Color(0xFFDA0000),
-        super(key: key);
+        iconColor = const Color(0xFFDA0000);
 
   @override
   Widget build(BuildContext context) {

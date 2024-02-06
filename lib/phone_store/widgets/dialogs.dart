@@ -1,110 +1,92 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_internship/components/widgets/circle_icon.dart';
 
-class ErrorDialog extends StatelessWidget {
-  const ErrorDialog({super.key});
-  @override
-  Widget build(BuildContext context) {
-    return const _BaseDialog(
-      circleIcon: CircleIcon.error(),
-      title: 'Error!',
-      description: 'Something went wrong while editing product!',
-      buttonText: 'Try again',
-      buttonColor: Color(0xFFFFFFFF),
-      buttonTextColor: Color(0xFF000000),
-      borderColor: Color(0xFFCFCFCF),
-    );
-  }
-}
-
-class SuccessDialog extends StatelessWidget {
-  const SuccessDialog({super.key});
-  @override
-  Widget build(BuildContext context) {
-    return const _BaseDialog(
-      circleIcon: CircleIcon.success(),
-      title: 'Success!',
-      description: 'The product has been successfully edited! ',
-      buttonText: 'Continue',
-      buttonColor: Color(0xFF34A4E3),
-      buttonTextColor: Color(0xFFFFFFFF),
-      borderColor: Color(0xFF34A4E3),
-    );
-  }
-}
-
-class _BaseDialog extends StatelessWidget {
+class Dialogs extends StatelessWidget {
   final CircleIcon circleIcon;
   final String description;
   final String title;
   final String buttonText;
   final Color buttonColor;
   final Color buttonTextColor;
-  final Color borderColor;
+  final VoidCallback onTapFunction;
 
-  const _BaseDialog({
-    required this.circleIcon,
+  const Dialogs.error({
+    super.key,
     required this.description,
-    required this.title,
-    required this.buttonText,
-    required this.buttonColor,
-    required this.buttonTextColor,
-    required this.borderColor,
-  });
+    required this.onTapFunction,
+  })  : circleIcon = const CircleIcon.error(),
+        title = 'Error!',
+        buttonText = 'Try again',
+        buttonColor = const Color(0xFFFFFFFF),
+        buttonTextColor = const Color(0xFF000000);
+
+  const Dialogs.success({
+    super.key,
+    required this.description,
+    required this.onTapFunction,
+  })  : circleIcon = const CircleIcon.success(),
+        title = 'Success!',
+        buttonText = 'Continue',
+        buttonColor = const Color(0xFF34A4E3),
+        buttonTextColor = const Color(0xFFFFFFFF);
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16),
-      child: AlertDialog(
-        surfaceTintColor: const Color(0xFFFFFFFF),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            circleIcon,
-            const SizedBox(height: 16),
-            Text(
-              title,
-              style: const TextStyle(
-                color: Color(0xFF000000),
-                fontFamily: 'Inter',
-                fontSize: 20,
-                fontStyle: FontStyle.normal,
-                fontWeight: FontWeight.w600,
-              ),
+    return AlertDialog(
+      surfaceTintColor: const Color(0xFFFFFFFF),
+      content: Column(
+        children: [
+          circleIcon,
+          const SizedBox(height: 16),
+          Text(
+            title,
+            style: const TextStyle(
+              color: Color(0xFF000000),
+              fontFamily: 'Inter',
+              fontSize: 20,
+              fontStyle: FontStyle.normal,
+              fontWeight: FontWeight.w600,
             ),
-            const SizedBox(height: 12),
-            Text(
-              description,
-              style: const TextStyle(
-                color: Color(0xFF787878),
-                fontFamily: 'Inter',
-                fontSize: 14,
-                fontStyle: FontStyle.normal,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ],
-        ),
-        actions: <Widget>[
-          Container(
-            alignment: Alignment.center,
-            height: 48,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: borderColor, width: 1),
-              color: buttonColor,
-            ),
-            child: MaterialButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              textColor: buttonTextColor,
-              child: Text(buttonText),
+          ),
+          const SizedBox(height: 12),
+          Text(
+            description,
+            style: const TextStyle(
+              color: Color(0xFF787878),
+              fontFamily: 'Inter',
+              fontSize: 14,
+              fontStyle: FontStyle.normal,
+              fontWeight: FontWeight.w500,
             ),
           ),
         ],
       ),
+      actions: <Widget>[
+        ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: buttonColor,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+          ),
+          onPressed: onTapFunction,
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+              child: Text(
+                buttonText,
+                style: TextStyle(
+                  color: buttonTextColor,
+                  fontFamily: 'Inter',
+                  fontSize: 16,
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
