@@ -2,23 +2,19 @@ import 'package:flutter/material.dart';
 
 class ContinueButton extends StatelessWidget {
   final String buttonText;
-  final Color buttonTextColor;
-  final Color buttonColor;
   final VoidCallback onTap;
 
   const ContinueButton({
     super.key,
     required this.buttonText,
-    required this.buttonTextColor,
     required this.onTap,
-    required this.buttonColor,
   });
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        backgroundColor: buttonColor,
+        backgroundColor: const Color(0xFF34A4E3),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
         ),
@@ -29,8 +25,8 @@ class ContinueButton extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 8),
           child: Text(
             buttonText,
-            style: TextStyle(
-              color: buttonTextColor,
+            style: const TextStyle(
+              color: Color(0xFFFFFFFF),
               fontFamily: 'Inter',
               fontSize: 16,
               fontStyle: FontStyle.normal,

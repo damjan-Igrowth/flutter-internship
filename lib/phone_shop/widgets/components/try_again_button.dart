@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
 
 class TryAgainButton extends StatelessWidget {
-  final String buttonText;
-  final Color buttonTextColor;
   final VoidCallback onTap;
 
   const TryAgainButton({
     super.key,
-    required this.buttonText,
-    required this.buttonTextColor,
     required this.onTap,
   });
 
@@ -16,19 +12,19 @@ class TryAgainButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return OutlinedButton(
       style: OutlinedButton.styleFrom(
+        side: const BorderSide(color: Color(0xFFCFCFCF), width: 1),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
-          side: const BorderSide(color: Color(0xFFCFCFCF), width: 1),
         ),
       ),
       onPressed: onTap,
-      child: Center(
+      child: const Center(
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8),
+          padding: EdgeInsets.symmetric(vertical: 8),
           child: Text(
-            buttonText,
+            'Try again',
             style: TextStyle(
-              color: buttonTextColor,
+              color: Color(0xFF000000),
               fontFamily: 'Inter',
               fontSize: 16,
               fontStyle: FontStyle.normal,
