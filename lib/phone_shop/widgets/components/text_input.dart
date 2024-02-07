@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 
 class TextInput extends StatefulWidget {
   final bool isDisabled;
+  final String label;
   final Widget? icon;
 
   const TextInput({
     super.key,
     this.isDisabled = false,
     this.icon,
+    required this.label,
   });
 
   @override
@@ -34,7 +36,7 @@ class _TextFormTemplateState extends State<TextInput> {
             enabled: !widget.isDisabled,
             decoration: InputDecoration(
               suffixIcon: widget.icon,
-              labelText: 'Text',
+              labelText: widget.label,
               labelStyle: MaterialStateTextStyle.resolveWith(
                 (Set<MaterialState> states) {
                   Color? color;
@@ -55,6 +57,10 @@ class _TextFormTemplateState extends State<TextInput> {
                         : FontWeight.w400,
                   );
                 },
+              ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: const BorderSide(color: focusedColor),
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
@@ -85,15 +91,15 @@ class _TextFormTemplateState extends State<TextInput> {
                       int.tryParse(value)! <= 0)) {
                 return 'Error text';
               } else if (_textController.text.isNotEmpty &&
-                  (value == null || value.length < 12)) {
-                return 'Text must have at least 12 characters';
+                  (value != null && value.contains('@'))) {
+                return 'Do not use the @ char';
               }
               return null;
             },
           ),
           ElevatedButton(
             onPressed: () {
-              if (_formKey.currentState!.validate()) {}
+              _formKey.currentState!.validate();
             },
             child: const Text('Add product'),
           ),
