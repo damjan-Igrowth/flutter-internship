@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class ShopCard extends StatelessWidget {
   final String title;
-  final int price;
+  final double price;
   final double discountPercentage;
   final double rating;
   final int stock;
@@ -23,7 +23,9 @@ class ShopCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      margin: EdgeInsets.zero,
       color: const Color(0xFFFFFFFF),
+      shadowColor: Colors.black.withOpacity(0.04),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
       ),
@@ -78,7 +80,7 @@ class ShopCard extends StatelessWidget {
 }
 
 class _Price extends StatelessWidget {
-  final int price;
+  final double price;
 
   const _Price({
     required this.price,
@@ -90,11 +92,12 @@ class _Price extends StatelessWidget {
       '${price.toStringAsFixed(2)} \$',
       textAlign: TextAlign.right,
       style: const TextStyle(
-          color: Color(0xFFE33434),
-          fontSize: 16,
-          fontWeight: FontWeight.w700,
-          fontStyle: FontStyle.normal,
-          fontFamily: 'Inter'),
+        color: Color(0xFFE33434),
+        fontSize: 16,
+        fontWeight: FontWeight.w700,
+        fontStyle: FontStyle.normal,
+        fontFamily: 'Inter',
+      ),
     );
   }
 }
@@ -112,11 +115,12 @@ class _Discount extends StatelessWidget {
       '-${discountPercentage.toStringAsFixed(2)}%',
       textAlign: TextAlign.right,
       style: const TextStyle(
-          color: Color(0xFF43C16E),
-          fontSize: 12,
-          fontWeight: FontWeight.w600,
-          fontStyle: FontStyle.normal,
-          fontFamily: 'Inter'),
+        color: Color(0xFF43C16E),
+        fontSize: 12,
+        fontWeight: FontWeight.w600,
+        fontStyle: FontStyle.normal,
+        fontFamily: 'Inter',
+      ),
     );
   }
 }
@@ -133,11 +137,12 @@ class _Stock extends StatelessWidget {
     return Text(
       'On stock: $stock',
       style: const TextStyle(
-          color: Color(0xFF4A4949),
-          fontSize: 12,
-          fontWeight: FontWeight.w500,
-          fontStyle: FontStyle.normal,
-          fontFamily: 'Inter'),
+        color: Color(0xFF4A4949),
+        fontSize: 12,
+        fontWeight: FontWeight.w500,
+        fontStyle: FontStyle.normal,
+        fontFamily: 'Inter',
+      ),
     );
   }
 }
@@ -154,11 +159,12 @@ class _Category extends StatelessWidget {
     return Text(
       category,
       style: const TextStyle(
-          color: Color(0xFF34A4E3),
-          fontSize: 12,
-          fontWeight: FontWeight.w500,
-          fontStyle: FontStyle.normal,
-          fontFamily: 'Inter'),
+        color: Color(0xFF34A4E3),
+        fontSize: 12,
+        fontWeight: FontWeight.w500,
+        fontStyle: FontStyle.normal,
+        fontFamily: 'Inter',
+      ),
     );
   }
 }
@@ -176,11 +182,12 @@ class _Title extends StatelessWidget {
       title,
       overflow: TextOverflow.ellipsis,
       style: const TextStyle(
-          color: Color(0xFF121212),
-          fontSize: 16,
-          fontWeight: FontWeight.w600,
-          fontStyle: FontStyle.normal,
-          fontFamily: 'Inter'),
+        color: Color(0xFF121212),
+        fontSize: 16,
+        fontWeight: FontWeight.w600,
+        fontStyle: FontStyle.normal,
+        fontFamily: 'Inter',
+      ),
     );
   }
 }
@@ -199,11 +206,12 @@ class _Stars extends StatelessWidget {
         Text(
           '$rating',
           style: const TextStyle(
-              color: Color(0xFFFFC046),
-              fontFamily: 'Poppins',
-              fontSize: 12,
-              fontWeight: FontWeight.w600,
-              fontStyle: FontStyle.normal),
+            color: Color(0xFFFFC046),
+            fontFamily: 'Poppins',
+            fontSize: 12,
+            fontWeight: FontWeight.w600,
+            fontStyle: FontStyle.normal,
+          ),
         ),
         const SizedBox(width: 4),
         ...List.generate(
@@ -243,7 +251,7 @@ class _Image extends StatelessWidget {
       ),
       child: Image.network(
         image,
-        fit: BoxFit.fill,
+        fit: BoxFit.cover,
       ),
     );
   }
