@@ -176,7 +176,7 @@ class _Title extends StatelessWidget {
       title,
       overflow: TextOverflow.ellipsis,
       style: const TextStyle(
-          color: Color(0xFF181E25),
+          color: Color(0xFF121212),
           fontSize: 16,
           fontWeight: FontWeight.w600,
           fontStyle: FontStyle.normal,
@@ -239,11 +239,11 @@ class _Image extends StatelessWidget {
           color: const Color(0xFFF3F3F3),
           width: 1,
         ),
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(8),
       ),
       child: Image.network(
         image,
-        fit: BoxFit.cover,
+        fit: BoxFit.fill,
       ),
     );
   }
