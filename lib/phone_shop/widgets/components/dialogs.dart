@@ -5,91 +5,71 @@ class Dialogs extends StatelessWidget {
   final CircleIcon circleIcon;
   final String description;
   final String title;
-  final String buttonText;
-  final Color buttonColor;
-  final Color buttonTextColor;
-  final VoidCallback onTap;
+  final Widget button;
 
-  const Dialogs.error({
+  const Dialogs({
     super.key,
+    required this.circleIcon,
     required this.description,
-    required this.onTap,
-  })  : circleIcon = const CircleIcon.error(),
-        title = 'Error!',
-        buttonText = 'Try again',
-        buttonColor = const Color(0xFFFFFFFF),
-        buttonTextColor = const Color(0xFF000000);
-
-  const Dialogs.success({
-    super.key,
-    required this.description,
-    required this.onTap,
-  })  : circleIcon = const CircleIcon.success(),
-        title = 'Success!',
-        buttonText = 'Continue',
-        buttonColor = const Color(0xFF34A4E3),
-        buttonTextColor = const Color(0xFFFFFFFF);
+    required this.title,
+    required this.button,
+  });
 
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
       surfaceTintColor: const Color(0xFFFFFFFF),
-      content: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            circleIcon,
-            const SizedBox(height: 16),
-            Text(
-              title,
-              style: const TextStyle(
-                color: Color(0xFF000000),
-                fontFamily: 'Inter',
-                fontSize: 20,
-                fontStyle: FontStyle.normal,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-            const SizedBox(height: 12),
-            Text(
-              description,
-              style: const TextStyle(
-                color: Color(0xFF787878),
-                fontFamily: 'Inter',
-                fontSize: 14,
-                fontStyle: FontStyle.normal,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ],
-        ),
+      icon: circleIcon,
+      content: Column(
+        children: [
+          _Title(title: title),
+          const SizedBox(height: 12),
+          _Description(description: description),
+        ],
       ),
-      actions: <Widget>[
-        ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: buttonColor,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
-          ),
-          onPressed: onTap,
-          child: Center(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-              child: Text(
-                buttonText,
-                style: TextStyle(
-                  color: buttonTextColor,
-                  fontFamily: 'Inter',
-                  fontSize: 16,
-                  fontStyle: FontStyle.normal,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ),
-          ),
-        ),
-      ],
+      actions: <Widget>[button],
+    );
+  }
+}
+
+class _Title extends StatelessWidget {
+  final String title;
+
+  const _Title({
+    required this.title,
+  });
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      title,
+      style: const TextStyle(
+        color: Color(0xFF000000),
+        fontFamily: 'Inter',
+        fontSize: 20,
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w600,
+      ),
+    );
+  }
+}
+
+class _Description extends StatelessWidget {
+  final String description;
+
+  const _Description({
+    required this.description,
+  });
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      description,
+      style: const TextStyle(
+        color: Color(0xFF787878),
+        fontFamily: 'Inter',
+        fontSize: 14,
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w500,
+      ),
     );
   }
 }
