@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class TryAgainButton extends StatelessWidget {
+class OutlineButton extends StatelessWidget {
   final VoidCallback onTap;
 
-  const TryAgainButton({
+  const OutlineButton({
     super.key,
     required this.onTap,
   });
@@ -20,7 +20,7 @@ class TryAgainButton extends StatelessWidget {
       onPressed: onTap,
       child: const Center(
         child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 8),
+          padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
           child: Text(
             'Try again',
             style: TextStyle(

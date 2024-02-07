@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class ContinueButton extends StatelessWidget {
+class FillButton extends StatelessWidget {
   final String buttonText;
   final VoidCallback onTap;
 
-  const ContinueButton({
+  const FillButton({
     super.key,
     required this.buttonText,
     required this.onTap,
@@ -22,7 +22,7 @@ class ContinueButton extends StatelessWidget {
       onPressed: onTap,
       child: Center(
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8),
+          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
           child: Text(
             buttonText,
             style: const TextStyle(
