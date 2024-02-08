@@ -3,12 +3,10 @@ import 'package:flutter/material.dart';
 class TextInput extends StatefulWidget {
   final bool isDisabled;
   final String label;
-  final Widget? icon;
 
   const TextInput({
     super.key,
     this.isDisabled = false,
-    this.icon,
     required this.label,
   });
 
@@ -35,7 +33,6 @@ class _TextFormTemplateState extends State<TextInput> {
             controller: _textController,
             enabled: !widget.isDisabled,
             decoration: InputDecoration(
-              suffixIcon: widget.icon,
               labelText: widget.label,
               labelStyle: MaterialStateTextStyle.resolveWith(
                 (Set<MaterialState> states) {
@@ -60,7 +57,7 @@ class _TextFormTemplateState extends State<TextInput> {
               ),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
-                borderSide: const BorderSide(color: focusedColor),
+                borderSide: const BorderSide(color: enabledColor),
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
@@ -78,6 +75,10 @@ class _TextFormTemplateState extends State<TextInput> {
                 borderRadius: BorderRadius.circular(12),
                 borderSide: const BorderSide(color: disabledColor),
               ),
+              focusedErrorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: const BorderSide(color: focusedColor),
+              ),
               filled: true,
               fillColor: widget.isDisabled
                   ? const Color(0xFFF3F4F8)
@@ -91,8 +92,8 @@ class _TextFormTemplateState extends State<TextInput> {
                       int.tryParse(value)! <= 0)) {
                 return 'Error text';
               } else if (_textController.text.isNotEmpty &&
-                  (value != null && value.contains('@'))) {
-                return 'Do not use the @ char';
+                  (value != null && value.length < 10)) {
+                return 'Error short word';
               }
               return null;
             },
@@ -103,6 +104,7 @@ class _TextFormTemplateState extends State<TextInput> {
             },
             child: const Text('Add product'),
           ),
+          const SizedBox(height: 10),
           ElevatedButton(
             onPressed: () {
               _formKey.currentState!.reset();
