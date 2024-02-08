@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 
 class OutlineButton extends StatelessWidget {
   final VoidCallback onTap;
+  final String buttonText;
 
   const OutlineButton({
     super.key,
     required this.onTap,
+    required this.buttonText,
   });
 
   @override
@@ -18,12 +20,12 @@ class OutlineButton extends StatelessWidget {
         ),
       ),
       onPressed: onTap,
-      child: const Center(
+      child: Center(
         child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
           child: Text(
-            'Try again',
-            style: TextStyle(
+            buttonText,
+            style: const TextStyle(
               color: Color(0xFF000000),
               fontFamily: 'Inter',
               fontSize: 16,

@@ -8,27 +8,25 @@ class Dialogs extends StatelessWidget {
   final String description;
   final String title;
   final Widget button;
-  final String? buttonText;
-
   final VoidCallback onTap;
 
   Dialogs.error({
     super.key,
     required this.description,
     required this.onTap,
-    this.buttonText,
+    String buttonText = 'Try again',
   })  : circleIcon = const CircleIcon.error(),
         title = 'Error!',
-        button = OutlineButton(onTap: onTap);
+        button = OutlineButton(onTap: onTap, buttonText: buttonText);
 
   Dialogs.success({
     super.key,
     required this.description,
     required this.onTap,
-    this.buttonText,
+    String buttonText = 'Done',
   })  : circleIcon = const CircleIcon.success(),
         title = 'Success!',
-        button = FillButton(buttonText: buttonText!, onTap: onTap);
+        button = FillButton(onTap: onTap, buttonText: buttonText);
 
   @override
   Widget build(BuildContext context) {
