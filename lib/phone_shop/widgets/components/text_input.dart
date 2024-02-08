@@ -3,11 +3,15 @@ import 'package:flutter/material.dart';
 class TextInput extends StatefulWidget {
   final bool isDisabled;
   final String label;
+  final Widget? icon;
+  final String? suffixText;
 
   const TextInput({
     super.key,
-    this.isDisabled = false,
     required this.label,
+    this.isDisabled = false,
+    this.icon,
+    this.suffixText,
   });
 
   @override
@@ -33,6 +37,8 @@ class _TextFormTemplateState extends State<TextInput> {
             controller: _textController,
             enabled: !widget.isDisabled,
             decoration: InputDecoration(
+              contentPadding:
+                  const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
               labelText: widget.label,
               labelStyle: MaterialStateTextStyle.resolveWith(
                 (Set<MaterialState> states) {
@@ -83,33 +89,17 @@ class _TextFormTemplateState extends State<TextInput> {
               fillColor: widget.isDisabled
                   ? const Color(0xFFF3F4F8)
                   : const Color(0xFFFFFFFF),
+              suffixIcon: widget.icon,
+              suffixIconColor: const Color(0xFF34A4E3),
+              suffixText: widget.suffixText,
+              suffixStyle: const TextStyle(
+                color: Color(0xFF949494),
+                fontFamily: 'Inter',
+                fontSize: 16,
+                fontStyle: FontStyle.normal,
+                fontWeight: FontWeight.w400,
+              ),
             ),
-            validator: (value) {
-              if (_textController.text.isEmpty &&
-                  (value == null ||
-                      value.isEmpty ||
-                      int.tryParse(value) == null ||
-                      int.tryParse(value)! <= 0)) {
-                return 'Error text';
-              } else if (_textController.text.isNotEmpty &&
-                  (value != null && value.length < 10)) {
-                return 'Error short word';
-              }
-              return null;
-            },
-          ),
-          ElevatedButton(
-            onPressed: () {
-              _formKey.currentState!.validate();
-            },
-            child: const Text('Add product'),
-          ),
-          const SizedBox(height: 10),
-          ElevatedButton(
-            onPressed: () {
-              _formKey.currentState!.reset();
-            },
-            child: const Text('Reset'),
           ),
         ],
       ),
