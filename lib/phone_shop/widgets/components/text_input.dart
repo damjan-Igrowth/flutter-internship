@@ -1,69 +1,64 @@
 import 'package:flutter/material.dart';
 
-class TextInput extends StatefulWidget {
-  final bool isDisabled;
+const Color enabledColor = Color(0xFFC9D2DE);
+const Color errorColor = Color(0xFFFF4242);
+const Color focusedColor = Color(0xFF7E44F8);
+const Color disabledColor = Color(0xFFC9D2DE);
+
+class TextInput extends StatelessWidget {
   final String label;
-  final Widget? icon;
+  final Widget? suffixicon;
   final String? suffixText;
+  final bool enabled;
+  final String? initialValue;
 
   const TextInput({
     super.key,
     required this.label,
-    this.isDisabled = false,
-    this.icon,
+    this.suffixicon,
     this.suffixText,
+    this.enabled = true,
+    this.initialValue,
   });
 
   @override
-  State<TextInput> createState() => _TextFormTemplateState();
-}
-
-class _TextFormTemplateState extends State<TextInput> {
-  final _textController = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
-
-  @override
   Widget build(BuildContext context) {
-    const Color enabledColor = Color(0xFFC9D2DE);
-    const Color errorColor = Color(0xFFFF4242);
-    const Color focusedColor = Color(0xFF7E44F8);
-    const Color disabledColor = Color(0xFFC9D2DE);
-
     return Form(
-      key: _formKey,
       child: Column(
         children: [
           TextFormField(
-            controller: _textController,
-            enabled: !widget.isDisabled,
+            initialValue: initialValue,
             decoration: InputDecoration(
               contentPadding:
                   const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-              labelText: widget.label,
+              labelText: label,
               labelStyle: MaterialStateTextStyle.resolveWith(
                 (Set<MaterialState> states) {
                   Color? color;
+                  FontWeight fontWeight = FontWeight.w400;
                   if (states.contains(MaterialState.error)) {
                     color = errorColor;
-                  } else if (states.contains(MaterialState.focused)) {
+                  } else if (states.contains(MaterialState.focused) ||
+                      states.contains(MaterialState.pressed)) {
                     color = focusedColor;
+                    fontWeight = FontWeight.w600;
                   } else if (states.contains(MaterialState.disabled)) {
                     color = disabledColor;
                   }
                   return TextStyle(
-                    color: color,
+                    color: enabled ? color : const Color(0xFF7B828A),
                     fontFamily: 'Inter',
                     fontSize: 16,
                     fontStyle: FontStyle.normal,
-                    fontWeight: _textController.text.isNotEmpty
-                        ? FontWeight.w600
-                        : FontWeight.w400,
+                    fontWeight: fontWeight,
                   );
                 },
               ),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
-                borderSide: const BorderSide(color: enabledColor),
+                borderSide: BorderSide(
+                  color: enabled ? enabledColor : disabledColor,
+                ),
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
@@ -83,15 +78,14 @@ class _TextFormTemplateState extends State<TextInput> {
               ),
               focusedErrorBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
-                borderSide: const BorderSide(color: focusedColor),
+                borderSide: const BorderSide(color: errorColor),
               ),
               filled: true,
-              fillColor: widget.isDisabled
-                  ? const Color(0xFFF3F4F8)
-                  : const Color(0xFFFFFFFF),
-              suffixIcon: widget.icon,
+              fillColor:
+                  enabled ? const Color(0xFFFFFFFF) : const Color(0xFFF3F4F8),
+              suffixIcon: suffixicon,
               suffixIconColor: const Color(0xFF34A4E3),
-              suffixText: widget.suffixText,
+              suffixText: suffixText,
               suffixStyle: const TextStyle(
                 color: Color(0xFF949494),
                 fontFamily: 'Inter',
@@ -99,7 +93,14 @@ class _TextFormTemplateState extends State<TextInput> {
                 fontStyle: FontStyle.normal,
                 fontWeight: FontWeight.w400,
               ),
+              enabled: enabled,
             ),
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter some text';
+              }
+              return null;
+            },
           ),
         ],
       ),
