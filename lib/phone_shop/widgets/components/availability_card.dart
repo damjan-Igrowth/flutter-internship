@@ -13,6 +13,7 @@ class AvailabilityCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      elevation: 0,
       color: const Color(0xFFFFFFFF),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
@@ -28,9 +29,13 @@ class AvailabilityCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const _CategoryText(),
+                const Expanded(child: _CategoryText()),
                 const SizedBox(width: 10),
-                _Category(category: category),
+                Expanded(
+                  child: Align(
+                      alignment: Alignment.topRight,
+                      child: _Category(category: category)),
+                ),
               ],
             ),
             const SizedBox(height: 12),
@@ -38,7 +43,7 @@ class AvailabilityCard extends StatelessWidget {
               children: [
                 const Icon(Icons.location_on, color: Color(0xFF34A4E3)),
                 const SizedBox(width: 10),
-                _Stock(stock: stock),
+                Expanded(child: _Stock(stock: stock)),
               ],
             )
           ],
@@ -72,7 +77,6 @@ class _Category extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       category,
-      overflow: TextOverflow.ellipsis,
       style: const TextStyle(
         color: Color(0xFF34A4E3),
         fontFamily: 'Inter',
