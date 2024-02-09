@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class Availability extends StatelessWidget {
+class AvailabilityCard extends StatelessWidget {
   final String category;
   final int stock;
 
-  const Availability({
+  const AvailabilityCard({
     super.key,
     required this.category,
     required this.stock,
