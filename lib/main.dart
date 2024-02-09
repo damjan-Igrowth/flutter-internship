@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_internship/components/screens/component.dart';
 import 'package:flutter_internship/layout_tasks/screens/layout.dart';
+import 'package:flutter_internship/phone_shop/widgets/components/overview_card.dart';
 import 'package:flutter_internship/sneakers_shop/screens/shop.dart';
 import 'package:flutter_internship/stopwatch/stop_watch.dart';
 
@@ -20,62 +21,73 @@ class MyApp extends StatelessWidget {
         body: Center(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                _ExpandedButton(
-                  backgroundColor: const Color(0xFF7E44F8),
-                  buttonText: 'Layout',
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const LayoutScreen(),
-                      ),
-                    );
-                  },
-                ),
-                const SizedBox(height: 16),
-                _ExpandedButton(
-                  backgroundColor: const Color(0xFF44B7F8),
-                  buttonText: 'Components',
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const ComponentClass(),
-                      ),
-                    );
-                  },
-                ),
-                const SizedBox(height: 16),
-                _ExpandedButton(
-                  backgroundColor: const Color(0xFFF89A44),
-                  buttonText: 'Sneakers App',
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const Shop(),
-                      ),
-                    );
-                  },
-                ),
-                const SizedBox(height: 16),
-                _ExpandedButton(
-                  backgroundColor: const Color(0xFF0E111C),
-                  buttonText: 'StopWatch',
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const StopWatch(),
-                      ),
-                    );
-                  },
-                ),
-              ],
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  _ExpandedButton(
+                    backgroundColor: const Color(0xFF7E44F8),
+                    buttonText: 'Layout',
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const LayoutScreen(),
+                        ),
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 16),
+                  _ExpandedButton(
+                    backgroundColor: const Color(0xFF44B7F8),
+                    buttonText: 'Components',
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const ComponentClass(),
+                        ),
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 16),
+                  _ExpandedButton(
+                    backgroundColor: const Color(0xFFF89A44),
+                    buttonText: 'Sneakers App',
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const Shop(),
+                        ),
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 16),
+                  _ExpandedButton(
+                    backgroundColor: const Color(0xFF0E111C),
+                    buttonText: 'StopWatch',
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const StopWatch(),
+                        ),
+                      );
+                    },
+                  ),
+                  const OverviewCard(
+                    title: 'Iphone 15 Pro',
+                    discountPercentage: 12.96,
+                    price: 149.00,
+                    rating: 4.69,
+                    description:
+                        'Lorem ipsum dolor sit amet consectetur. Ornare id ullamcorper et non. Massa in urna volutpat sed sagittis eget. Nullam sollicitudin viverra egestas ante. Vitae blandit.',
+                    brand: 'Apple',
+                  )
+                ],
+              ),
             ),
           ),
         ),

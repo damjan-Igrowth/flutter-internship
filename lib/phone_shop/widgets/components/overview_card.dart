@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_internship/phone_shop/widgets/components/stars.dart';
 
 class OverviewCard extends StatelessWidget {
   final String title;
-  final String category;
+  final String brand;
   final double discountPercentage;
   final double price;
   final double rating;
@@ -11,7 +12,7 @@ class OverviewCard extends StatelessWidget {
   const OverviewCard({
     super.key,
     required this.title,
-    required this.category,
+    required this.brand,
     required this.discountPercentage,
     required this.price,
     required this.rating,
@@ -21,6 +22,7 @@ class OverviewCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      elevation: 0,
       color: const Color(0xFFFFFFFF),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
@@ -34,22 +36,33 @@ class OverviewCard extends StatelessWidget {
         child: Column(
           children: [
             Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                _Category(category: category),
-                _Price(price: price),
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _Brand(brand: brand),
+                      const SizedBox(height: 8),
+                      _Title(title: title),
+                    ],
+                  ),
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    _Price(price: price),
+                    const SizedBox(height: 8),
+                    _Discount(discountPercentage: discountPercentage),
+                  ],
+                )
               ],
             ),
             const SizedBox(height: 8),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                _Title(title: title),
-                _Discount(discountPercentage: discountPercentage),
-              ],
-            ),
-            const SizedBox(height: 8),
-            _Stars(rating: rating),
+            Stars(rating: rating),
             const SizedBox(height: 16),
             _Description(description: description),
           ],
@@ -59,16 +72,15 @@ class OverviewCard extends StatelessWidget {
   }
 }
 
-class _Category extends StatelessWidget {
-  final String category;
+class _Brand extends StatelessWidget {
+  final String brand;
 
-  const _Category({required this.category});
+  const _Brand({required this.brand});
 
   @override
   Widget build(BuildContext context) {
     return Text(
-      category,
-      overflow: TextOverflow.ellipsis,
+      brand,
       style: const TextStyle(
         color: Color(0xFF34A4E3),
         fontFamily: 'Inter',
@@ -112,7 +124,6 @@ class _Title extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       title,
-      overflow: TextOverflow.ellipsis,
       style: const TextStyle(
         color: Color(0xFF121212),
         fontFamily: 'Inter',
@@ -147,43 +158,6 @@ class _Discount extends StatelessWidget {
   }
 }
 
-class _Stars extends StatelessWidget {
-  final double rating;
-
-  const _Stars({
-    required this.rating,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Text(
-          '$rating',
-          style: const TextStyle(
-            color: Color(0xFFFFC046),
-            fontFamily: 'Poppins',
-            fontSize: 12,
-            fontWeight: FontWeight.w600,
-            fontStyle: FontStyle.normal,
-          ),
-        ),
-        const SizedBox(width: 4),
-        ...List.generate(
-          5,
-          (index) => Icon(
-            index < rating.ceil() ? Icons.star : Icons.star_border,
-            color: index < rating.floor()
-                ? const Color(0xFFFFC046)
-                : const Color(0xFFC0C0C0),
-            size: 10,
-          ),
-        ),
-      ],
-    );
-  }
-}
-
 class _Description extends StatelessWidget {
   final String description;
 
@@ -193,11 +167,12 @@ class _Description extends StatelessWidget {
     return Text(
       description,
       style: const TextStyle(
-          color: Color(0xFF4A4A4A),
-          fontFamily: 'Inter',
-          fontSize: 14,
-          fontWeight: FontWeight.w400,
-          fontStyle: FontStyle.normal),
+        color: Color(0xFF4A4A4A),
+        fontFamily: 'Inter',
+        fontSize: 14,
+        fontWeight: FontWeight.w400,
+        fontStyle: FontStyle.normal,
+      ),
     );
   }
 }
