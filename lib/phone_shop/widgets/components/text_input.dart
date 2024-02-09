@@ -7,7 +7,7 @@ const Color disabledColor = Color(0xFFC9D2DE);
 
 class TextInput extends StatelessWidget {
   final String label;
-  final Widget? suffixicon;
+  final Widget? suffixIcon;
   final String? suffixText;
   final bool enabled;
   final String? initialValue;
@@ -15,7 +15,7 @@ class TextInput extends StatelessWidget {
   const TextInput({
     super.key,
     required this.label,
-    this.suffixicon,
+    this.suffixIcon,
     this.suffixText,
     this.enabled = true,
     this.initialValue,
@@ -83,7 +83,7 @@ class TextInput extends StatelessWidget {
               filled: true,
               fillColor:
                   enabled ? const Color(0xFFFFFFFF) : const Color(0xFFF3F4F8),
-              suffixIcon: suffixicon,
+              suffixIcon: suffixIcon,
               suffixIconColor: const Color(0xFF34A4E3),
               suffixText: suffixText,
               suffixStyle: const TextStyle(
