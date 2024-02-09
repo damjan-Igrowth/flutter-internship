@@ -12,10 +12,6 @@ class FillButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color buttonTextColor =
-        onTap == null ? const Color(0xFFCED6E2) : const Color(0xFFFFFFFF);
-    final String buttonFontFamily = onTap == null ? 'Poppins' : 'Inter';
-
     return ElevatedButton(
       style: ButtonStyle(
         backgroundColor: MaterialStateProperty.resolveWith<Color>(
@@ -39,8 +35,10 @@ class FillButton extends StatelessWidget {
           child: Text(
             buttonText,
             style: TextStyle(
-              color: buttonTextColor,
-              fontFamily: buttonFontFamily,
+              color: onTap == null
+                  ? const Color(0xFFCED6E2)
+                  : const Color(0xFFFFFFFF),
+              fontFamily: onTap == null ? 'Poppins' : 'Inter',
               fontSize: 16,
               fontStyle: FontStyle.normal,
               fontWeight: FontWeight.w600,
