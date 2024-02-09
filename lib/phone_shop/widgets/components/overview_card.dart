@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Overview extends StatelessWidget {
+class OverviewCard extends StatelessWidget {
   final String title;
   final String category;
   final double discountPercentage;
@@ -8,7 +8,7 @@ class Overview extends StatelessWidget {
   final double rating;
   final String description;
 
-  const Overview({
+  const OverviewCard({
     super.key,
     required this.title,
     required this.category,
