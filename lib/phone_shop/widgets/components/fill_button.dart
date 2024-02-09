@@ -27,23 +27,30 @@ class FillButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
           ),
         ),
+        foregroundColor: MaterialStateProperty.resolveWith<Color?>(
+          (Set<MaterialState> states) {
+            return states.contains(MaterialState.disabled)
+                ? const Color(0xFFCED6E2)
+                : const Color(0xFFFFFFFF);
+          },
+        ),
+        textStyle: MaterialStateProperty.resolveWith<TextStyle>(
+          (Set<MaterialState> states) {
+            return TextStyle(
+              fontFamily:
+                  states.contains(MaterialState.disabled) ? 'Poppins' : 'Inter',
+              fontSize: 16,
+              fontStyle: FontStyle.normal,
+              fontWeight: FontWeight.w600,
+            );
+          },
+        ),
       ),
       onPressed: onTap,
       child: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
-          child: Text(
-            buttonText,
-            style: TextStyle(
-              color: onTap == null
-                  ? const Color(0xFFCED6E2)
-                  : const Color(0xFFFFFFFF),
-              fontFamily: onTap == null ? 'Poppins' : 'Inter',
-              fontSize: 16,
-              fontStyle: FontStyle.normal,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
+          child: Text(buttonText),
         ),
       ),
     );
