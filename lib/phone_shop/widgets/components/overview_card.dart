@@ -22,6 +22,7 @@ class OverviewCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      margin: EdgeInsets.zero,
       elevation: 0,
       color: const Color(0xFFFFFFFF),
       shape: RoundedRectangleBorder(
