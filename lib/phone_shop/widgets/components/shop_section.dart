@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class Section extends StatelessWidget {
+class ShopSection extends StatelessWidget {
   final String title;
   final Widget child;
 
-  const Section({super.key, required this.title, required this.child});
+  const ShopSection({super.key, required this.title, required this.child});
 
   @override
   Widget build(BuildContext context) {
