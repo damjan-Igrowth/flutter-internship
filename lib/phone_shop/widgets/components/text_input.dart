@@ -12,7 +12,7 @@ class TextInput extends StatefulWidget {
   final bool enabled;
   final String? initialValue;
   final String? Function(String?)? validator;
-  final void Function(String)? onSave;
+  final TextEditingController? controller;
 
   const TextInput({
     super.key,
@@ -22,7 +22,7 @@ class TextInput extends StatefulWidget {
     this.enabled = true,
     this.initialValue,
     this.validator,
-    this.onSave,
+    this.controller,
   });
 
   @override
@@ -30,18 +30,10 @@ class TextInput extends StatefulWidget {
 }
 
 class _TextInputState extends State<TextInput> {
-  late TextEditingController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = TextEditingController(text: widget.initialValue);
-  }
-
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      controller: _controller,
+      controller: widget.controller,
       enabled: widget.enabled,
       style: const TextStyle(
         color: Color(0xFF181E25),
@@ -139,17 +131,6 @@ class _TextInputState extends State<TextInput> {
         ),
       ),
       validator: widget.validator,
-      onChanged: (value) {
-        if (widget.onSave != null) {
-          widget.onSave!(value);
-        }
-      },
     );
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
   }
 }
