@@ -2,27 +2,23 @@ import 'package:flutter/material.dart';
 
 class ShopGallery extends StatelessWidget {
   final List<String> images;
-  final EdgeInsetsGeometry padding;
+  final EdgeInsetsGeometry? padding;
 
-  const ShopGallery({super.key, required this.images, required this.padding});
+  const ShopGallery({super.key, required this.images, this.padding});
 
   @override
   Widget build(BuildContext context) {
-    Widget productListView;
-
-    productListView = ListView.builder(
-      scrollDirection: Axis.horizontal,
-      itemCount: images.length,
-      itemBuilder: (context, index) {
-        return Padding(
-          padding: padding,
-          child: _ImageItem(image: images[index]),
-        );
-      },
-    );
     return SizedBox(
       height: 328,
-      child: productListView,
+      child: ListView.separated(
+        padding: padding,
+        scrollDirection: Axis.horizontal,
+        itemCount: images.length,
+        itemBuilder: (context, index) {
+          return _ImageItem(image: images[index]);
+        },
+        separatorBuilder: (context, index) => const SizedBox(width: 16),
+      ),
     );
   }
 }
