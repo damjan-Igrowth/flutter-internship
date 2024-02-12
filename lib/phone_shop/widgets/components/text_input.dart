@@ -14,6 +14,7 @@ class TextInput extends StatefulWidget {
   final String? Function(String?)? validator;
   final TextEditingController? controller;
   final Function(String?)? onSaved;
+  final Function(String)? onChanged;
 
   const TextInput({
     super.key,
@@ -25,6 +26,7 @@ class TextInput extends StatefulWidget {
     this.validator,
     this.controller,
     this.onSaved,
+    this.onChanged,
   });
 
   @override
@@ -37,6 +39,9 @@ class _TextInputState extends State<TextInput> {
     return TextFormField(
       controller: widget.controller,
       initialValue: widget.initialValue,
+      validator: widget.validator,
+      onSaved: widget.onSaved,
+      onChanged: widget.onChanged,
       enabled: widget.enabled,
       style: const TextStyle(
         color: Color(0xFF181E25),
@@ -133,8 +138,6 @@ class _TextInputState extends State<TextInput> {
           fontWeight: FontWeight.w400,
         ),
       ),
-      validator: widget.validator,
-      onSaved: widget.onSaved,
     );
   }
 }
