@@ -13,6 +13,7 @@ class TextInput extends StatefulWidget {
   final String? initialValue;
   final String? Function(String?)? validator;
   final TextEditingController? controller;
+  final Function(String?)? onSaved;
 
   const TextInput({
     super.key,
@@ -23,6 +24,7 @@ class TextInput extends StatefulWidget {
     this.initialValue,
     this.validator,
     this.controller,
+    this.onSaved,
   });
 
   @override
@@ -34,6 +36,7 @@ class _TextInputState extends State<TextInput> {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: widget.controller,
+      initialValue: widget.initialValue,
       enabled: widget.enabled,
       style: const TextStyle(
         color: Color(0xFF181E25),
@@ -131,6 +134,7 @@ class _TextInputState extends State<TextInput> {
         ),
       ),
       validator: widget.validator,
+      onSaved: widget.onSaved,
     );
   }
 }
