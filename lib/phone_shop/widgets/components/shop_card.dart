@@ -24,8 +24,9 @@ class ShopCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      elevation: 0,
       margin: EdgeInsets.zero,
-      color: const Color(0xFFFFFFFF),
+      color: Colors.white,
       shadowColor: Colors.black.withOpacity(0.04),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
@@ -215,7 +216,7 @@ class _Image extends StatelessWidget {
       ),
       child: Image.network(
         image,
-        fit: BoxFit.cover,
+        fit: BoxFit.fitHeight,
       ),
     );
   }

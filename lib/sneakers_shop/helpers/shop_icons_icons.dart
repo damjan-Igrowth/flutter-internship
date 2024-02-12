@@ -11,7 +11,7 @@
 ///      fonts:
 ///       - asset: fonts/ShopIcons.ttf
 ///
-/// 
+///
 /// * Font Awesome 5, Copyright (C) 2016 by Dave Gandy
 ///         Author:    Dave Gandy
 ///         License:   SIL (https://github.com/FortAwesome/Font-Awesome/blob/master/LICENSE.txt)
@@ -25,7 +25,12 @@ class ShopIcons {
   static const _kFontFam = 'ShopIcons';
   static const String? _kFontPkg = null;
 
-  static const IconData ph_sneaker_move = IconData(0xe801, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData akar_icons_home = IconData(0xe802, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData stopwatch_1 = IconData(0xf2f2, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData ph_sneaker_move =
+      IconData(0xe801, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData akar_icons_home =
+      IconData(0xe802, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData group =
+      IconData(0xe803, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData stopwatch_1 =
+      IconData(0xf2f2, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }
