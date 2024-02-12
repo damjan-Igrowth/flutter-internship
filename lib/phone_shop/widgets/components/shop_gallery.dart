@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 class ShopGallery extends StatelessWidget {
   final List<String> images;
+  final EdgeInsetsGeometry padding;
 
-  const ShopGallery({super.key, required this.images});
+  const ShopGallery({super.key, required this.images, required this.padding});
 
   @override
   Widget build(BuildContext context) {
@@ -14,10 +15,8 @@ class ShopGallery extends StatelessWidget {
       itemCount: images.length,
       itemBuilder: (context, index) {
         return Padding(
-          padding: const EdgeInsets.only(left: 20),
-          child: _ImageItem(
-            image: images[index],
-          ),
+          padding: padding,
+          child: _ImageItem(image: images[index]),
         );
       },
     );
