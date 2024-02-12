@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_internship/phone_shop/widgets/components/stars.dart';
 
 class ShopCard extends StatelessWidget {
   final String title;
@@ -52,7 +53,7 @@ class ShopCard extends StatelessWidget {
                           children: [
                             _Category(category: category),
                             const SizedBox(height: 4),
-                            _Stars(rating: rating),
+                            Stars(rating: rating),
                             const SizedBox(height: 4),
                             _Stock(stock: stock),
                           ],
@@ -188,43 +189,6 @@ class _Title extends StatelessWidget {
         fontStyle: FontStyle.normal,
         fontFamily: 'Inter',
       ),
-    );
-  }
-}
-
-class _Stars extends StatelessWidget {
-  final double rating;
-
-  const _Stars({
-    required this.rating,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Text(
-          '$rating',
-          style: const TextStyle(
-            color: Color(0xFFFFC046),
-            fontFamily: 'Poppins',
-            fontSize: 12,
-            fontWeight: FontWeight.w600,
-            fontStyle: FontStyle.normal,
-          ),
-        ),
-        const SizedBox(width: 4),
-        ...List.generate(
-          5,
-          (index) => Icon(
-            index < rating.ceil() ? Icons.star : Icons.star_border,
-            color: index < rating.floor()
-                ? const Color(0xFFFFC046)
-                : const Color(0xFFC0C0C0),
-            size: 10,
-          ),
-        ),
-      ],
     );
   }
 }
