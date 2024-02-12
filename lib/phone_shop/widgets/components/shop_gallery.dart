@@ -36,7 +36,9 @@ class _ImageItem extends StatelessWidget {
       borderRadius: BorderRadius.circular(20),
       child: Image.network(
         image,
-        fit: BoxFit.contain,
+        width: 328,
+        height: 328,
+        fit: BoxFit.cover,
       ),
     );
   }
