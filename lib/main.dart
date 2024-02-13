@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_internship/components/screens/component.dart';
 import 'package:flutter_internship/layout_tasks/screens/layout.dart';
-import 'package:flutter_internship/phone_shop/screens/home_screen.dart';
+import 'package:flutter_internship/phone_shop/screens/product_detail_screen.dart';
 import 'package:flutter_internship/sneakers_shop/screens/shop.dart';
 import 'package:flutter_internship/stopwatch/stop_watch.dart';
 
@@ -84,7 +84,7 @@ class MyApp extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const HomeScreen(),
+                        builder: (context) => const ProductDetailScreen(),
                       ),
                     );
                   },
