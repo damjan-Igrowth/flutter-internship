@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_internship/phone_shop/screens/product_detail_screen.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/fill_button.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/shop_card.dart';
 import 'package:flutter_internship/phone_shop/widgets/data/shop_cards.dart';
@@ -9,11 +10,11 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: const Color(0xFFF8F8F8),
-        appBar: _HomeScreenTitle(),
-        body: Column(
+    return Scaffold(
+      backgroundColor: const Color(0xFFF8F8F8),
+      appBar: _HomeScreenTitle(),
+      body: SafeArea(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             _ShopCardList(),
@@ -123,7 +124,14 @@ class _ShopCardList extends StatelessWidget {
             return MouseRegion(
               cursor: SystemMouseCursors.click,
               child: GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const ProductDetailScreen(),
+                    ),
+                  );
+                },
                 child: Column(
                   children: [
                     ShopCard(

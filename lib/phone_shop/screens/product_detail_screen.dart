@@ -16,13 +16,15 @@ class ProductDetailScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFFF8F8F8),
       appBar: _ProductDetailAppBar(),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            _Gallery(),
-            _Overview(),
-            _Availability(),
-          ],
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              _Gallery(),
+              _Overview(),
+              _Availability(),
+            ],
+          ),
         ),
       ),
     );

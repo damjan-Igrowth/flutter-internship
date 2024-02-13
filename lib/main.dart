@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_internship/components/screens/component.dart';
 import 'package:flutter_internship/layout_tasks/screens/layout.dart';
+import 'package:flutter_internship/phone_shop/screens/home_screen.dart';
 import 'package:flutter_internship/sneakers_shop/screens/shop.dart';
 import 'package:flutter_internship/stopwatch/stop_watch.dart';
 
@@ -71,6 +72,19 @@ class MyApp extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) => const StopWatch(),
+                      ),
+                    );
+                  },
+                ),
+                const SizedBox(height: 16),
+                _ExpandedButton(
+                  backgroundColor: const Color(0xFF2AE0B1),
+                  buttonText: 'TechByte',
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const HomeScreen(),
                       ),
                     );
                   },
