@@ -20,9 +20,7 @@ class ProductDetailScreen extends StatelessWidget {
         child: Column(
           children: [
             _Gallery(),
-            const SizedBox(height: 16),
             _Overview(),
-            const SizedBox(height: 16),
             _Availability(),
           ],
         ),
@@ -40,6 +38,7 @@ class _ProductDetailAppBar extends StatelessWidget
   Widget build(BuildContext context) {
     return AppBar(
       centerTitle: false,
+      titleSpacing: -8,
       title: _TitleText(),
       actions: [_TitleEditIcon()],
     );
@@ -66,7 +65,7 @@ class _TitleEditIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(right: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 20),
       child: MouseRegion(
         cursor: SystemMouseCursors.click,
         child: GestureDetector(
@@ -86,9 +85,12 @@ class _TitleEditIcon extends StatelessWidget {
 class _Gallery extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ShopGallery(
-      images: Images.imagesList(),
-      padding: const EdgeInsets.symmetric(horizontal: 20),
+    return Padding(
+      padding: const EdgeInsets.only(top: 20),
+      child: ShopGallery(
+        images: Images.imagesList(),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+      ),
     );
   }
 }
@@ -97,7 +99,7 @@ class _Overview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
       child: ShopSection(
         title: 'Overview',
         child: OverviewCard(
@@ -117,7 +119,7 @@ class _Availability extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
       child: ShopSection(
         title: 'Availability',
         child: AvailabilityCard(
