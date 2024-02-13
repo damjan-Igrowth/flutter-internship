@@ -9,11 +9,11 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: const Color(0xFFF8F8F8),
-        appBar: _HomeScreenTitle(),
-        body: Column(
+    return Scaffold(
+      backgroundColor: const Color(0xFFF8F8F8),
+      appBar: _HomeScreenTitle(),
+      body: SafeArea(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             _ShopCardList(),
