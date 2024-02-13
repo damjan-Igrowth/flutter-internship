@@ -39,7 +39,10 @@ class _ProductDetailAppBar extends StatelessWidget
     return AppBar(
       centerTitle: false,
       titleSpacing: -8,
-      title: _TitleText(),
+      title: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 20),
+        child: _TitleText(),
+      ),
       actions: [_TitleEditIcon()],
     );
   }
