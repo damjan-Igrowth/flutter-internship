@@ -13,15 +13,9 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFFF8F8F8),
       appBar: _HomeScreenTitle(),
-      body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            _ShopCardList(),
-            _DisabledButton(),
-          ],
-        ),
-      ),
+      body: SafeArea(child: _ShopCardList()),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: _DisabledButton(),
     );
   }
 }
@@ -32,30 +26,25 @@ class _HomeScreenTitle extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PreferredSize(
-      preferredSize: const Size.fromHeight(102),
-      child: AppBar(
-        backgroundColor: const Color(0xFFFFFFFF),
-        shadowColor: const Color.fromRGBO(0, 0, 0, 0.05),
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(12),
-            bottomRight: Radius.circular(12),
-          ),
-        ),
-        leading: Transform.scale(scale: 0.9, child: _TitleIcon()),
-        titleSpacing: 8,
-        centerTitle: false,
-        title: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 20),
-          child: _TitleText(),
+    return AppBar(
+      scrolledUnderElevation: 0.0,
+      backgroundColor: const Color(0xFFFFFFFF),
+      shadowColor: const Color.fromRGBO(0, 0, 0, 0.05),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(12),
+          bottomRight: Radius.circular(12),
         ),
       ),
+      leading: Transform.scale(scale: 0.9, child: _TitleImage()),
+      titleSpacing: 8,
+      centerTitle: false,
+      title: _TitleText(),
     );
   }
 }
 
-class _TitleIcon extends StatelessWidget {
+class _TitleImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -115,42 +104,28 @@ class _TitleText extends StatelessWidget {
 class _ShopCardList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
-        child: ListView.builder(
-          itemCount: shopCards.length,
-          itemBuilder: (context, index) {
-            return MouseRegion(
-              cursor: SystemMouseCursors.click,
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const ProductDetailScreen(),
-                    ),
-                  );
-                },
-                child: Column(
-                  children: [
-                    ShopCard(
-                      title: shopCards[index].title,
-                      price: shopCards[index].price,
-                      discountPercentage: shopCards[index].discountPercentage,
-                      rating: shopCards[index].rating,
-                      stock: shopCards[index].stock,
-                      category: shopCards[index].category,
-                      image: shopCards[index].image,
-                    ),
-                    const SizedBox(height: 16),
-                  ],
-                ),
-              ),
-            );
-          },
+    return Column(
+      children: [
+        Expanded(
+          child: ListView.separated(
+            padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+            itemCount: shopItems.length,
+            itemBuilder: (context, index) {
+              return ShopCard(
+                title: shopItems[index].title,
+                price: shopItems[index].price,
+                discountPercentage: shopItems[index].discountPercentage,
+                rating: shopItems[index].rating,
+                stock: shopItems[index].stock,
+                category: shopItems[index].category,
+                image: shopItems[index].image,
+                onTap: () {},
+              );
+            },
+            separatorBuilder: (context, index) => const SizedBox(height: 16),
+          ),
         ),
-      ),
+      ],
     );
   }
 }
@@ -158,9 +133,15 @@ class _ShopCardList extends StatelessWidget {
 class _DisabledButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.all(20),
-      child: FillButton(buttonText: 'Add product'),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: SizedBox(
+        width: double.infinity,
+        child: FloatingActionButton(
+          onPressed: () {},
+          child: const FillButton(buttonText: 'Add product'),
+        ),
+      ),
     );
   }
 }
