@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_internship/phone_shop/screens/product_detail_screen.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/fill_button.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/shop_gallery.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/text_input.dart';
-import 'package:flutter_internship/phone_shop/widgets/data/images.dart';
+import 'package:flutter_internship/phone_shop/widgets/data/product_details.dart';
+import 'package:flutter_internship/sneakers_shop/helpers/my_app1_icons.dart';
 
 class ProductEditScreen extends StatelessWidget {
   const ProductEditScreen({super.key});
@@ -11,22 +13,24 @@ class ProductEditScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF8F8F8),
-      appBar: _ProductDetailAppBar(),
+      appBar: _ProductEditAppBar(),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             children: [
               _Gallery(),
-              _EnabledButton(),
+              // _TextInputs(),
             ],
           ),
         ),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: _EnabledButton(),
     );
   }
 }
 
-class _ProductDetailAppBar extends StatelessWidget
+class _ProductEditAppBar extends StatelessWidget
     implements PreferredSizeWidget {
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
@@ -34,11 +38,44 @@ class _ProductDetailAppBar extends StatelessWidget
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      scrolledUnderElevation: 0.0,
+      backgroundColor: const Color(0xFFFFFFFF),
+      shadowColor: const Color.fromRGBO(0, 0, 0, 0.05),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(12),
+          bottomRight: Radius.circular(12),
+        ),
+      ),
+      leading: _TitleBackIcon(),
       centerTitle: false,
-      titleSpacing: -8,
-      title: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 20),
-        child: _TitleText(),
+      titleSpacing: 8,
+      title: _TitleText(),
+    );
+  }
+}
+
+class _TitleBackIcon extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 20),
+      child: MouseRegion(
+        cursor: SystemMouseCursors.click,
+        child: GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const ProductDetailScreen(),
+              ),
+            );
+          },
+          child: const Icon(
+            (ShopIcons.chevron_left),
+            size: 24,
+          ),
+        ),
       ),
     );
   }
@@ -66,7 +103,7 @@ class _Gallery extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 20),
       child: ShopGallery(
-        images: Images.imagesList(),
+        images: productDetails.images,
         padding: const EdgeInsets.symmetric(horizontal: 20),
       ),
     );
@@ -109,10 +146,16 @@ class _EnabledButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(20),
-      child: FillButton(
-        buttonText: 'Save changes',
-        onTap: () {},
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: SizedBox(
+        width: double.infinity,
+        child: FloatingActionButton(
+          onPressed: () {},
+          child: FillButton(
+            buttonText: 'Save changes',
+            onTap: () {},
+          ),
+        ),
       ),
     );
   }

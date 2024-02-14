@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_internship/phone_shop/screens/home_screen.dart';
+import 'package:flutter_internship/phone_shop/screens/product_edit_screen.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/availability_card.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/overview_card.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/shop_gallery.dart';
@@ -106,7 +107,14 @@ class _TitleEditIcon extends StatelessWidget {
       child: MouseRegion(
         cursor: SystemMouseCursors.click,
         child: GestureDetector(
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const ProductEditScreen(),
+              ),
+            );
+          },
           child: const Icon(
             (ShopIcons.basil_edit_outline),
             size: 24,
