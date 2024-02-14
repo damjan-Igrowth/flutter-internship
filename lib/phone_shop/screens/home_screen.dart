@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_internship/phone_shop/screens/product_detail_screen.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/fill_button.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/shop_card.dart';
 import 'package:flutter_internship/phone_shop/widgets/data/shop_item_model.dart';
@@ -118,7 +119,14 @@ class _ShopCardList extends StatelessWidget {
                 stock: shopItemModels[index].stock,
                 category: shopItemModels[index].category,
                 image: shopItemModels[index].image,
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const ProductDetailScreen(),
+                    ),
+                  );
+                },
               );
             },
             separatorBuilder: (context, index) => const SizedBox(height: 16),
