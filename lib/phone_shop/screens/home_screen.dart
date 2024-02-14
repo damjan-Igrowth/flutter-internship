@@ -119,7 +119,14 @@ class _ShopCardList extends StatelessWidget {
                 stock: shopItems[index].stock,
                 category: shopItems[index].category,
                 image: shopItems[index].image,
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const ProductDetailScreen(),
+                    ),
+                  );
+                },
               );
             },
             separatorBuilder: (context, index) => const SizedBox(height: 16),
