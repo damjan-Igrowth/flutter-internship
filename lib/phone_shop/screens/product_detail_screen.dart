@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_internship/phone_shop/screens/home_screen.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/availability_card.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/overview_card.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/shop_gallery.dart';
