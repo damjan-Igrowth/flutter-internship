@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_internship/phone_shop/screens/product_edit_screen.dart';
+import 'package:flutter_internship/phone_shop/screens/home_screen.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/availability_card.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/overview_card.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/shop_gallery.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/shop_section.dart';
-import 'package:flutter_internship/phone_shop/widgets/data/availability_details.dart';
-import 'package:flutter_internship/phone_shop/widgets/data/images.dart';
 import 'package:flutter_internship/phone_shop/widgets/data/product_details.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_internship/sneakers_shop/helpers/my_app1_icons.dart';
 
 class ProductDetailScreen extends StatelessWidget {
   const ProductDetailScreen({super.key});
@@ -40,13 +38,46 @@ class _ProductDetailAppBar extends StatelessWidget
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      centerTitle: false,
-      titleSpacing: -8,
-      title: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 20),
-        child: _TitleText(),
+      scrolledUnderElevation: 0.0,
+      backgroundColor: const Color(0xFFFFFFFF),
+      shadowColor: const Color.fromRGBO(0, 0, 0, 0.05),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(12),
+          bottomRight: Radius.circular(12),
+        ),
       ),
+      leading: _TitleBackIcon(),
+      centerTitle: false,
+      titleSpacing: 8,
+      title: _TitleText(),
       actions: [_TitleEditIcon()],
+    );
+  }
+}
+
+class _TitleBackIcon extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 20),
+      child: MouseRegion(
+        cursor: SystemMouseCursors.click,
+        child: GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const HomeScreen(),
+              ),
+            );
+          },
+          child: const Icon(
+            (ShopIcons.chevron_left),
+            size: 24,
+          ),
+        ),
+      ),
     );
   }
 }
@@ -75,19 +106,11 @@ class _TitleEditIcon extends StatelessWidget {
       child: MouseRegion(
         cursor: SystemMouseCursors.click,
         child: GestureDetector(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const ProductEditScreen(),
-              ),
-            );
-          },
-          child: SvgPicture.asset(
-            'assets/images/basil_edit-outline.svg',
-            fit: BoxFit.contain,
-            width: 24,
-            height: 24,
+          onTap: () {},
+          child: const Icon(
+            (ShopIcons.basil_edit_outline),
+            size: 24,
+            color: Color(0xFF458FFF),
           ),
         ),
       ),
@@ -101,7 +124,7 @@ class _Gallery extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 20),
       child: ShopGallery(
-        images: Images.imagesList(),
+        images: productDetails.images,
         padding: const EdgeInsets.symmetric(horizontal: 20),
       ),
     );
@@ -136,8 +159,8 @@ class _Availability extends StatelessWidget {
       child: ShopSection(
         title: 'Availability',
         child: AvailabilityCard(
-          category: availabilityDetails.category,
-          stock: availabilityDetails.stock,
+          category: productDetails.category,
+          stock: productDetails.stock,
         ),
       ),
     );

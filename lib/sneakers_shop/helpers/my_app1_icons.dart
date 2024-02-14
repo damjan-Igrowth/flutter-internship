@@ -11,7 +11,11 @@
 ///      fonts:
 ///       - asset: fonts/ShopIcons.ttf
 ///
-/// 
+///
+/// * Material Design Icons, Copyright (C) Google, Inc
+///         Author:    Google
+///         License:   Apache 2.0 (https://www.apache.org/licenses/LICENSE-2.0)
+///         Homepage:  https://design.google.com/icons/
 /// * Font Awesome 5, Copyright (C) 2016 by Dave Gandy
 ///         Author:    Dave Gandy
 ///         License:   SIL (https://github.com/FortAwesome/Font-Awesome/blob/master/LICENSE.txt)
@@ -25,7 +29,16 @@ class ShopIcons {
   static const _kFontFam = 'ShopIcons';
   static const String? _kFontPkg = null;
 
-  static const IconData ph_sneaker_move = IconData(0xe801, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData akar_icons_home = IconData(0xe802, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData stopwatch_1 = IconData(0xf2f2, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData basil_edit_outline =
+      IconData(0xe800, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData ph_sneaker_move =
+      IconData(0xe801, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData akar_icons_home =
+      IconData(0xe802, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData group =
+      IconData(0xe803, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData chevron_left =
+      IconData(0xe804, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData stopwatch_1 =
+      IconData(0xf2f2, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }

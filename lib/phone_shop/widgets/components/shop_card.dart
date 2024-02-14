@@ -9,6 +9,7 @@ class ShopCard extends StatelessWidget {
   final int stock;
   final String category;
   final String image;
+  final VoidCallback? onTap;
 
   const ShopCard({
     super.key,
@@ -19,63 +20,70 @@ class ShopCard extends StatelessWidget {
     required this.stock,
     required this.category,
     required this.image,
+    this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 0,
-      margin: EdgeInsets.zero,
-      color: Colors.white,
-      shadowColor: Colors.black.withOpacity(0.04),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(12),
-        child: Row(
-          children: [
-            _Image(image: image),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _Title(title: title),
-                  const SizedBox(height: 8),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onTap: onTap,
+        child: Card(
+          elevation: 0,
+          margin: EdgeInsets.zero,
+          color: Colors.white,
+          shadowColor: Colors.black.withOpacity(0.04),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(12),
+            child: Row(
+              children: [
+                _Image(image: image),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Expanded(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            _Category(category: category),
-                            const SizedBox(height: 4),
-                            Stars(rating: rating),
-                            const SizedBox(height: 4),
-                            _Stock(stock: stock),
-                          ],
-                        ),
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
+                      _Title(title: title),
+                      const SizedBox(height: 8),
+                      Row(
                         crossAxisAlignment: CrossAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          _Discount(discountPercentage: discountPercentage),
-                          const SizedBox(height: 6),
-                          _Price(price: price),
+                          Expanded(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                _Category(category: category),
+                                const SizedBox(height: 4),
+                                Stars(rating: rating),
+                                const SizedBox(height: 4),
+                                _Stock(stock: stock),
+                              ],
+                            ),
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              _Discount(discountPercentage: discountPercentage),
+                              const SizedBox(height: 6),
+                              _Price(price: price),
+                            ],
+                          ),
                         ],
                       ),
                     ],
                   ),
-                ],
-              ),
-            )
-          ],
+                )
+              ],
+            ),
+          ),
         ),
       ),
     );
