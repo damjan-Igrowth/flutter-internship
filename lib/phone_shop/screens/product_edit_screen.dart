@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_internship/phone_shop/widgets/components/company_bottom_sheet.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/dialogs.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/fill_button.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/shop_gallery.dart';
@@ -7,6 +8,7 @@ import 'package:flutter_internship/phone_shop/widgets/components/title_back_icon
 import 'package:flutter_internship/phone_shop/widgets/components/title_text.dart';
 import 'package:flutter_internship/phone_shop/widgets/data/product_details.dart';
 import 'package:flutter_internship/phone_shop/widgets/data/product_edit_details.dart';
+import 'package:flutter_internship/sneakers_shop/helpers/shop_icons_icons.dart';
 
 class ProductEditScreen extends StatelessWidget {
   const ProductEditScreen({super.key});
@@ -86,11 +88,51 @@ class _TextInputs extends StatelessWidget {
           TextInput(
             label: productEditCompany.label,
             initialValue: productEditCompany.initialValue,
+            suffixIcon: productEditCompany.suffixIcon,
+            readOnly: true,
+            onTap: () {
+              showModalBottomSheet(
+                context: context,
+                builder: (context) => const CompanyBottomSheet(
+                  sheetTitleText: 'Company',
+                  firstText: 'Apple',
+                  secondText: 'Samsung',
+                  thirdText: 'Xiaomi',
+                  fourthText: 'Realme',
+                  fifthText: 'Oneplus',
+                  firstIcon: ShopIcons.smartphone,
+                  secondIcon: ShopIcons.laptop,
+                  thirdIcon: ShopIcons.games,
+                  fourthIcon: ShopIcons.audio,
+                  fifthIcon: ShopIcons.appliances,
+                ),
+              );
+            },
           ),
           const SizedBox(height: 36),
           TextInput(
             label: productEditCategory.label,
             initialValue: productEditCategory.initialValue,
+            suffixIcon: productEditCategory.suffixIcon,
+            readOnly: true,
+            onTap: () {
+              showModalBottomSheet(
+                context: context,
+                builder: (context) => const CompanyBottomSheet(
+                  sheetTitleText: 'Category',
+                  firstText: 'Smartphones',
+                  secondText: 'Laptops',
+                  thirdText: 'Video Games',
+                  fourthText: 'Audio',
+                  fifthText: 'Appliances',
+                  firstIcon: ShopIcons.smartphone,
+                  secondIcon: ShopIcons.laptop,
+                  thirdIcon: ShopIcons.games,
+                  fourthIcon: ShopIcons.audio,
+                  fifthIcon: ShopIcons.appliances,
+                ),
+              );
+            },
           ),
           const SizedBox(height: 36),
           TextInput(
@@ -138,6 +180,7 @@ class _EnabledButton extends StatelessWidget {
             buttonText: 'Save changes',
             onTap: () {
               showDialog(
+                barrierDismissible: false,
                 context: context,
                 builder: (context) => Dialogs.success(
                   description: 'The product has been successfully edited!',

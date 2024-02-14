@@ -35,7 +35,7 @@ class Dialogs extends StatelessWidget {
       icon: circleIcon,
       iconPadding: const EdgeInsets.all(16),
       content: SizedBox(
-        height: MediaQuery.of(context).size.height * 0.1,
+        height: MediaQuery.of(context).size.height * 0.11,
         child: Column(
           children: [
             _Title(title: title),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_internship/sneakers_shop/helpers/shop_icons_icons.dart';
 
 class ProductEditDetails {
   final String label;
@@ -28,10 +29,14 @@ class ProductEditDetails {
 
 ProductEditDetails productEditName =
     ProductEditDetails(label: 'Product name', initialValue: 'Iphone 15 Pro');
-ProductEditDetails productEditCompany =
-    ProductEditDetails(label: 'Company', initialValue: 'Apple');
-ProductEditDetails productEditCategory =
-    ProductEditDetails(label: 'Category', initialValue: 'Smartphones');
+ProductEditDetails productEditCompany = ProductEditDetails(
+    label: 'Company',
+    initialValue: 'Apple',
+    suffixIcon: const Icon(ShopIcons.lucide_building_2));
+ProductEditDetails productEditCategory = ProductEditDetails(
+    label: 'Category',
+    initialValue: 'Smartphones',
+    suffixIcon: Icon(ShopIcons.iconamoon_category_light));
 ProductEditDetails productEditDescription = ProductEditDetails(
   label: 'Description',
   initialValue:
