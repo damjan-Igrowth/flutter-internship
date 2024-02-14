@@ -107,7 +107,7 @@ class _Price extends StatelessWidget {
       textAlign: TextAlign.right,
       style: const TextStyle(
         color: Color(0xFFE33434),
-        fontSize: 16,
+        fontSize: 20,
         fontWeight: FontWeight.w700,
         fontStyle: FontStyle.normal,
         fontFamily: 'Inter',
@@ -150,7 +150,7 @@ class _Discount extends StatelessWidget {
       textAlign: TextAlign.right,
       style: const TextStyle(
         color: Color(0xFF43C16E),
-        fontSize: 12,
+        fontSize: 14,
         fontWeight: FontWeight.w600,
         fontStyle: FontStyle.normal,
         fontFamily: 'Inter',

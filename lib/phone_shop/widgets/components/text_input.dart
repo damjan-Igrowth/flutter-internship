@@ -15,6 +15,7 @@ class TextInput extends StatefulWidget {
   final TextEditingController? controller;
   final Function(String?)? onSaved;
   final Function(String)? onChanged;
+  final bool isDescription;
 
   const TextInput({
     super.key,
@@ -27,6 +28,7 @@ class TextInput extends StatefulWidget {
     this.controller,
     this.onSaved,
     this.onChanged,
+    this.isDescription = false,
   });
 
   @override
@@ -43,16 +45,26 @@ class _TextInputState extends State<TextInput> {
       onSaved: widget.onSaved,
       onChanged: widget.onChanged,
       enabled: widget.enabled,
-      style: const TextStyle(
-        color: Color(0xFF181E25),
-        fontFamily: 'Inter',
-        fontSize: 16,
-        fontStyle: FontStyle.normal,
-        fontWeight: FontWeight.w600,
-      ),
+      maxLines: null,
+      style: widget.isDescription
+          ? const TextStyle(
+              color: Color(0xFF181E25),
+              fontFamily: 'Inter',
+              fontSize: 14,
+              fontStyle: FontStyle.normal,
+              fontWeight: FontWeight.w400,
+            )
+          : const TextStyle(
+              color: Color(0xFF181E25),
+              fontFamily: 'Inter',
+              fontSize: 16,
+              fontStyle: FontStyle.normal,
+              fontWeight: FontWeight.w600,
+            ),
       decoration: InputDecoration(
-        contentPadding:
-            const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+        contentPadding: widget.isDescription
+            ? const EdgeInsets.all(20)
+            : const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
         labelText: widget.label,
         labelStyle: MaterialStateTextStyle.resolveWith(
           (Set<MaterialState> states) {

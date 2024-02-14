@@ -34,12 +34,15 @@ class Dialogs extends StatelessWidget {
       surfaceTintColor: const Color(0xFFFFFFFF),
       icon: circleIcon,
       iconPadding: const EdgeInsets.all(16),
-      content: Column(
-        children: [
-          _Title(title: title),
-          const SizedBox(height: 12),
-          _Description(description: description),
-        ],
+      content: SizedBox(
+        height: MediaQuery.of(context).size.height * 0.1,
+        child: Column(
+          children: [
+            _Title(title: title),
+            const SizedBox(height: 12),
+            _Description(description: description),
+          ],
+        ),
       ),
       contentPadding: const EdgeInsets.symmetric(horizontal: 16),
       actions: <Widget>[button],

@@ -4,6 +4,8 @@ import 'package:flutter_internship/phone_shop/widgets/components/availability_ca
 import 'package:flutter_internship/phone_shop/widgets/components/overview_card.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/shop_gallery.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/shop_section.dart';
+import 'package:flutter_internship/phone_shop/widgets/components/title_back_icon.dart';
+import 'package:flutter_internship/phone_shop/widgets/components/title_text.dart';
 import 'package:flutter_internship/phone_shop/widgets/data/product_details.dart';
 import 'package:flutter_internship/sneakers_shop/helpers/shop_icons_icons.dart';
 
@@ -47,48 +49,11 @@ class _ProductDetailAppBar extends StatelessWidget
           bottomRight: Radius.circular(12),
         ),
       ),
-      leading: _TitleBackIcon(),
+      leading: const TitleBackIcon(),
       centerTitle: false,
       titleSpacing: 8,
-      title: _TitleText(),
+      title: const TitleText(title: 'Product details'),
       actions: [_TitleEditIcon()],
-    );
-  }
-}
-
-class _TitleBackIcon extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 20),
-      child: MouseRegion(
-        cursor: SystemMouseCursors.click,
-        child: GestureDetector(
-          onTap: () {
-            Navigator.pop(context);
-          },
-          child: const Icon(
-            (ShopIcons.chevron_left),
-            size: 24,
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _TitleText extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return const Text(
-      'Product details',
-      style: TextStyle(
-        color: Color(0xFF000000),
-        fontFamily: 'Inter',
-        fontSize: 20,
-        fontStyle: FontStyle.normal,
-        fontWeight: FontWeight.w600,
-      ),
     );
   }
 }

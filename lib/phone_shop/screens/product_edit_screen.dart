@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_internship/phone_shop/screens/product_detail_screen.dart';
+import 'package:flutter_internship/phone_shop/widgets/components/dialogs.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/fill_button.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/shop_gallery.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/text_input.dart';
+import 'package:flutter_internship/phone_shop/widgets/components/title_back_icon.dart';
+import 'package:flutter_internship/phone_shop/widgets/components/title_text.dart';
 import 'package:flutter_internship/phone_shop/widgets/data/product_details.dart';
-import 'package:flutter_internship/sneakers_shop/helpers/my_app1_icons.dart';
+import 'package:flutter_internship/phone_shop/widgets/data/product_edit_details.dart';
 
 class ProductEditScreen extends StatelessWidget {
   const ProductEditScreen({super.key});
@@ -19,7 +21,7 @@ class ProductEditScreen extends StatelessWidget {
           child: Column(
             children: [
               _Gallery(),
-              // _TextInputs(),
+              _TextInputs(),
             ],
           ),
         ),
@@ -47,52 +49,10 @@ class _ProductEditAppBar extends StatelessWidget
           bottomRight: Radius.circular(12),
         ),
       ),
-      leading: _TitleBackIcon(),
+      leading: const TitleBackIcon(),
       centerTitle: false,
       titleSpacing: 8,
-      title: _TitleText(),
-    );
-  }
-}
-
-class _TitleBackIcon extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 20),
-      child: MouseRegion(
-        cursor: SystemMouseCursors.click,
-        child: GestureDetector(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const ProductDetailScreen(),
-              ),
-            );
-          },
-          child: const Icon(
-            (ShopIcons.chevron_left),
-            size: 24,
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _TitleText extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return const Text(
-      'Edit product',
-      style: TextStyle(
-        color: Color(0xFF000000),
-        fontFamily: 'Inter',
-        fontSize: 20,
-        fontStyle: FontStyle.normal,
-        fontWeight: FontWeight.w600,
-      ),
+      title: const TitleText(title: 'Edit product'),
     );
   }
 }
@@ -113,31 +73,54 @@ class _Gallery extends StatelessWidget {
 class _TextInputs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return const Column(
-      children: [
-        TextInput(label: 'Product name', initialValue: 'Iphone 15 Pro'),
-        TextInput(label: 'Company', initialValue: 'Apple'),
-        TextInput(label: 'Category', initialValue: 'Smartphones'),
-        TextInput(
-            label: 'Description',
-            initialValue:
-                'Lorem ipsum dolor sit amet consectetur. Ornare id ullamcorper et non. Massa in urna volutpat sed sagittis eget. Nullam sollicitudin viverra egestas ante. Vitae blandit.'),
-        Row(
-          children: [
-            TextInput(
-              label: 'Discount',
-              initialValue: '12.44',
-              suffixText: '%',
-            ),
-            SizedBox(width: 16),
-            TextInput(
-              label: 'Price',
-              initialValue: '999.00',
-              suffixText: '\$',
-            ),
-          ],
-        )
-      ],
+    return Padding(
+      padding: const EdgeInsets.all(20),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          TextInput(
+            label: productEditName.label,
+            initialValue: productEditName.initialValue,
+          ),
+          const SizedBox(height: 36),
+          TextInput(
+            label: productEditCompany.label,
+            initialValue: productEditCompany.initialValue,
+          ),
+          const SizedBox(height: 36),
+          TextInput(
+            label: productEditCategory.label,
+            initialValue: productEditCategory.initialValue,
+          ),
+          const SizedBox(height: 36),
+          TextInput(
+            label: productEditDescription.label,
+            initialValue: productEditDescription.initialValue,
+            isDescription: productEditDescription.isDescription,
+          ),
+          const SizedBox(height: 36),
+          Row(
+            children: [
+              Flexible(
+                child: TextInput(
+                  label: productEditDiscount.label,
+                  initialValue: productEditDiscount.initialValue,
+                  suffixText: productEditDiscount.suffixText,
+                ),
+              ),
+              const SizedBox(width: 16),
+              Flexible(
+                child: TextInput(
+                  label: productEditPrice.label,
+                  initialValue: productEditPrice.initialValue,
+                  suffixText: productEditPrice.suffixText,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 100),
+        ],
+      ),
     );
   }
 }
@@ -153,7 +136,17 @@ class _EnabledButton extends StatelessWidget {
           onPressed: () {},
           child: FillButton(
             buttonText: 'Save changes',
-            onTap: () {},
+            onTap: () {
+              showDialog(
+                context: context,
+                builder: (context) => Dialogs.success(
+                  description: 'The product has been successfully edited!',
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                ),
+              );
+            },
           ),
         ),
       ),
