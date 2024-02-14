@@ -4,7 +4,7 @@ import 'package:flutter_internship/phone_shop/widgets/components/overview_card.d
 import 'package:flutter_internship/phone_shop/widgets/components/shop_gallery.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/shop_section.dart';
 import 'package:flutter_internship/phone_shop/widgets/data/product_details.dart';
-import 'package:flutter_internship/sneakers_shop/helpers/my_app1_icons.dart';
+import 'package:flutter_internship/sneakers_shop/helpers/shop_icons_icons.dart';
 
 class ProductDetailScreen extends StatelessWidget {
   const ProductDetailScreen({super.key});
