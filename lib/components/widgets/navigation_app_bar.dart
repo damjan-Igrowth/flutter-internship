@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_internship/components/screens/component.dart';
-import 'package:flutter_internship/sneakers_shop/helpers/my_app1_icons.dart';
+import 'package:flutter_internship/sneakers_shop/helpers/shop_icons_icons.dart';
 import 'package:flutter_internship/sneakers_shop/widgets/sneakers_grid.dart';
 
 class NavigationAppBar extends StatefulWidget {

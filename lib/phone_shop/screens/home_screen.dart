@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_internship/phone_shop/screens/product_detail_screen.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/fill_button.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/shop_card.dart';
-import 'package:flutter_internship/phone_shop/widgets/data/shop_cards.dart';
+import 'package:flutter_internship/phone_shop/widgets/data/shop_item_model.dart';
 import 'package:flutter_svg/svg.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -109,16 +109,16 @@ class _ShopCardList extends StatelessWidget {
         Expanded(
           child: ListView.separated(
             padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-            itemCount: shopItems.length,
+            itemCount: shopItemModels.length,
             itemBuilder: (context, index) {
               return ShopCard(
-                title: shopItems[index].title,
-                price: shopItems[index].price,
-                discountPercentage: shopItems[index].discountPercentage,
-                rating: shopItems[index].rating,
-                stock: shopItems[index].stock,
-                category: shopItems[index].category,
-                image: shopItems[index].image,
+                title: shopItemModels[index].title,
+                price: shopItemModels[index].price,
+                discountPercentage: shopItemModels[index].discountPercentage,
+                rating: shopItemModels[index].rating,
+                stock: shopItemModels[index].stock,
+                category: shopItemModels[index].category,
+                image: shopItemModels[index].image,
                 onTap: () {
                   Navigator.push(
                     context,
