@@ -65,12 +65,7 @@ class _TitleBackIcon extends StatelessWidget {
         cursor: SystemMouseCursors.click,
         child: GestureDetector(
           onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const HomeScreen(),
-              ),
-            );
+            Navigator.pop(context);
           },
           child: const Icon(
             (ShopIcons.chevron_left),
