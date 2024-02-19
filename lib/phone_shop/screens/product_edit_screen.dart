@@ -10,8 +10,21 @@ import 'package:flutter_internship/phone_shop/widgets/data/product_details.dart'
 import 'package:flutter_internship/phone_shop/widgets/data/product_edit_details.dart';
 import 'package:flutter_internship/sneakers_shop/helpers/shop_icons_icons.dart';
 
-class ProductEditScreen extends StatelessWidget {
+class ProductEditScreen extends StatefulWidget {
   const ProductEditScreen({super.key});
+
+  @override
+  State<ProductEditScreen> createState() => _ProductEditScreenState();
+}
+
+class _ProductEditScreenState extends State<ProductEditScreen> {
+  late final GlobalKey<FormState> _formKey;
+
+  @override
+  void initState() {
+    super.initState();
+    _formKey = GlobalKey<FormState>();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,13 +36,13 @@ class ProductEditScreen extends StatelessWidget {
           child: Column(
             children: [
               _Gallery(),
-              _TextInputs(),
+              Form(key: _formKey, child: _TextInputs()),
             ],
           ),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: _EnabledButton(),
+      floatingActionButton: _EnabledButton(formKey: _formKey),
     );
   }
 }
@@ -72,7 +85,14 @@ class _Gallery extends StatelessWidget {
   }
 }
 
-class _TextInputs extends StatelessWidget {
+class _TextInputs extends StatefulWidget {
+  @override
+  State<_TextInputs> createState() => _TextInputsState();
+}
+
+class _TextInputsState extends State<_TextInputs> {
+  TextEditingController statusController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -83,6 +103,7 @@ class _TextInputs extends StatelessWidget {
           TextInput(
             label: productEditName.label,
             initialValue: productEditName.initialValue,
+            validator: emptyFieldValidator,
           ),
           const SizedBox(height: 36),
           TextInput(
@@ -100,14 +121,10 @@ class _TextInputs extends StatelessWidget {
                   thirdText: 'Xiaomi',
                   fourthText: 'Realme',
                   fifthText: 'Oneplus',
-                  firstIcon: ShopIcons.smartphone,
-                  secondIcon: ShopIcons.laptop,
-                  thirdIcon: ShopIcons.games,
-                  fourthIcon: ShopIcons.audio,
-                  fifthIcon: ShopIcons.appliances,
                 ),
               );
             },
+            validator: emptyFieldValidator,
           ),
           const SizedBox(height: 36),
           TextInput(
@@ -133,6 +150,7 @@ class _TextInputs extends StatelessWidget {
                 ),
               );
             },
+            validator: emptyFieldValidator,
           ),
           const SizedBox(height: 36),
           TextInput(
@@ -148,6 +166,9 @@ class _TextInputs extends StatelessWidget {
                   label: productEditDiscount.label,
                   initialValue: productEditDiscount.initialValue,
                   suffixText: productEditDiscount.suffixText,
+                  validator: numericValidator,
+                  keyboardType:
+                      const TextInputType.numberWithOptions(decimal: true),
                 ),
               ),
               const SizedBox(width: 16),
@@ -156,6 +177,9 @@ class _TextInputs extends StatelessWidget {
                   label: productEditPrice.label,
                   initialValue: productEditPrice.initialValue,
                   suffixText: productEditPrice.suffixText,
+                  validator: numericValidator,
+                  keyboardType:
+                      const TextInputType.numberWithOptions(decimal: true),
                 ),
               ),
             ],
@@ -167,7 +191,18 @@ class _TextInputs extends StatelessWidget {
   }
 }
 
-class _EnabledButton extends StatelessWidget {
+class _EnabledButton extends StatefulWidget {
+  final GlobalKey<FormState> formKey;
+
+  const _EnabledButton({required this.formKey});
+
+  @override
+  _EnabledButtonState createState() => _EnabledButtonState();
+}
+
+class _EnabledButtonState extends State<_EnabledButton> {
+  bool _isLoading = false;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -175,24 +210,77 @@ class _EnabledButton extends StatelessWidget {
       child: SizedBox(
         width: double.infinity,
         child: FloatingActionButton(
+          backgroundColor: const Color(0xFF34A4E3),
           onPressed: () {},
-          child: FillButton(
-            buttonText: 'Save changes',
-            onTap: () {
-              showDialog(
-                barrierDismissible: false,
-                context: context,
-                builder: (context) => Dialogs.success(
-                  description: 'The product has been successfully edited!',
+          child: _isLoading
+              ? const SizedBox(
+                  width: 22,
+                  height: 22,
+                  child: CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation<Color?>(Colors.white),
+                    strokeWidth: 2.5,
+                  ),
+                )
+              : FillButton(
+                  buttonText: 'Save changes',
                   onTap: () {
-                    Navigator.pop(context);
-                  },
-                ),
-              );
-            },
-          ),
+                    if (!_isLoading) {
+                      setState(() {
+                        _isLoading = true;
+                      });
+                      Future.delayed(const Duration(seconds: 5), () {
+                        if (widget.formKey.currentState!.validate()) {
+                          showDialog(
+                            barrierDismissible: false,
+                            context: context,
+                            builder: (context) => Dialogs.success(
+                              description:
+                                  'The product has been successfully edited!',
+                              onTap: () {
+                                int count = 3;
+                                Navigator.of(context)
+                                    .popUntil((_) => count-- <= 0);
+                              },
+                            ),
+                          );
+                        } else {
+                          showDialog(
+                            barrierDismissible: false,
+                            context: context,
+                            builder: (context) => Dialogs.error(
+                              description:
+                                  'Something went wrong while editing product!',
+                              onTap: () {
+                                Navigator.pop(context);
+                              },
+                            ),
+                          );
+                        }
+                        setState(() {
+                          _isLoading = false;
+                        });
+                      });
+                    }
+                  }),
         ),
       ),
     );
   }
+}
+
+String? emptyFieldValidator(String? value) {
+  if (value == null || value.isEmpty) {
+    return 'Empty field';
+  }
+  return null;
+}
+
+String? numericValidator(String? value) {
+  if (value == null || value.isEmpty) {
+    return 'Empty field!';
+  }
+  if (double.tryParse(value.replaceAll(',', '.')) == null) {
+    return 'Must be a valid number!';
+  }
+  return null;
 }

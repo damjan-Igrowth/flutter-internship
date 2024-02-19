@@ -35,7 +35,7 @@ class Dialogs extends StatelessWidget {
       icon: circleIcon,
       iconPadding: const EdgeInsets.all(16),
       content: SizedBox(
-        height: MediaQuery.of(context).size.height * 0.11,
+        height: MediaQuery.of(context).size.height / 10,
         child: Column(
           children: [
             _Title(title: title),
@@ -59,14 +59,16 @@ class _Title extends StatelessWidget {
   });
   @override
   Widget build(BuildContext context) {
-    return Text(
-      title,
-      style: const TextStyle(
-        color: Color(0xFF000000),
-        fontFamily: 'Inter',
-        fontSize: 20,
-        fontStyle: FontStyle.normal,
-        fontWeight: FontWeight.w600,
+    return Expanded(
+      child: Text(
+        title,
+        style: const TextStyle(
+          color: Color(0xFF000000),
+          fontFamily: 'Inter',
+          fontSize: 20,
+          fontStyle: FontStyle.normal,
+          fontWeight: FontWeight.w600,
+        ),
       ),
     );
   }
@@ -80,14 +82,16 @@ class _Description extends StatelessWidget {
   });
   @override
   Widget build(BuildContext context) {
-    return Text(
-      description,
-      style: const TextStyle(
-        color: Color(0xFF787878),
-        fontFamily: 'Inter',
-        fontSize: 14,
-        fontStyle: FontStyle.normal,
-        fontWeight: FontWeight.w500,
+    return Expanded(
+      child: Text(
+        description,
+        style: const TextStyle(
+          color: Color(0xFF787878),
+          fontFamily: 'Inter',
+          fontSize: 14,
+          fontStyle: FontStyle.normal,
+          fontWeight: FontWeight.w500,
+        ),
       ),
     );
   }

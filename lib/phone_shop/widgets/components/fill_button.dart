@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 class FillButton extends StatelessWidget {
   final String buttonText;
   final VoidCallback? onTap;
+  final Widget? child;
 
   const FillButton({
     super.key,
     required this.buttonText,
     this.onTap,
+    this.child,
   });
 
   @override
