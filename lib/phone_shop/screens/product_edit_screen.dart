@@ -10,8 +10,6 @@ import 'package:flutter_internship/phone_shop/widgets/data/category_list_item.da
 import 'package:flutter_internship/phone_shop/widgets/data/product_details.dart';
 import 'package:flutter_internship/phone_shop/widgets/data/product_edit_details.dart';
 
-bool _isLoading = false;
-
 class ProductEditScreen extends StatefulWidget {
   const ProductEditScreen({super.key});
 
@@ -20,12 +18,12 @@ class ProductEditScreen extends StatefulWidget {
 }
 
 class _ProductEditScreenState extends State<ProductEditScreen> {
-  late final GlobalKey<FormState> _formKey;
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  bool _isLoading = false;
 
   @override
   void initState() {
     super.initState();
-    _formKey = GlobalKey<FormState>();
   }
 
   @override
@@ -36,18 +34,27 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
       appBar: _ProductEditAppBar(),
       body: SafeArea(
         child: SingleChildScrollView(
-          reverse: true,
           child: Column(
             children: [
               _Gallery(),
-              Form(key: _formKey, child: _TextInputs()),
+              Form(key: _formKey, child: _TextInputs(isLoading: _isLoading)),
             ],
           ),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: _EnabledButton(formKey: _formKey),
+      floatingActionButton: _EnabledButton(
+        formKey: _formKey,
+        isLoading: _isLoading,
+        onLoadingChanged: _setLoading,
+      ),
     );
+  }
+
+  void _setLoading(bool loading) {
+    setState(() {
+      _isLoading = loading;
+    });
   }
 }
 
@@ -90,6 +97,10 @@ class _Gallery extends StatelessWidget {
 }
 
 class _TextInputs extends StatefulWidget {
+  final bool isLoading;
+
+  const _TextInputs({required this.isLoading});
+
   @override
   State<_TextInputs> createState() => _TextInputsState();
 }
@@ -111,6 +122,7 @@ class _TextInputsState extends State<_TextInputs> {
             label: productEditName.label,
             initialValue: productEditName.initialValue,
             validator: emptyFieldValidator,
+            enabled: !widget.isLoading,
           ),
           const SizedBox(height: 36),
           TextInput(
@@ -119,18 +131,21 @@ class _TextInputsState extends State<_TextInputs> {
             controller: companyController,
             readOnly: true,
             onTap: () async {
-              String? company = await showModalBottomSheet<String>(
-                context: context,
-                builder: (context) => BottomItemsSheet(
-                  sheetTitleText: 'Company',
-                  itemsList: companyListItems,
-                ),
-              );
-              if (company != null) {
-                companyController.text = company;
+              if (!widget.isLoading) {
+                String? company = await showModalBottomSheet<String>(
+                  context: context,
+                  builder: (context) => BottomItemsSheet(
+                    sheetTitleText: 'Company',
+                    itemsList: companyListItems,
+                  ),
+                );
+                if (company != null) {
+                  companyController.text = company;
+                }
               }
             },
             validator: emptyFieldValidator,
+            enabled: !widget.isLoading,
           ),
           const SizedBox(height: 36),
           TextInput(
@@ -139,24 +154,28 @@ class _TextInputsState extends State<_TextInputs> {
             controller: categoryController,
             readOnly: true,
             onTap: () async {
-              String? category = await showModalBottomSheet<String>(
-                context: context,
-                builder: (context) => BottomItemsSheet(
-                  sheetTitleText: 'Category',
-                  itemsList: categoryListItems,
-                ),
-              );
-              if (category != null) {
-                categoryController.text = category;
+              if (!widget.isLoading) {
+                String? category = await showModalBottomSheet<String>(
+                  context: context,
+                  builder: (context) => BottomItemsSheet(
+                    sheetTitleText: 'Category',
+                    itemsList: categoryListItems,
+                  ),
+                );
+                if (category != null) {
+                  categoryController.text = category;
+                }
               }
             },
             validator: emptyFieldValidator,
+            enabled: !widget.isLoading,
           ),
           const SizedBox(height: 36),
           TextInput(
             label: productEditDescription.label,
             initialValue: productEditDescription.initialValue,
             isDescription: productEditDescription.isDescription,
+            enabled: !widget.isLoading,
           ),
           const SizedBox(height: 36),
           Row(
@@ -169,6 +188,7 @@ class _TextInputsState extends State<_TextInputs> {
                   validator: numericValidator,
                   keyboardType:
                       const TextInputType.numberWithOptions(decimal: true),
+                  enabled: !widget.isLoading,
                 ),
               ),
               const SizedBox(width: 16),
@@ -180,6 +200,7 @@ class _TextInputsState extends State<_TextInputs> {
                   validator: numericValidator,
                   keyboardType:
                       const TextInputType.numberWithOptions(decimal: true),
+                  enabled: !widget.isLoading,
                 ),
               ),
             ],
@@ -193,8 +214,14 @@ class _TextInputsState extends State<_TextInputs> {
 
 class _EnabledButton extends StatefulWidget {
   final GlobalKey<FormState> formKey;
+  final bool isLoading;
+  final void Function(bool loading) onLoadingChanged;
 
-  const _EnabledButton({required this.formKey});
+  const _EnabledButton({
+    required this.formKey,
+    required this.isLoading,
+    required this.onLoadingChanged,
+  });
 
   @override
   _EnabledButtonState createState() => _EnabledButtonState();
@@ -210,7 +237,7 @@ class _EnabledButtonState extends State<_EnabledButton> {
         child: FloatingActionButton(
           backgroundColor: const Color(0xFF34A4E3),
           onPressed: () {},
-          child: _isLoading
+          child: widget.isLoading
               ? const SizedBox(
                   width: 22,
                   height: 22,
@@ -222,10 +249,8 @@ class _EnabledButtonState extends State<_EnabledButton> {
               : FillButton(
                   buttonText: 'Save changes',
                   onTap: () {
-                    if (!_isLoading) {
-                      setState(() {
-                        _isLoading = true;
-                      });
+                    if (!widget.isLoading) {
+                      widget.onLoadingChanged(true);
                       Future.delayed(const Duration(seconds: 5), () {
                         if (widget.formKey.currentState!.validate()) {
                           showDialog(
@@ -254,9 +279,7 @@ class _EnabledButtonState extends State<_EnabledButton> {
                             ),
                           );
                         }
-                        setState(() {
-                          _isLoading = false;
-                        });
+                        widget.onLoadingChanged(false);
                       });
                     }
                   }),

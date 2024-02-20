@@ -44,7 +44,6 @@ class _BottomItemsSheetState extends State<BottomItemsSheet> {
               itemCount: widget.itemsList.length,
               itemBuilder: (BuildContext context, int index) {
                 final listItem = widget.itemsList[index];
-
                 return _ListItem(
                   tileText: listItem.text,
                   tileIcon: listItem.icon,
@@ -63,7 +62,10 @@ class _BottomItemsSheetState extends State<BottomItemsSheet> {
     setState(() {
       _selectedItem = selectedItem;
     });
-    Navigator.pop(context, selectedItem);
+    Navigator.pop(
+      context,
+      selectedItem,
+    );
   }
 }
 
@@ -144,35 +146,16 @@ class _ListItem extends StatefulWidget {
 }
 
 class _ListItemState extends State<_ListItem> {
-  late bool _isSelected;
-
-  @override
-  void initState() {
-    super.initState();
-    _isSelected = widget.isSelected;
-  }
-
-  @override
-  void didUpdateWidget(_ListItem oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    _isSelected = widget.isSelected;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: _isSelected ? Colors.lightBlue : Colors.white,
+      color: widget.isSelected ? Colors.lightBlue : Colors.white,
       child: ListTile(
         title: _ListTileText(
           tileText: widget.tileText,
           tileIcon: widget.tileIcon,
         ),
-        onTap: () {
-          setState(() {
-            _isSelected = !_isSelected;
-          });
-          widget.onTap();
-        },
+        onTap: widget.onTap,
       ),
     );
   }
