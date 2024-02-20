@@ -36,7 +36,7 @@ ProductEditDetails productEditCompany = ProductEditDetails(
 ProductEditDetails productEditCategory = ProductEditDetails(
     label: 'Category',
     initialValue: 'Smartphones',
-    suffixIcon: Icon(ShopIcons.iconamoon_category_light));
+    suffixIcon: const Icon(ShopIcons.iconamoon_category_light));
 ProductEditDetails productEditDescription = ProductEditDetails(
   label: 'Description',
   initialValue:

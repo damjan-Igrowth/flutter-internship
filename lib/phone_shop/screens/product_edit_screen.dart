@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_internship/phone_shop/widgets/components/company_bottom_sheet.dart';
+import 'package:flutter_internship/phone_shop/widgets/components/bottom_items_sheet.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/dialogs.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/fill_button.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/shop_gallery.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/text_input.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/title_back_icon.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/title_text.dart';
+import 'package:flutter_internship/phone_shop/widgets/data/category_list_item.dart';
 import 'package:flutter_internship/phone_shop/widgets/data/product_details.dart';
 import 'package:flutter_internship/phone_shop/widgets/data/product_edit_details.dart';
-import 'package:flutter_internship/sneakers_shop/helpers/shop_icons_icons.dart';
+
+bool _isLoading = false;
 
 class ProductEditScreen extends StatefulWidget {
   const ProductEditScreen({super.key});
@@ -29,10 +31,12 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       backgroundColor: const Color(0xFFF8F8F8),
       appBar: _ProductEditAppBar(),
       body: SafeArea(
         child: SingleChildScrollView(
+          reverse: true,
           child: Column(
             children: [
               _Gallery(),
@@ -91,7 +95,10 @@ class _TextInputs extends StatefulWidget {
 }
 
 class _TextInputsState extends State<_TextInputs> {
-  TextEditingController statusController = TextEditingController();
+  TextEditingController companyController =
+      TextEditingController(text: productEditCompany.initialValue);
+  TextEditingController categoryController =
+      TextEditingController(text: productEditCategory.initialValue);
 
   @override
   Widget build(BuildContext context) {
@@ -108,47 +115,40 @@ class _TextInputsState extends State<_TextInputs> {
           const SizedBox(height: 36),
           TextInput(
             label: productEditCompany.label,
-            initialValue: productEditCompany.initialValue,
             suffixIcon: productEditCompany.suffixIcon,
+            controller: companyController,
             readOnly: true,
-            onTap: () {
-              showModalBottomSheet(
+            onTap: () async {
+              String? company = await showModalBottomSheet<String>(
                 context: context,
-                builder: (context) => const CompanyBottomSheet(
+                builder: (context) => BottomItemsSheet(
                   sheetTitleText: 'Company',
-                  firstText: 'Apple',
-                  secondText: 'Samsung',
-                  thirdText: 'Xiaomi',
-                  fourthText: 'Realme',
-                  fifthText: 'Oneplus',
+                  itemsList: companyListItems,
                 ),
               );
+              if (company != null) {
+                companyController.text = company;
+              }
             },
             validator: emptyFieldValidator,
           ),
           const SizedBox(height: 36),
           TextInput(
             label: productEditCategory.label,
-            initialValue: productEditCategory.initialValue,
             suffixIcon: productEditCategory.suffixIcon,
+            controller: categoryController,
             readOnly: true,
-            onTap: () {
-              showModalBottomSheet(
+            onTap: () async {
+              String? category = await showModalBottomSheet<String>(
                 context: context,
-                builder: (context) => const CompanyBottomSheet(
+                builder: (context) => BottomItemsSheet(
                   sheetTitleText: 'Category',
-                  firstText: 'Smartphones',
-                  secondText: 'Laptops',
-                  thirdText: 'Video Games',
-                  fourthText: 'Audio',
-                  fifthText: 'Appliances',
-                  firstIcon: ShopIcons.smartphone,
-                  secondIcon: ShopIcons.laptop,
-                  thirdIcon: ShopIcons.games,
-                  fourthIcon: ShopIcons.audio,
-                  fifthIcon: ShopIcons.appliances,
+                  itemsList: categoryListItems,
                 ),
               );
+              if (category != null) {
+                categoryController.text = category;
+              }
             },
             validator: emptyFieldValidator,
           ),
@@ -201,8 +201,6 @@ class _EnabledButton extends StatefulWidget {
 }
 
 class _EnabledButtonState extends State<_EnabledButton> {
-  bool _isLoading = false;
-
   @override
   Widget build(BuildContext context) {
     return Padding(

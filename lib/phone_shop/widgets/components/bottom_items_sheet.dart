@@ -1,40 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_internship/phone_shop/widgets/data/category_list_item.dart';
 import 'package:flutter_internship/sneakers_shop/helpers/shop_icons_icons.dart';
 
-class CompanyBottomSheet extends StatefulWidget {
+class BottomItemsSheet extends StatefulWidget {
   final String sheetTitleText;
-
-  final String firstText;
-  final String secondText;
-  final String thirdText;
-  final String fourthText;
-  final String fifthText;
-  final IconData? firstIcon;
-  final IconData? secondIcon;
-  final IconData? thirdIcon;
-  final IconData? fourthIcon;
-  final IconData? fifthIcon;
-
-  const CompanyBottomSheet({
+  final List<ShopItem> itemsList;
+  const BottomItemsSheet({
     super.key,
-    required this.firstText,
-    required this.secondText,
-    required this.thirdText,
-    required this.fourthText,
-    required this.fifthText,
-    this.firstIcon,
-    this.secondIcon,
-    this.thirdIcon,
-    this.fourthIcon,
-    this.fifthIcon,
     required this.sheetTitleText,
+    required this.itemsList,
   });
 
   @override
-  State<CompanyBottomSheet> createState() => _CompanyBottomSheetState();
+  State<BottomItemsSheet> createState() => _BottomItemsSheetState();
 }
 
-class _CompanyBottomSheetState extends State<CompanyBottomSheet> {
+class _BottomItemsSheetState extends State<BottomItemsSheet> {
+  String? _selectedItem;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -57,24 +40,30 @@ class _CompanyBottomSheetState extends State<CompanyBottomSheet> {
             ),
           ),
           Expanded(
-            child: ListView(
-              children: [
-                _ListItem(
-                    tileText: widget.firstText, tileIcon: widget.firstIcon),
-                _ListItem(
-                    tileText: widget.secondText, tileIcon: widget.secondIcon),
-                _ListItem(
-                    tileText: widget.thirdText, tileIcon: widget.thirdIcon),
-                _ListItem(
-                    tileText: widget.fourthText, tileIcon: widget.fourthIcon),
-                _ListItem(
-                    tileText: widget.fifthText, tileIcon: widget.fifthIcon),
-              ],
+            child: ListView.builder(
+              itemCount: widget.itemsList.length,
+              itemBuilder: (BuildContext context, int index) {
+                final listItem = widget.itemsList[index];
+
+                return _ListItem(
+                  tileText: listItem.text,
+                  tileIcon: listItem.icon,
+                  isSelected: _selectedItem == listItem.text,
+                  onTap: () => _handleItemTap(listItem.text),
+                );
+              },
             ),
           ),
         ],
       ),
     );
+  }
+
+  void _handleItemTap(String selectedItem) {
+    setState(() {
+      _selectedItem = selectedItem;
+    });
+    Navigator.pop(context, selectedItem);
   }
 }
 
@@ -140,15 +129,34 @@ class _ListTileText extends StatelessWidget {
 class _ListItem extends StatefulWidget {
   final String tileText;
   final IconData? tileIcon;
+  final bool isSelected;
+  final VoidCallback onTap;
 
-  const _ListItem({required this.tileText, this.tileIcon});
+  const _ListItem({
+    required this.tileText,
+    this.tileIcon,
+    required this.isSelected,
+    required this.onTap,
+  });
 
   @override
   _ListItemState createState() => _ListItemState();
 }
 
 class _ListItemState extends State<_ListItem> {
-  bool _isSelected = false;
+  late bool _isSelected;
+
+  @override
+  void initState() {
+    super.initState();
+    _isSelected = widget.isSelected;
+  }
+
+  @override
+  void didUpdateWidget(_ListItem oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    _isSelected = widget.isSelected;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -163,7 +171,7 @@ class _ListItemState extends State<_ListItem> {
           setState(() {
             _isSelected = !_isSelected;
           });
-          Navigator.pop(context);
+          widget.onTap();
         },
       ),
     );
