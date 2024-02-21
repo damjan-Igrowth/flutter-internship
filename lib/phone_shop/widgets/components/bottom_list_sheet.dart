@@ -1,22 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_internship/phone_shop/widgets/data/category_list_item.dart';
+import 'package:flutter_internship/phone_shop/widgets/data/bottom_sheet_item.dart';
 import 'package:flutter_internship/sneakers_shop/helpers/shop_icons_icons.dart';
 
-class BottomItemsSheet extends StatefulWidget {
+class BottomListSheet extends StatelessWidget {
   final String sheetTitleText;
-  final List<ShopItem> itemsList;
-  const BottomItemsSheet({
+  final List<BottomSheetItem> itemsList;
+  final Function(String) onItemSelected;
+  final String selectedItem;
+
+  const BottomListSheet({
     super.key,
     required this.sheetTitleText,
     required this.itemsList,
+    required this.onItemSelected,
+    required this.selectedItem,
   });
-
-  @override
-  State<BottomItemsSheet> createState() => _BottomItemsSheetState();
-}
-
-class _BottomItemsSheetState extends State<BottomItemsSheet> {
-  String? _selectedItem;
 
   @override
   Widget build(BuildContext context) {
@@ -34,37 +32,27 @@ class _BottomItemsSheetState extends State<BottomItemsSheet> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                _SheetTitle(sheetTitleText: widget.sheetTitleText),
+                _SheetTitle(sheetTitleText: sheetTitleText),
                 _DropIcon(),
               ],
             ),
           ),
           Expanded(
             child: ListView.builder(
-              itemCount: widget.itemsList.length,
+              itemCount: itemsList.length,
               itemBuilder: (BuildContext context, int index) {
-                final listItem = widget.itemsList[index];
+                final listItem = itemsList[index];
                 return _ListItem(
                   tileText: listItem.text,
                   tileIcon: listItem.icon,
-                  isSelected: _selectedItem == listItem.text,
-                  onTap: () => _handleItemTap(listItem.text),
+                  isSelected: selectedItem == listItem.text,
+                  onTap: () => onItemSelected(listItem.text),
                 );
               },
             ),
           ),
         ],
       ),
-    );
-  }
-
-  void _handleItemTap(String selectedItem) {
-    setState(() {
-      _selectedItem = selectedItem;
-    });
-    Navigator.pop(
-      context,
-      selectedItem,
     );
   }
 }
@@ -103,20 +91,26 @@ class _DropIcon extends StatelessWidget {
 class _ListTileText extends StatelessWidget {
   final String tileText;
   final IconData? tileIcon;
+  final bool isSelected;
 
-  const _ListTileText({required this.tileText, this.tileIcon});
+  const _ListTileText(
+      {required this.tileText, this.tileIcon, required this.isSelected});
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         if (tileIcon != null) ...[
-          Icon(tileIcon, size: 20, color: const Color(0xFF8C8C8C)),
+          Icon(
+            tileIcon,
+            size: 20,
+            color: isSelected ? Colors.blue : const Color(0xFF8C8C8C),
+          ),
           const SizedBox(width: 20),
         ],
         Text(
           tileText,
-          style: const TextStyle(
-            color: Color(0xFF8C8C8C),
+          style: TextStyle(
+            color: isSelected ? Colors.blue : const Color(0xFF8C8C8C),
             fontFamily: 'Inter',
             fontSize: 16,
             fontStyle: FontStyle.normal,
@@ -128,7 +122,7 @@ class _ListTileText extends StatelessWidget {
   }
 }
 
-class _ListItem extends StatefulWidget {
+class _ListItem extends StatelessWidget {
   final String tileText;
   final IconData? tileIcon;
   final bool isSelected;
@@ -142,20 +136,20 @@ class _ListItem extends StatefulWidget {
   });
 
   @override
-  _ListItemState createState() => _ListItemState();
-}
-
-class _ListItemState extends State<_ListItem> {
-  @override
   Widget build(BuildContext context) {
     return Container(
-      color: widget.isSelected ? Colors.lightBlue : Colors.white,
+      decoration: BoxDecoration(
+          color: isSelected ? Colors.lightBlue[50] : Colors.transparent),
       child: ListTile(
         title: _ListTileText(
-          tileText: widget.tileText,
-          tileIcon: widget.tileIcon,
+          tileText: tileText,
+          tileIcon: tileIcon,
+          isSelected: isSelected,
         ),
-        onTap: widget.onTap,
+        onTap: () {
+          onTap();
+          Navigator.pop(context);
+        },
       ),
     );
   }

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_internship/phone_shop/widgets/components/bottom_items_sheet.dart';
+import 'package:flutter_internship/phone_shop/widgets/components/bottom_list_sheet.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/dialogs.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/fill_button.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/shop_gallery.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/text_input.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/title_back_icon.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/title_text.dart';
-import 'package:flutter_internship/phone_shop/widgets/data/category_list_item.dart';
+import 'package:flutter_internship/phone_shop/widgets/data/bottom_sheet_item.dart';
 import 'package:flutter_internship/phone_shop/widgets/data/product_details.dart';
 import 'package:flutter_internship/phone_shop/widgets/data/product_edit_details.dart';
 
@@ -22,11 +22,6 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
   bool _isLoading = false;
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
@@ -34,6 +29,7 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
       appBar: _ProductEditAppBar(),
       body: SafeArea(
         child: SingleChildScrollView(
+          reverse: true,
           child: Column(
             children: [
               _Gallery(),
@@ -132,16 +128,19 @@ class _TextInputsState extends State<_TextInputs> {
             readOnly: true,
             onTap: () async {
               if (!widget.isLoading) {
-                String? company = await showModalBottomSheet<String>(
+                await showModalBottomSheet<String>(
                   context: context,
-                  builder: (context) => BottomItemsSheet(
+                  builder: (context) => BottomListSheet(
                     sheetTitleText: 'Company',
                     itemsList: companyListItems,
+                    onItemSelected: (String selectedItem) async {
+                      setState(() {
+                        companyController.text = selectedItem;
+                      });
+                    },
+                    selectedItem: companyController.text,
                   ),
                 );
-                if (company != null) {
-                  companyController.text = company;
-                }
               }
             },
             validator: emptyFieldValidator,
@@ -155,16 +154,19 @@ class _TextInputsState extends State<_TextInputs> {
             readOnly: true,
             onTap: () async {
               if (!widget.isLoading) {
-                String? category = await showModalBottomSheet<String>(
+                await showModalBottomSheet<String>(
                   context: context,
-                  builder: (context) => BottomItemsSheet(
+                  builder: (context) => BottomListSheet(
                     sheetTitleText: 'Category',
                     itemsList: categoryListItems,
+                    onItemSelected: (String selectedItem) async {
+                      setState(() {
+                        categoryController.text = selectedItem;
+                      });
+                    },
+                    selectedItem: categoryController.text,
                   ),
                 );
-                if (category != null) {
-                  categoryController.text = category;
-                }
               }
             },
             validator: emptyFieldValidator,
