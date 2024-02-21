@@ -6,7 +6,7 @@ import 'package:flutter_internship/phone_shop/widgets/components/shop_gallery.da
 import 'package:flutter_internship/phone_shop/widgets/components/shop_section.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/title_back_icon.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/title_text.dart';
-import 'package:flutter_internship/phone_shop/widgets/data/product_details.dart';
+import 'package:flutter_internship/phone_shop/widgets/data/shop_item_model.dart';
 import 'package:flutter_internship/sneakers_shop/helpers/shop_icons_icons.dart';
 
 class ProductDetailScreen extends StatelessWidget {
@@ -91,7 +91,7 @@ class _Gallery extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 20),
       child: ShopGallery(
-        images: productDetails.images,
+        images: shopItemModels[1].images,
         padding: const EdgeInsets.symmetric(horizontal: 20),
       ),
     );
@@ -106,12 +106,12 @@ class _Overview extends StatelessWidget {
       child: ShopSection(
         title: 'Overview',
         child: OverviewCard(
-          title: productDetails.title,
-          brand: productDetails.brand,
-          discountPercentage: productDetails.discountPercentage,
-          price: productDetails.price,
-          rating: productDetails.rating,
-          description: productDetails.description,
+          title: shopItemModels[1].title,
+          brand: shopItemModels[1].brand,
+          discountPercentage: shopItemModels[1].discountPercentage,
+          price: shopItemModels[1].price,
+          rating: shopItemModels[1].rating,
+          description: shopItemModels[1].description,
         ),
       ),
     );
@@ -126,8 +126,8 @@ class _Availability extends StatelessWidget {
       child: ShopSection(
         title: 'Availability',
         child: AvailabilityCard(
-          category: productDetails.category,
-          stock: productDetails.stock,
+          category: shopItemModels[1].category,
+          stock: shopItemModels[1].stock,
         ),
       ),
     );

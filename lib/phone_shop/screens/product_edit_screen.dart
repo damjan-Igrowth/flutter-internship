@@ -7,8 +7,7 @@ import 'package:flutter_internship/phone_shop/widgets/components/text_input.dart
 import 'package:flutter_internship/phone_shop/widgets/components/title_back_icon.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/title_text.dart';
 import 'package:flutter_internship/phone_shop/widgets/data/bottom_sheet_item.dart';
-import 'package:flutter_internship/phone_shop/widgets/data/product_details.dart';
-import 'package:flutter_internship/phone_shop/widgets/data/product_edit_details.dart';
+import 'package:flutter_internship/phone_shop/widgets/data/shop_item_model.dart';
 
 class ProductEditScreen extends StatefulWidget {
   const ProductEditScreen({super.key});
@@ -85,7 +84,7 @@ class _Gallery extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 20),
       child: ShopGallery(
-        images: productDetails.images,
+        images: shopItemModels[1].images,
         padding: const EdgeInsets.symmetric(horizontal: 20),
       ),
     );
