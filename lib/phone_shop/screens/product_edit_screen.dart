@@ -8,6 +8,8 @@ import 'package:flutter_internship/phone_shop/widgets/components/title_back_icon
 import 'package:flutter_internship/phone_shop/widgets/components/title_text.dart';
 import 'package:flutter_internship/phone_shop/widgets/data/bottom_sheet_item.dart';
 import 'package:flutter_internship/phone_shop/widgets/data/shop_item_model.dart';
+import 'package:flutter_internship/phone_shop/widgets/helpers/validators.dart';
+import 'package:flutter_internship/sneakers_shop/helpers/shop_icons_icons.dart';
 
 class ProductEditScreen extends StatefulWidget {
   final ShopItemModel shopItemModel;
@@ -106,7 +108,10 @@ class _TextInputs extends StatefulWidget {
   final bool isLoading;
   final ShopItemModel shopItemModel;
 
-  const _TextInputs({required this.isLoading, required this.shopItemModel});
+  const _TextInputs({
+    required this.isLoading,
+    required this.shopItemModel,
+  });
 
   @override
   State<_TextInputs> createState() => _TextInputsState();
@@ -116,14 +121,20 @@ class _TextInputsState extends State<_TextInputs> {
   TextEditingController companyController = TextEditingController();
   TextEditingController categoryController = TextEditingController();
   TextEditingController nameController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
+  TextEditingController discountPercentageController = TextEditingController();
+  TextEditingController priceController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    companyController = TextEditingController(text: widget.shopItemModel.brand);
-    categoryController =
-        TextEditingController(text: widget.shopItemModel.category);
-    nameController = TextEditingController(text: widget.shopItemModel.title);
+    companyController.text = widget.shopItemModel.brand;
+    categoryController.text = widget.shopItemModel.category;
+    nameController.text = widget.shopItemModel.title;
+    descriptionController.text = widget.shopItemModel.description;
+    discountPercentageController.text =
+        widget.shopItemModel.discountPercentage.toStringAsFixed(2);
+    priceController.text = widget.shopItemModel.price.toStringAsFixed(2);
   }
 
   @override
@@ -134,15 +145,18 @@ class _TextInputsState extends State<_TextInputs> {
         mainAxisSize: MainAxisSize.min,
         children: [
           TextInput(
-            label: productEditName.label,
+            label: 'Product name',
             controller: nameController,
-            validator: _emptyFieldValidator,
+            validator: emptyFieldValidator,
             enabled: !widget.isLoading,
+            onSaved: (value) {
+              widget.shopItemModel.title = nameController.text;
+            },
           ),
           const SizedBox(height: 36),
           TextInput(
-            label: productEditCompany.label,
-            suffixIcon: productEditCompany.suffixIcon,
+            label: 'Company',
+            suffixIcon: const Icon(ShopIcons.lucide_building_2),
             controller: companyController,
             readOnly: true,
             onTap: () async {
@@ -162,13 +176,16 @@ class _TextInputsState extends State<_TextInputs> {
                 );
               }
             },
-            validator: _emptyFieldValidator,
+            validator: emptyFieldValidator,
             enabled: !widget.isLoading,
+            onSaved: (value) {
+              widget.shopItemModel.brand = companyController.text;
+            },
           ),
           const SizedBox(height: 36),
           TextInput(
-            label: productEditCategory.label,
-            suffixIcon: productEditCategory.suffixIcon,
+            label: 'Category',
+            suffixIcon: const Icon(ShopIcons.iconamoon_category_light),
             controller: categoryController,
             readOnly: true,
             onTap: () async {
@@ -188,41 +205,53 @@ class _TextInputsState extends State<_TextInputs> {
                 );
               }
             },
-            validator: _emptyFieldValidator,
+            validator: emptyFieldValidator,
             enabled: !widget.isLoading,
+            onSaved: (value) {
+              widget.shopItemModel.category = categoryController.text;
+            },
           ),
           const SizedBox(height: 36),
           TextInput(
-            label: productEditDescription.label,
-            initialValue: widget.shopItemModel.description,
-            isDescription: productEditDescription.isDescription,
+            label: 'Description',
+            controller: descriptionController,
             enabled: !widget.isLoading,
+            onSaved: (value) {
+              widget.shopItemModel.description = descriptionController.text;
+            },
           ),
           const SizedBox(height: 36),
           Row(
             children: [
               Flexible(
                 child: TextInput(
-                  label: productEditDiscount.label,
-                  initialValue: widget.shopItemModel.discountPercentage
-                      .toStringAsFixed(2),
-                  suffixText: productEditDiscount.suffixText,
-                  validator: _numericValidator,
+                  label: 'Discount',
+                  controller: discountPercentageController,
+                  suffixText: '%',
+                  validator: numericValidator,
                   keyboardType:
                       const TextInputType.numberWithOptions(decimal: true),
                   enabled: !widget.isLoading,
+                  onSaved: (value) {
+                    widget.shopItemModel.discountPercentage =
+                        double.parse(discountPercentageController.text);
+                  },
                 ),
               ),
               const SizedBox(width: 16),
               Flexible(
                 child: TextInput(
-                  label: productEditPrice.label,
-                  initialValue: widget.shopItemModel.price.toStringAsFixed(2),
-                  suffixText: productEditPrice.suffixText,
-                  validator: _numericValidator,
+                  label: 'Price',
+                  controller: priceController,
+                  suffixText: '\$',
+                  validator: numericValidator,
                   keyboardType:
                       const TextInputType.numberWithOptions(decimal: true),
                   enabled: !widget.isLoading,
+                  onSaved: (value) {
+                    widget.shopItemModel.price =
+                        double.parse(priceController.text);
+                  },
                 ),
               ),
             ],
@@ -238,6 +267,9 @@ class _TextInputsState extends State<_TextInputs> {
     companyController.dispose();
     categoryController.dispose();
     nameController.dispose();
+    descriptionController.dispose();
+    discountPercentageController.dispose();
+    priceController.dispose();
     super.dispose();
   }
 }
@@ -283,6 +315,8 @@ class _EnabledButtonState extends State<_EnabledButton> {
                       widget.onLoadingChanged(true);
                       Future.delayed(const Duration(seconds: 5), () {
                         if (widget.formKey.currentState!.validate()) {
+                          widget.formKey.currentState!.save();
+                          // Navigator.pop(context);
                           showDialog(
                             barrierDismissible: false,
                             context: context,
@@ -317,21 +351,4 @@ class _EnabledButtonState extends State<_EnabledButton> {
       ),
     );
   }
-}
-
-String? _emptyFieldValidator(String? value) {
-  if (value == null || value.isEmpty) {
-    return 'Empty field';
-  }
-  return null;
-}
-
-String? _numericValidator(String? value) {
-  if (value == null || value.isEmpty) {
-    return 'Empty field!';
-  }
-  if (double.tryParse(value.replaceAll(',', '.')) == null) {
-    return 'Must be a valid number!';
-  }
-  return null;
 }

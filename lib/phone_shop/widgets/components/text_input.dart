@@ -10,7 +10,6 @@ class TextInput extends StatefulWidget {
   final Widget? suffixIcon;
   final String? suffixText;
   final bool enabled;
-  final String? initialValue;
   final String? Function(String?)? validator;
   final TextEditingController? controller;
   final Function(String?)? onSaved;
@@ -26,7 +25,6 @@ class TextInput extends StatefulWidget {
     this.suffixIcon,
     this.suffixText,
     this.enabled = true,
-    this.initialValue,
     this.validator,
     this.controller,
     this.onSaved,
@@ -49,7 +47,6 @@ class _TextInputState extends State<TextInput> {
       readOnly: widget.readOnly,
       onTap: widget.onTap,
       controller: widget.controller,
-      initialValue: widget.initialValue,
       validator: widget.validator,
       onSaved: widget.onSaved,
       onChanged: widget.onChanged,

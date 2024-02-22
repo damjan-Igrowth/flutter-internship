@@ -1,21 +1,20 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_internship/sneakers_shop/helpers/shop_icons_icons.dart';
-
 class ShopItemModel {
-  final String title;
-  final String image;
-  final double discountPercentage;
-  final double rating;
-  final int stock;
-  final String category;
-  final double price;
-  final bool isSelected;
+  int id;
+  String title;
+  String image;
+  double discountPercentage;
+  double rating;
+  int stock;
+  String category;
+  double price;
+  bool isSelected;
 
-  final String brand;
-  final String description;
-  final List<String> images;
+  String brand;
+  String description;
+  List<String> images;
 
   ShopItemModel({
+    required this.id,
     required this.brand,
     required this.description,
     required this.images,
@@ -48,6 +47,7 @@ final List<ShopItemModel> shopItemModels = [
       'https://s3-alpha-sig.figma.com/img/6bda/c53e/73747002d112b5221144e5b027cddd77?Expires=1708905600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=iRKX9LUEvdxSt27dMhdOSsotJjh3aEXlWb9mfzaM5pV-sT0KIRSN-qTauv3rouOMr4bdi~1xNlHFfe7mOReZVFI3ZfOhiU8OgrbJS4eecUaR4BVAP2jYWmLDa3mleNykEvaukTSdJB6WvtdrXroAfXRSlvQ3Kv621hF5EVTjsEMrfYn-TspwxW9dlVhAtmjKLwdgqYLqAe~QXXYlIId1xpk-LDVaFqABQQXdCZb~Z-T~zkACR15l~tEsFh5KUcpQ4gaC6anPYkIxSYVk1JJdg1CsQOjB3IY2YrUC1tekLxR-w-A40OdcTpRzMM0M18X~s10K2ehx-bxtz2jP0PfPdw__',
       'https://s3-alpha-sig.figma.com/img/2ec6/d7d8/8e98f319aeb11bc07b94cd0d1e1d2a68?Expires=1708905600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=O8hqDt1jwCgv74iWeCY2DX~RP30SHxSgTu5zmxzHWYNvE~oFqcNdtbjPzCd9DRia4P5DLu4zL4jQL4NVVetkPD0f1gLB4CqEDu0S0mVpQTfhuYjOEIScOWJNtIyjp9jEsol1DKJKZlGw2myVZaMrPEhLqBnH25abXSTMUenroqb4Fq7LfV~cZodVyjnXSzKh94zZG9AApHjA2iv8X69RQ2h1P21oiCO6pN-XljFuvpgd0pTPCSpc82LKArAUGF90Vl6JDJxJ54OagThAbrZqt-sFSu59dPrSmiDcPZTKHfaZSIlkUR7BJlfnLCiFY-oA5snDYVfIUx~55cH---V5sg__',
     ],
+    id: 1,
   ),
   ShopItemModel(
     title: 'Samsung S24',
@@ -66,6 +66,7 @@ final List<ShopItemModel> shopItemModels = [
       'https://s3-alpha-sig.figma.com/img/6bda/c53e/73747002d112b5221144e5b027cddd77?Expires=1708905600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=iRKX9LUEvdxSt27dMhdOSsotJjh3aEXlWb9mfzaM5pV-sT0KIRSN-qTauv3rouOMr4bdi~1xNlHFfe7mOReZVFI3ZfOhiU8OgrbJS4eecUaR4BVAP2jYWmLDa3mleNykEvaukTSdJB6WvtdrXroAfXRSlvQ3Kv621hF5EVTjsEMrfYn-TspwxW9dlVhAtmjKLwdgqYLqAe~QXXYlIId1xpk-LDVaFqABQQXdCZb~Z-T~zkACR15l~tEsFh5KUcpQ4gaC6anPYkIxSYVk1JJdg1CsQOjB3IY2YrUC1tekLxR-w-A40OdcTpRzMM0M18X~s10K2ehx-bxtz2jP0PfPdw__',
       'https://s3-alpha-sig.figma.com/img/2ec6/d7d8/8e98f319aeb11bc07b94cd0d1e1d2a68?Expires=1708905600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=O8hqDt1jwCgv74iWeCY2DX~RP30SHxSgTu5zmxzHWYNvE~oFqcNdtbjPzCd9DRia4P5DLu4zL4jQL4NVVetkPD0f1gLB4CqEDu0S0mVpQTfhuYjOEIScOWJNtIyjp9jEsol1DKJKZlGw2myVZaMrPEhLqBnH25abXSTMUenroqb4Fq7LfV~cZodVyjnXSzKh94zZG9AApHjA2iv8X69RQ2h1P21oiCO6pN-XljFuvpgd0pTPCSpc82LKArAUGF90Vl6JDJxJ54OagThAbrZqt-sFSu59dPrSmiDcPZTKHfaZSIlkUR7BJlfnLCiFY-oA5snDYVfIUx~55cH---V5sg__',
     ],
+    id: 2,
   ),
   ShopItemModel(
     title: 'Xiaomi 14',
@@ -84,58 +85,6 @@ final List<ShopItemModel> shopItemModels = [
       'https://s3-alpha-sig.figma.com/img/6bda/c53e/73747002d112b5221144e5b027cddd77?Expires=1708905600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=iRKX9LUEvdxSt27dMhdOSsotJjh3aEXlWb9mfzaM5pV-sT0KIRSN-qTauv3rouOMr4bdi~1xNlHFfe7mOReZVFI3ZfOhiU8OgrbJS4eecUaR4BVAP2jYWmLDa3mleNykEvaukTSdJB6WvtdrXroAfXRSlvQ3Kv621hF5EVTjsEMrfYn-TspwxW9dlVhAtmjKLwdgqYLqAe~QXXYlIId1xpk-LDVaFqABQQXdCZb~Z-T~zkACR15l~tEsFh5KUcpQ4gaC6anPYkIxSYVk1JJdg1CsQOjB3IY2YrUC1tekLxR-w-A40OdcTpRzMM0M18X~s10K2ehx-bxtz2jP0PfPdw__',
       'https://s3-alpha-sig.figma.com/img/2ec6/d7d8/8e98f319aeb11bc07b94cd0d1e1d2a68?Expires=1708905600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=O8hqDt1jwCgv74iWeCY2DX~RP30SHxSgTu5zmxzHWYNvE~oFqcNdtbjPzCd9DRia4P5DLu4zL4jQL4NVVetkPD0f1gLB4CqEDu0S0mVpQTfhuYjOEIScOWJNtIyjp9jEsol1DKJKZlGw2myVZaMrPEhLqBnH25abXSTMUenroqb4Fq7LfV~cZodVyjnXSzKh94zZG9AApHjA2iv8X69RQ2h1P21oiCO6pN-XljFuvpgd0pTPCSpc82LKArAUGF90Vl6JDJxJ54OagThAbrZqt-sFSu59dPrSmiDcPZTKHfaZSIlkUR7BJlfnLCiFY-oA5snDYVfIUx~55cH---V5sg__',
     ],
+    id: 3,
   ),
 ];
-
-class ProductEditDetails {
-  final String label;
-  final Widget? suffixIcon;
-  final String? suffixText;
-  final bool? enabled;
-  final String? initialValue;
-  final String? Function(String?)? validator;
-  final TextEditingController? controller;
-  final Function(String?)? onSaved;
-  final Function(String)? onChanged;
-  final bool isDescription;
-
-  ProductEditDetails({
-    required this.label,
-    this.suffixIcon,
-    this.suffixText,
-    this.enabled,
-    this.initialValue,
-    this.validator,
-    this.controller,
-    this.onSaved,
-    this.onChanged,
-    this.isDescription = false,
-  });
-}
-
-ProductEditDetails productEditName =
-    ProductEditDetails(label: 'Product name', initialValue: 'Iphone 15 Pro');
-ProductEditDetails productEditCompany = ProductEditDetails(
-    label: 'Company',
-    initialValue: 'Apple',
-    suffixIcon: const Icon(ShopIcons.lucide_building_2));
-ProductEditDetails productEditCategory = ProductEditDetails(
-    label: 'Category',
-    initialValue: 'Smartphones',
-    suffixIcon: const Icon(ShopIcons.iconamoon_category_light));
-ProductEditDetails productEditDescription = ProductEditDetails(
-  label: 'Description',
-  initialValue:
-      'Lorem ipsum dolor sit amet consectetur. Ornare id ullamcorper et non. Massa in urna volutpat sed sagittis eget. Nullam sollicitudin viverra egestas ante. Vitae blandit.',
-  isDescription: true,
-);
-ProductEditDetails productEditDiscount = ProductEditDetails(
-  label: 'Discount',
-  initialValue: '12.44',
-  suffixText: '%',
-);
-ProductEditDetails productEditPrice = ProductEditDetails(
-  label: 'Price',
-  initialValue: '999.00',
-  suffixText: '\$',
-);
