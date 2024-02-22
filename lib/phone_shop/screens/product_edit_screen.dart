@@ -10,7 +10,9 @@ import 'package:flutter_internship/phone_shop/widgets/data/bottom_sheet_item.dar
 import 'package:flutter_internship/phone_shop/widgets/data/shop_item_model.dart';
 
 class ProductEditScreen extends StatefulWidget {
-  const ProductEditScreen({super.key});
+  final ShopItemModel shopItemModel;
+
+  const ProductEditScreen({super.key, required this.shopItemModel});
 
   @override
   State<ProductEditScreen> createState() => _ProductEditScreenState();
@@ -31,8 +33,13 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
           reverse: true,
           child: Column(
             children: [
-              _Gallery(),
-              Form(key: _formKey, child: _TextInputs(isLoading: _isLoading)),
+              _Gallery(images: widget.shopItemModel.images),
+              Form(
+                  key: _formKey,
+                  child: _TextInputs(
+                    isLoading: _isLoading,
+                    shopItemModel: widget.shopItemModel,
+                  )),
             ],
           ),
         ),
@@ -79,12 +86,16 @@ class _ProductEditAppBar extends StatelessWidget
 }
 
 class _Gallery extends StatelessWidget {
+  final List<String> images;
+
+  const _Gallery({required this.images});
+
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 20),
       child: ShopGallery(
-        images: shopItemModels[1].images,
+        images: images,
         padding: const EdgeInsets.symmetric(horizontal: 20),
       ),
     );
@@ -93,18 +104,27 @@ class _Gallery extends StatelessWidget {
 
 class _TextInputs extends StatefulWidget {
   final bool isLoading;
+  final ShopItemModel shopItemModel;
 
-  const _TextInputs({required this.isLoading});
+  const _TextInputs({required this.isLoading, required this.shopItemModel});
 
   @override
   State<_TextInputs> createState() => _TextInputsState();
 }
 
 class _TextInputsState extends State<_TextInputs> {
-  TextEditingController companyController =
-      TextEditingController(text: productEditCompany.initialValue);
-  TextEditingController categoryController =
-      TextEditingController(text: productEditCategory.initialValue);
+  TextEditingController companyController = TextEditingController();
+  TextEditingController categoryController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    companyController = TextEditingController(text: widget.shopItemModel.brand);
+    categoryController =
+        TextEditingController(text: widget.shopItemModel.category);
+    nameController = TextEditingController(text: widget.shopItemModel.title);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -115,8 +135,8 @@ class _TextInputsState extends State<_TextInputs> {
         children: [
           TextInput(
             label: productEditName.label,
-            initialValue: productEditName.initialValue,
-            validator: emptyFieldValidator,
+            controller: nameController,
+            validator: _emptyFieldValidator,
             enabled: !widget.isLoading,
           ),
           const SizedBox(height: 36),
@@ -142,7 +162,7 @@ class _TextInputsState extends State<_TextInputs> {
                 );
               }
             },
-            validator: emptyFieldValidator,
+            validator: _emptyFieldValidator,
             enabled: !widget.isLoading,
           ),
           const SizedBox(height: 36),
@@ -168,13 +188,13 @@ class _TextInputsState extends State<_TextInputs> {
                 );
               }
             },
-            validator: emptyFieldValidator,
+            validator: _emptyFieldValidator,
             enabled: !widget.isLoading,
           ),
           const SizedBox(height: 36),
           TextInput(
             label: productEditDescription.label,
-            initialValue: productEditDescription.initialValue,
+            initialValue: widget.shopItemModel.description,
             isDescription: productEditDescription.isDescription,
             enabled: !widget.isLoading,
           ),
@@ -184,9 +204,10 @@ class _TextInputsState extends State<_TextInputs> {
               Flexible(
                 child: TextInput(
                   label: productEditDiscount.label,
-                  initialValue: productEditDiscount.initialValue,
+                  initialValue: widget.shopItemModel.discountPercentage
+                      .toStringAsFixed(2),
                   suffixText: productEditDiscount.suffixText,
-                  validator: numericValidator,
+                  validator: _numericValidator,
                   keyboardType:
                       const TextInputType.numberWithOptions(decimal: true),
                   enabled: !widget.isLoading,
@@ -196,9 +217,9 @@ class _TextInputsState extends State<_TextInputs> {
               Flexible(
                 child: TextInput(
                   label: productEditPrice.label,
-                  initialValue: productEditPrice.initialValue,
+                  initialValue: widget.shopItemModel.price.toStringAsFixed(2),
                   suffixText: productEditPrice.suffixText,
-                  validator: numericValidator,
+                  validator: _numericValidator,
                   keyboardType:
                       const TextInputType.numberWithOptions(decimal: true),
                   enabled: !widget.isLoading,
@@ -210,6 +231,14 @@ class _TextInputsState extends State<_TextInputs> {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    companyController.dispose();
+    categoryController.dispose();
+    nameController.dispose();
+    super.dispose();
   }
 }
 
@@ -290,14 +319,14 @@ class _EnabledButtonState extends State<_EnabledButton> {
   }
 }
 
-String? emptyFieldValidator(String? value) {
+String? _emptyFieldValidator(String? value) {
   if (value == null || value.isEmpty) {
     return 'Empty field';
   }
   return null;
 }
 
-String? numericValidator(String? value) {
+String? _numericValidator(String? value) {
   if (value == null || value.isEmpty) {
     return 'Empty field!';
   }

@@ -10,20 +10,22 @@ import 'package:flutter_internship/phone_shop/widgets/data/shop_item_model.dart'
 import 'package:flutter_internship/sneakers_shop/helpers/shop_icons_icons.dart';
 
 class ProductDetailScreen extends StatelessWidget {
-  const ProductDetailScreen({super.key});
+  final ShopItemModel shopItemModel;
+
+  const ProductDetailScreen({super.key, required this.shopItemModel});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF8F8F8),
-      appBar: _ProductDetailAppBar(),
+      appBar: _ProductDetailAppBar(shopItemModel: shopItemModel),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             children: [
-              _Gallery(),
-              _Overview(),
-              _Availability(),
+              _Gallery(images: shopItemModel.images),
+              _Overview(shopItemModel: shopItemModel),
+              _Availability(shopItemModel: shopItemModel),
             ],
           ),
         ),
@@ -34,6 +36,10 @@ class ProductDetailScreen extends StatelessWidget {
 
 class _ProductDetailAppBar extends StatelessWidget
     implements PreferredSizeWidget {
+  final ShopItemModel shopItemModel;
+
+  const _ProductDetailAppBar({required this.shopItemModel});
+
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 
@@ -53,12 +59,20 @@ class _ProductDetailAppBar extends StatelessWidget
       centerTitle: false,
       titleSpacing: 8,
       title: const TitleText(title: 'Product details'),
-      actions: [_TitleEditIcon()],
+      actions: [
+        _TitleEditIcon(
+          shopItemModel: shopItemModel,
+        )
+      ],
     );
   }
 }
 
 class _TitleEditIcon extends StatelessWidget {
+  final ShopItemModel shopItemModel;
+
+  const _TitleEditIcon({required this.shopItemModel});
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -70,7 +84,8 @@ class _TitleEditIcon extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const ProductEditScreen(),
+                builder: (context) =>
+                    ProductEditScreen(shopItemModel: shopItemModel),
               ),
             );
           },
@@ -86,12 +101,16 @@ class _TitleEditIcon extends StatelessWidget {
 }
 
 class _Gallery extends StatelessWidget {
+  final List<String> images;
+
+  const _Gallery({required this.images});
+
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 20),
       child: ShopGallery(
-        images: shopItemModels[1].images,
+        images: images,
         padding: const EdgeInsets.symmetric(horizontal: 20),
       ),
     );
@@ -99,6 +118,10 @@ class _Gallery extends StatelessWidget {
 }
 
 class _Overview extends StatelessWidget {
+  final ShopItemModel shopItemModel;
+
+  const _Overview({required this.shopItemModel});
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -106,12 +129,12 @@ class _Overview extends StatelessWidget {
       child: ShopSection(
         title: 'Overview',
         child: OverviewCard(
-          title: shopItemModels[1].title,
-          brand: shopItemModels[1].brand,
-          discountPercentage: shopItemModels[1].discountPercentage,
-          price: shopItemModels[1].price,
-          rating: shopItemModels[1].rating,
-          description: shopItemModels[1].description,
+          title: shopItemModel.title,
+          brand: shopItemModel.brand,
+          discountPercentage: shopItemModel.discountPercentage,
+          price: shopItemModel.price,
+          rating: shopItemModel.rating,
+          description: shopItemModel.description,
         ),
       ),
     );
@@ -119,6 +142,10 @@ class _Overview extends StatelessWidget {
 }
 
 class _Availability extends StatelessWidget {
+  final ShopItemModel shopItemModel;
+
+  const _Availability({required this.shopItemModel});
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -126,8 +153,8 @@ class _Availability extends StatelessWidget {
       child: ShopSection(
         title: 'Availability',
         child: AvailabilityCard(
-          category: shopItemModels[1].category,
-          stock: shopItemModels[1].stock,
+          category: shopItemModel.category,
+          stock: shopItemModel.stock,
         ),
       ),
     );

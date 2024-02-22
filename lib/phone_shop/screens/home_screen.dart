@@ -123,7 +123,9 @@ class _ShopCardList extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const ProductDetailScreen(),
+                      builder: (context) => ProductDetailScreen(
+                        shopItemModel: shopItemModels[index],
+                      ),
                     ),
                   );
                 },
