@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_internship/phone_shop/helpers/validators.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/bottom_list_sheet.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/dialogs.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/fill_button.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/shop_gallery.dart';
-import 'package:flutter_internship/phone_shop/widgets/components/text_input.dart';
+import 'package:flutter_internship/phone_shop/widgets/components/text_input_field.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/title_back_icon.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/title_text.dart';
 import 'package:flutter_internship/phone_shop/widgets/data/bottom_sheet_item.dart';
@@ -114,14 +116,15 @@ class _TextInputsState extends State<_TextInputs> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          TextInput(
+          TextInputField(
             label: productEditName.label,
             initialValue: productEditName.initialValue,
             validator: emptyFieldValidator,
             enabled: !widget.isLoading,
+            maxLines: 1,
           ),
           const SizedBox(height: 36),
-          TextInput(
+          TextInputField(
             label: productEditCompany.label,
             suffixIcon: productEditCompany.suffixIcon,
             controller: companyController,
@@ -145,9 +148,10 @@ class _TextInputsState extends State<_TextInputs> {
             },
             validator: emptyFieldValidator,
             enabled: !widget.isLoading,
+            maxLines: 1,
           ),
           const SizedBox(height: 36),
-          TextInput(
+          TextInputField(
             label: productEditCategory.label,
             suffixIcon: productEditCategory.suffixIcon,
             controller: categoryController,
@@ -171,19 +175,20 @@ class _TextInputsState extends State<_TextInputs> {
             },
             validator: emptyFieldValidator,
             enabled: !widget.isLoading,
+            maxLines: 1,
           ),
           const SizedBox(height: 36),
-          TextInput(
+          TextInputField(
             label: productEditDescription.label,
             initialValue: productEditDescription.initialValue,
-            isDescription: productEditDescription.isDescription,
             enabled: !widget.isLoading,
+            maxLines: 5,
           ),
           const SizedBox(height: 36),
           Row(
             children: [
               Flexible(
-                child: TextInput(
+                child: TextInputField(
                   label: productEditDiscount.label,
                   initialValue: productEditDiscount.initialValue,
                   suffixText: productEditDiscount.suffixText,
@@ -191,11 +196,15 @@ class _TextInputsState extends State<_TextInputs> {
                   keyboardType:
                       const TextInputType.numberWithOptions(decimal: true),
                   enabled: !widget.isLoading,
+                  maxLines: 1,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(RegExp(r'[0-9,.]')),
+                  ],
                 ),
               ),
               const SizedBox(width: 16),
               Flexible(
-                child: TextInput(
+                child: TextInputField(
                   label: productEditPrice.label,
                   initialValue: productEditPrice.initialValue,
                   suffixText: productEditPrice.suffixText,
@@ -203,6 +212,10 @@ class _TextInputsState extends State<_TextInputs> {
                   keyboardType:
                       const TextInputType.numberWithOptions(decimal: true),
                   enabled: !widget.isLoading,
+                  maxLines: 1,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(RegExp(r'[0-9,.]')),
+                  ],
                 ),
               ),
             ],
@@ -214,7 +227,7 @@ class _TextInputsState extends State<_TextInputs> {
   }
 }
 
-class _EnabledButton extends StatefulWidget {
+class _EnabledButton extends StatelessWidget {
   final GlobalKey<FormState> formKey;
   final bool isLoading;
   final void Function(bool loading) onLoadingChanged;
@@ -226,11 +239,6 @@ class _EnabledButton extends StatefulWidget {
   });
 
   @override
-  _EnabledButtonState createState() => _EnabledButtonState();
-}
-
-class _EnabledButtonState extends State<_EnabledButton> {
-  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -238,8 +246,8 @@ class _EnabledButtonState extends State<_EnabledButton> {
         width: double.infinity,
         child: FloatingActionButton(
           backgroundColor: const Color(0xFF34A4E3),
-          onPressed: () {},
-          child: widget.isLoading
+          onPressed: null,
+          child: isLoading
               ? const SizedBox(
                   width: 22,
                   height: 22,
@@ -251,10 +259,10 @@ class _EnabledButtonState extends State<_EnabledButton> {
               : FillButton(
                   buttonText: 'Save changes',
                   onTap: () {
-                    if (!widget.isLoading) {
-                      widget.onLoadingChanged(true);
+                    if (!isLoading) {
+                      onLoadingChanged(true);
                       Future.delayed(const Duration(seconds: 5), () {
-                        if (widget.formKey.currentState!.validate()) {
+                        if (formKey.currentState!.validate()) {
                           showDialog(
                             barrierDismissible: false,
                             context: context,
@@ -281,7 +289,7 @@ class _EnabledButtonState extends State<_EnabledButton> {
                             ),
                           );
                         }
-                        widget.onLoadingChanged(false);
+                        onLoadingChanged(false);
                       });
                     }
                   }),
@@ -289,21 +297,4 @@ class _EnabledButtonState extends State<_EnabledButton> {
       ),
     );
   }
-}
-
-String? emptyFieldValidator(String? value) {
-  if (value == null || value.isEmpty) {
-    return 'Empty field';
-  }
-  return null;
-}
-
-String? numericValidator(String? value) {
-  if (value == null || value.isEmpty) {
-    return 'Empty field!';
-  }
-  if (double.tryParse(value.replaceAll(',', '.')) == null) {
-    return 'Must be a valid number!';
-  }
-  return null;
 }

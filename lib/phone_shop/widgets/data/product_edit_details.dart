@@ -11,7 +11,6 @@ class ProductEditDetails {
   final TextEditingController? controller;
   final Function(String?)? onSaved;
   final Function(String)? onChanged;
-  final bool isDescription;
 
   ProductEditDetails({
     required this.label,
@@ -23,7 +22,6 @@ class ProductEditDetails {
     this.controller,
     this.onSaved,
     this.onChanged,
-    this.isDescription = false,
   });
 }
 
@@ -41,7 +39,6 @@ ProductEditDetails productEditDescription = ProductEditDetails(
   label: 'Description',
   initialValue:
       'Lorem ipsum dolor sit amet consectetur. Ornare id ullamcorper et non. Massa in urna volutpat sed sagittis eget. Nullam sollicitudin viverra egestas ante. Vitae blandit.',
-  isDescription: true,
 );
 ProductEditDetails productEditDiscount = ProductEditDetails(
   label: 'Discount',
