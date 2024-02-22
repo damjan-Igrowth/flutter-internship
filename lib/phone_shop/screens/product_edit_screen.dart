@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_internship/phone_shop/helpers/validators.dart';
+import 'package:flutter_internship/phone_shop/widgets/helpers/validators.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/bottom_list_sheet.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/dialogs.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/fill_button.dart';
