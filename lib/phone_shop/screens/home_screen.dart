@@ -134,8 +134,9 @@ class _ShopCardListState extends State<_ShopCardList> {
                       builder: (context) => ProductDetailScreen(
                         shopItemModel: shopItemModels[index],
                         onUpdate: (ShopItemModel shopItemModel) {
-                          shopItemModels[index] = shopItemModel;
-                          setState(() {});
+                          setState(() {
+                            shopItemModels[index] = shopItemModel;
+                          });
                         },
                       ),
                     ),

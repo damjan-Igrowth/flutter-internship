@@ -176,13 +176,13 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
         formKey: _formKey,
         isLoading: isLoading,
         onLoadingChanged: _setLoading,
-        onPressed: saveChanges,
+        onPressed: _saveChanges,
         shopItemModel: widget.shopItemModel,
       ),
     );
   }
 
-  void saveChanges() {
+  void _saveChanges() {
     String title = nameController.text;
     String brand = companyController.text;
     String category = categoryController.text;
@@ -203,6 +203,7 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
       rating: widget.shopItemModel.rating,
       stock: widget.shopItemModel.stock,
     );
+
     //Items.add(updatedItem)
     //setState()
     widget.onUpdate(updatedItem);
@@ -268,7 +269,7 @@ class _Gallery extends StatelessWidget {
   }
 }
 
-class _EnabledButton extends StatefulWidget {
+class _EnabledButton extends StatelessWidget {
   final void Function() onPressed;
   final ShopItemModel shopItemModel;
 
@@ -285,11 +286,6 @@ class _EnabledButton extends StatefulWidget {
   });
 
   @override
-  _EnabledButtonState createState() => _EnabledButtonState();
-}
-
-class _EnabledButtonState extends State<_EnabledButton> {
-  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -297,8 +293,8 @@ class _EnabledButtonState extends State<_EnabledButton> {
         width: double.infinity,
         child: FloatingActionButton(
           backgroundColor: const Color(0xFF34A4E3),
-          onPressed: () {},
-          child: widget.isLoading
+          onPressed: null,
+          child: isLoading
               ? const SizedBox(
                   width: 22,
                   height: 22,
@@ -310,10 +306,10 @@ class _EnabledButtonState extends State<_EnabledButton> {
               : FillButton(
                   buttonText: 'Save changes',
                   onTap: () {
-                    if (!widget.isLoading) {
-                      widget.onLoadingChanged(true);
+                    if (!isLoading) {
+                      onLoadingChanged(true);
                       Future.delayed(const Duration(seconds: 5), () {
-                        if (widget.formKey.currentState!.validate()) {
+                        if (formKey.currentState!.validate()) {
                           showDialog(
                             barrierDismissible: false,
                             context: context,
@@ -321,7 +317,7 @@ class _EnabledButtonState extends State<_EnabledButton> {
                               description:
                                   'The product has been successfully edited!',
                               onTap: () {
-                                widget.onPressed();
+                                onPressed();
                                 int count = 3;
                                 Navigator.of(context)
                                     .popUntil((_) => count-- <= 0);
@@ -341,7 +337,7 @@ class _EnabledButtonState extends State<_EnabledButton> {
                             ),
                           );
                         }
-                        widget.onLoadingChanged(false);
+                        onLoadingChanged(false);
                       });
                     }
                   },

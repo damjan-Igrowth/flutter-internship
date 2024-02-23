@@ -79,17 +79,12 @@ class _ProductDetailAppBar extends StatelessWidget
   }
 }
 
-class _TitleEditIcon extends StatefulWidget {
+class _TitleEditIcon extends StatelessWidget {
   final ShopItemModel shopItemModel;
   final Function(ShopItemModel) onUpdate;
 
   const _TitleEditIcon({required this.shopItemModel, required this.onUpdate});
 
-  @override
-  State<_TitleEditIcon> createState() => _TitleEditIconState();
-}
-
-class _TitleEditIconState extends State<_TitleEditIcon> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -102,8 +97,8 @@ class _TitleEditIconState extends State<_TitleEditIcon> {
               context,
               MaterialPageRoute(
                 builder: (context) => ProductEditScreen(
-                  shopItemModel: widget.shopItemModel,
-                  onUpdate: widget.onUpdate,
+                  shopItemModel: shopItemModel,
+                  onUpdate: onUpdate,
                 ),
               ),
             );
