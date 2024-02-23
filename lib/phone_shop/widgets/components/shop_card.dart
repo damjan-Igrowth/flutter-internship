@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/stars.dart';
 
 class ShopCard extends StatelessWidget {
+  final int id;
   final String title;
   final double price;
   final double discountPercentage;
@@ -23,6 +24,7 @@ class ShopCard extends StatelessWidget {
     required this.image,
     this.onTap,
     this.isSelected = false,
+    required this.id,
   });
 
   @override

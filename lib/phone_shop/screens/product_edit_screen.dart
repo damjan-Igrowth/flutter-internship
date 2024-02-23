@@ -13,8 +13,13 @@ import 'package:flutter_internship/sneakers_shop/helpers/shop_icons_icons.dart';
 
 class ProductEditScreen extends StatefulWidget {
   final ShopItemModel shopItemModel;
+  final Function(ShopItemModel) onUpdate;
 
-  const ProductEditScreen({super.key, required this.shopItemModel});
+  const ProductEditScreen({
+    super.key,
+    required this.shopItemModel,
+    required this.onUpdate,
+  });
 
   @override
   State<ProductEditScreen> createState() => _ProductEditScreenState();
@@ -22,7 +27,26 @@ class ProductEditScreen extends StatefulWidget {
 
 class _ProductEditScreenState extends State<ProductEditScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  bool _isLoading = false;
+  TextEditingController companyController = TextEditingController();
+  TextEditingController categoryController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
+  TextEditingController discountPercentageController = TextEditingController();
+  TextEditingController priceController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    companyController.text = widget.shopItemModel.brand;
+    categoryController.text = widget.shopItemModel.category;
+    nameController.text = widget.shopItemModel.title;
+    descriptionController.text = widget.shopItemModel.description;
+    discountPercentageController.text =
+        widget.shopItemModel.discountPercentage.toStringAsFixed(2);
+    priceController.text = widget.shopItemModel.price.toStringAsFixed(2);
+  }
+
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -37,11 +61,112 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
             children: [
               _Gallery(images: widget.shopItemModel.images),
               Form(
-                  key: _formKey,
-                  child: _TextInputs(
-                    isLoading: _isLoading,
-                    shopItemModel: widget.shopItemModel,
-                  )),
+                key: _formKey,
+                child: Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      TextInput(
+                        label: 'Product name',
+                        controller: nameController,
+                        validator: emptyFieldValidator,
+                        enabled: !isLoading,
+                      ),
+                      const SizedBox(height: 36),
+                      TextInput(
+                        label: 'Company',
+                        suffixIcon: const Icon(ShopIcons.lucide_building_2),
+                        controller: companyController,
+                        readOnly: true,
+                        onTap: () async {
+                          if (!isLoading) {
+                            await showModalBottomSheet<String>(
+                              context: context,
+                              builder: (context) => BottomListSheet(
+                                sheetTitleText: 'Company',
+                                itemsList: companyListItems,
+                                onItemSelected: (String selectedItem) async {
+                                  setState(() {
+                                    companyController.text = selectedItem;
+                                  });
+                                },
+                                selectedItem: companyController.text,
+                              ),
+                            );
+                          }
+                        },
+                        validator: emptyFieldValidator,
+                        enabled: !isLoading,
+                      ),
+                      const SizedBox(height: 36),
+                      TextInput(
+                        label: 'Category',
+                        suffixIcon:
+                            const Icon(ShopIcons.iconamoon_category_light),
+                        controller: categoryController,
+                        readOnly: true,
+                        onTap: () async {
+                          if (!isLoading) {
+                            await showModalBottomSheet<String>(
+                              context: context,
+                              builder: (context) => BottomListSheet(
+                                sheetTitleText: 'Category',
+                                itemsList: categoryListItems,
+                                onItemSelected: (String selectedItem) async {
+                                  setState(() {
+                                    categoryController.text = selectedItem;
+                                  });
+                                },
+                                selectedItem: categoryController.text,
+                              ),
+                            );
+                          }
+                        },
+                        validator: emptyFieldValidator,
+                        enabled: !isLoading,
+                      ),
+                      const SizedBox(height: 36),
+                      TextInput(
+                        label: 'Description',
+                        controller: descriptionController,
+                        enabled: !isLoading,
+                      ),
+                      const SizedBox(height: 36),
+                      Row(
+                        children: [
+                          Flexible(
+                            child: TextInput(
+                              label: 'Discount',
+                              controller: discountPercentageController,
+                              suffixText: '%',
+                              validator: numericValidator,
+                              keyboardType:
+                                  const TextInputType.numberWithOptions(
+                                      decimal: true),
+                              enabled: !isLoading,
+                            ),
+                          ),
+                          const SizedBox(width: 16),
+                          Flexible(
+                            child: TextInput(
+                              label: 'Price',
+                              controller: priceController,
+                              suffixText: '\$',
+                              validator: numericValidator,
+                              keyboardType:
+                                  const TextInputType.numberWithOptions(
+                                      decimal: true),
+                              enabled: !isLoading,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 100),
+                    ],
+                  ),
+                ),
+              ),
             ],
           ),
         ),
@@ -49,16 +174,55 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: _EnabledButton(
         formKey: _formKey,
-        isLoading: _isLoading,
+        isLoading: isLoading,
         onLoadingChanged: _setLoading,
+        onPressed: saveChanges,
+        shopItemModel: widget.shopItemModel,
       ),
     );
   }
 
+  void saveChanges() {
+    String title = nameController.text;
+    String brand = companyController.text;
+    String category = categoryController.text;
+    String description = descriptionController.text;
+    double discountPercentage = double.parse(discountPercentageController.text);
+    double price = double.parse(priceController.text);
+
+    ShopItemModel updatedItem = ShopItemModel(
+      title: title,
+      brand: brand,
+      category: category,
+      description: description,
+      discountPercentage: discountPercentage,
+      price: price,
+      id: widget.shopItemModel.id,
+      images: widget.shopItemModel.images,
+      image: widget.shopItemModel.image,
+      rating: widget.shopItemModel.rating,
+      stock: widget.shopItemModel.stock,
+    );
+    //Items.add(updatedItem)
+    //setState()
+    widget.onUpdate(updatedItem);
+  }
+
   void _setLoading(bool loading) {
     setState(() {
-      _isLoading = loading;
+      isLoading = loading;
     });
+  }
+
+  @override
+  void dispose() {
+    companyController.dispose();
+    categoryController.dispose();
+    nameController.dispose();
+    descriptionController.dispose();
+    discountPercentageController.dispose();
+    priceController.dispose();
+    super.dispose();
   }
 }
 
@@ -104,177 +268,10 @@ class _Gallery extends StatelessWidget {
   }
 }
 
-class _TextInputs extends StatefulWidget {
-  final bool isLoading;
+class _EnabledButton extends StatefulWidget {
+  final void Function() onPressed;
   final ShopItemModel shopItemModel;
 
-  const _TextInputs({
-    required this.isLoading,
-    required this.shopItemModel,
-  });
-
-  @override
-  State<_TextInputs> createState() => _TextInputsState();
-}
-
-class _TextInputsState extends State<_TextInputs> {
-  TextEditingController companyController = TextEditingController();
-  TextEditingController categoryController = TextEditingController();
-  TextEditingController nameController = TextEditingController();
-  TextEditingController descriptionController = TextEditingController();
-  TextEditingController discountPercentageController = TextEditingController();
-  TextEditingController priceController = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-    companyController.text = widget.shopItemModel.brand;
-    categoryController.text = widget.shopItemModel.category;
-    nameController.text = widget.shopItemModel.title;
-    descriptionController.text = widget.shopItemModel.description;
-    discountPercentageController.text =
-        widget.shopItemModel.discountPercentage.toStringAsFixed(2);
-    priceController.text = widget.shopItemModel.price.toStringAsFixed(2);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(20),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          TextInput(
-            label: 'Product name',
-            controller: nameController,
-            validator: emptyFieldValidator,
-            enabled: !widget.isLoading,
-            onSaved: (value) {
-              widget.shopItemModel.title = nameController.text;
-            },
-          ),
-          const SizedBox(height: 36),
-          TextInput(
-            label: 'Company',
-            suffixIcon: const Icon(ShopIcons.lucide_building_2),
-            controller: companyController,
-            readOnly: true,
-            onTap: () async {
-              if (!widget.isLoading) {
-                await showModalBottomSheet<String>(
-                  context: context,
-                  builder: (context) => BottomListSheet(
-                    sheetTitleText: 'Company',
-                    itemsList: companyListItems,
-                    onItemSelected: (String selectedItem) async {
-                      setState(() {
-                        companyController.text = selectedItem;
-                      });
-                    },
-                    selectedItem: companyController.text,
-                  ),
-                );
-              }
-            },
-            validator: emptyFieldValidator,
-            enabled: !widget.isLoading,
-            onSaved: (value) {
-              widget.shopItemModel.brand = companyController.text;
-            },
-          ),
-          const SizedBox(height: 36),
-          TextInput(
-            label: 'Category',
-            suffixIcon: const Icon(ShopIcons.iconamoon_category_light),
-            controller: categoryController,
-            readOnly: true,
-            onTap: () async {
-              if (!widget.isLoading) {
-                await showModalBottomSheet<String>(
-                  context: context,
-                  builder: (context) => BottomListSheet(
-                    sheetTitleText: 'Category',
-                    itemsList: categoryListItems,
-                    onItemSelected: (String selectedItem) async {
-                      setState(() {
-                        categoryController.text = selectedItem;
-                      });
-                    },
-                    selectedItem: categoryController.text,
-                  ),
-                );
-              }
-            },
-            validator: emptyFieldValidator,
-            enabled: !widget.isLoading,
-            onSaved: (value) {
-              widget.shopItemModel.category = categoryController.text;
-            },
-          ),
-          const SizedBox(height: 36),
-          TextInput(
-            label: 'Description',
-            controller: descriptionController,
-            enabled: !widget.isLoading,
-            onSaved: (value) {
-              widget.shopItemModel.description = descriptionController.text;
-            },
-          ),
-          const SizedBox(height: 36),
-          Row(
-            children: [
-              Flexible(
-                child: TextInput(
-                  label: 'Discount',
-                  controller: discountPercentageController,
-                  suffixText: '%',
-                  validator: numericValidator,
-                  keyboardType:
-                      const TextInputType.numberWithOptions(decimal: true),
-                  enabled: !widget.isLoading,
-                  onSaved: (value) {
-                    widget.shopItemModel.discountPercentage =
-                        double.parse(discountPercentageController.text);
-                  },
-                ),
-              ),
-              const SizedBox(width: 16),
-              Flexible(
-                child: TextInput(
-                  label: 'Price',
-                  controller: priceController,
-                  suffixText: '\$',
-                  validator: numericValidator,
-                  keyboardType:
-                      const TextInputType.numberWithOptions(decimal: true),
-                  enabled: !widget.isLoading,
-                  onSaved: (value) {
-                    widget.shopItemModel.price =
-                        double.parse(priceController.text);
-                  },
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 100),
-        ],
-      ),
-    );
-  }
-
-  @override
-  void dispose() {
-    companyController.dispose();
-    categoryController.dispose();
-    nameController.dispose();
-    descriptionController.dispose();
-    discountPercentageController.dispose();
-    priceController.dispose();
-    super.dispose();
-  }
-}
-
-class _EnabledButton extends StatefulWidget {
   final GlobalKey<FormState> formKey;
   final bool isLoading;
   final void Function(bool loading) onLoadingChanged;
@@ -283,6 +280,8 @@ class _EnabledButton extends StatefulWidget {
     required this.formKey,
     required this.isLoading,
     required this.onLoadingChanged,
+    required this.onPressed,
+    required this.shopItemModel,
   });
 
   @override
@@ -315,8 +314,6 @@ class _EnabledButtonState extends State<_EnabledButton> {
                       widget.onLoadingChanged(true);
                       Future.delayed(const Duration(seconds: 5), () {
                         if (widget.formKey.currentState!.validate()) {
-                          widget.formKey.currentState!.save();
-                          // Navigator.pop(context);
                           showDialog(
                             barrierDismissible: false,
                             context: context,
@@ -324,6 +321,7 @@ class _EnabledButtonState extends State<_EnabledButton> {
                               description:
                                   'The product has been successfully edited!',
                               onTap: () {
+                                widget.onPressed();
                                 int count = 3;
                                 Navigator.of(context)
                                     .popUntil((_) => count-- <= 0);
@@ -346,7 +344,8 @@ class _EnabledButtonState extends State<_EnabledButton> {
                         widget.onLoadingChanged(false);
                       });
                     }
-                  }),
+                  },
+                ),
         ),
       ),
     );

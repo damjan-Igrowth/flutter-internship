@@ -11,14 +11,22 @@ import 'package:flutter_internship/sneakers_shop/helpers/shop_icons_icons.dart';
 
 class ProductDetailScreen extends StatelessWidget {
   final ShopItemModel shopItemModel;
+  final Function(ShopItemModel) onUpdate;
 
-  const ProductDetailScreen({super.key, required this.shopItemModel});
+  const ProductDetailScreen({
+    super.key,
+    required this.shopItemModel,
+    required this.onUpdate,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF8F8F8),
-      appBar: _ProductDetailAppBar(shopItemModel: shopItemModel),
+      appBar: _ProductDetailAppBar(
+        shopItemModel: shopItemModel,
+        onUpdate: onUpdate,
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -37,8 +45,10 @@ class ProductDetailScreen extends StatelessWidget {
 class _ProductDetailAppBar extends StatelessWidget
     implements PreferredSizeWidget {
   final ShopItemModel shopItemModel;
+  final Function(ShopItemModel) onUpdate;
 
-  const _ProductDetailAppBar({required this.shopItemModel});
+  const _ProductDetailAppBar(
+      {required this.shopItemModel, required this.onUpdate});
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
@@ -62,17 +72,24 @@ class _ProductDetailAppBar extends StatelessWidget
       actions: [
         _TitleEditIcon(
           shopItemModel: shopItemModel,
+          onUpdate: onUpdate,
         )
       ],
     );
   }
 }
 
-class _TitleEditIcon extends StatelessWidget {
+class _TitleEditIcon extends StatefulWidget {
   final ShopItemModel shopItemModel;
+  final Function(ShopItemModel) onUpdate;
 
-  const _TitleEditIcon({required this.shopItemModel});
+  const _TitleEditIcon({required this.shopItemModel, required this.onUpdate});
 
+  @override
+  State<_TitleEditIcon> createState() => _TitleEditIconState();
+}
+
+class _TitleEditIconState extends State<_TitleEditIcon> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -84,8 +101,10 @@ class _TitleEditIcon extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) =>
-                    ProductEditScreen(shopItemModel: shopItemModel),
+                builder: (context) => ProductEditScreen(
+                  shopItemModel: widget.shopItemModel,
+                  onUpdate: widget.onUpdate,
+                ),
               ),
             );
           },

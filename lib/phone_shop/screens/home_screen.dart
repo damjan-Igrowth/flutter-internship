@@ -101,7 +101,14 @@ class _TitleText extends StatelessWidget {
   }
 }
 
-class _ShopCardList extends StatelessWidget {
+class _ShopCardList extends StatefulWidget {
+  @override
+  State<_ShopCardList> createState() => _ShopCardListState();
+}
+
+class _ShopCardListState extends State<_ShopCardList> {
+  List<ShopItemModel> initialShopItemModels = shopItemModels;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -112,6 +119,7 @@ class _ShopCardList extends StatelessWidget {
             itemCount: shopItemModels.length,
             itemBuilder: (context, index) {
               return ShopCard(
+                id: shopItemModels[index].id,
                 title: shopItemModels[index].title,
                 price: shopItemModels[index].price,
                 discountPercentage: shopItemModels[index].discountPercentage,
@@ -125,6 +133,10 @@ class _ShopCardList extends StatelessWidget {
                     MaterialPageRoute(
                       builder: (context) => ProductDetailScreen(
                         shopItemModel: shopItemModels[index],
+                        onUpdate: (ShopItemModel shopItemModel) {
+                          shopItemModels.add(shopItemModel);
+                          setState(() {});
+                        },
                       ),
                     ),
                   );

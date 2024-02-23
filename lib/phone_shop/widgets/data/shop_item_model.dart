@@ -1,17 +1,17 @@
 class ShopItemModel {
-  int id;
-  String title;
-  String image;
-  double discountPercentage;
-  double rating;
-  int stock;
-  String category;
-  double price;
-  bool isSelected;
+  final int id;
+  final String title;
+  final String image;
+  final double discountPercentage;
+  final double rating;
+  final int stock;
+  final String category;
+  final double price;
+  final bool isSelected;
 
-  String brand;
-  String description;
-  List<String> images;
+  final String brand;
+  final String description;
+  final List<String> images;
 
   ShopItemModel({
     required this.id,
