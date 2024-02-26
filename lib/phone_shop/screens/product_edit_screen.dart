@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/bottom_list_sheet.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/dialogs.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/fill_button.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/shop_gallery.dart';
-import 'package:flutter_internship/phone_shop/widgets/components/text_input.dart';
+import 'package:flutter_internship/phone_shop/widgets/components/text_input_field.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/title_back_icon.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/title_text.dart';
 import 'package:flutter_internship/phone_shop/widgets/data/bottom_sheet_item.dart';
@@ -67,18 +68,20 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      TextInput(
+                      TextInputField(
                         label: 'Product name',
                         controller: nameController,
                         validator: emptyFieldValidator,
                         enabled: !isLoading,
+                        maxLines: 1,
                       ),
                       const SizedBox(height: 36),
-                      TextInput(
+                      TextInputField(
                         label: 'Company',
                         suffixIcon: const Icon(ShopIcons.lucide_building_2),
                         controller: companyController,
                         readOnly: true,
+                        maxLines: 1,
                         onTap: () async {
                           if (!isLoading) {
                             await showModalBottomSheet<String>(
@@ -98,12 +101,13 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
                         enabled: !isLoading,
                       ),
                       const SizedBox(height: 36),
-                      TextInput(
+                      TextInputField(
                         label: 'Category',
                         suffixIcon:
                             const Icon(ShopIcons.iconamoon_category_light),
                         controller: categoryController,
                         readOnly: true,
+                        maxLines: 1,
                         onTap: () async {
                           if (!isLoading) {
                             await showModalBottomSheet<String>(
@@ -123,19 +127,25 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
                         enabled: !isLoading,
                       ),
                       const SizedBox(height: 36),
-                      TextInput(
+                      TextInputField(
                         label: 'Description',
                         controller: descriptionController,
                         enabled: !isLoading,
+                        maxLines: 5,
                       ),
                       const SizedBox(height: 36),
                       Row(
                         children: [
                           Flexible(
-                            child: TextInput(
+                            child: TextInputField(
                               label: 'Discount',
                               controller: discountPercentageController,
                               suffixText: '%',
+                              maxLines: 1,
+                              inputFormatters: [
+                                FilteringTextInputFormatter.allow(
+                                    RegExp(r'[0-9,.]')),
+                              ],
                               validator: numericValidator,
                               keyboardType:
                                   const TextInputType.numberWithOptions(
@@ -145,10 +155,15 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
                           ),
                           const SizedBox(width: 16),
                           Flexible(
-                            child: TextInput(
+                            child: TextInputField(
                               label: 'Price',
                               controller: priceController,
                               suffixText: '\$',
+                              maxLines: 1,
+                              inputFormatters: [
+                                FilteringTextInputFormatter.allow(
+                                    RegExp(r'[0-9,.]')),
+                              ],
                               validator: numericValidator,
                               keyboardType:
                                   const TextInputType.numberWithOptions(
@@ -200,8 +215,6 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
       stock: widget.shopItemModel.stock,
     );
 
-    //Items.add(updatedItem)
-    //setState()
     widget.onUpdate(updatedItem);
   }
 
@@ -304,7 +317,7 @@ class _EnabledButton extends StatelessWidget {
                   onTap: () {
                     if (!isLoading) {
                       onLoadingChanged(true);
-                      Future.delayed(const Duration(seconds: 5), () {
+                      Future.delayed(const Duration(seconds: 3), () {
                         if (formKey.currentState!.validate()) {
                           showDialog(
                             barrierDismissible: false,

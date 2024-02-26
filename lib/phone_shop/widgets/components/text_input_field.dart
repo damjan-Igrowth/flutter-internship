@@ -1,76 +1,77 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 const Color enabledColor = Color(0xFFC9D2DE);
 const Color errorColor = Color(0xFFFF4242);
 const Color focusedColor = Color(0xFF7E44F8);
 const Color disabledColor = Color(0xFFC9D2DE);
 
-class TextInput extends StatefulWidget {
+class TextInputField extends StatefulWidget {
   final String label;
   final Widget? suffixIcon;
   final String? suffixText;
   final bool enabled;
+  final String? initialValue;
   final String? Function(String?)? validator;
   final TextEditingController? controller;
   final Function(String?)? onSaved;
   final Function(String)? onChanged;
-  final bool isDescription;
   final VoidCallback? onTap;
   final bool readOnly;
   final TextInputType? keyboardType;
+  final List<TextInputFormatter>? inputFormatters;
+  final int? maxLines;
 
-  const TextInput({
+  const TextInputField({
     super.key,
     required this.label,
     this.suffixIcon,
     this.suffixText,
     this.enabled = true,
+    this.initialValue,
     this.validator,
     this.controller,
     this.onSaved,
     this.onChanged,
-    this.isDescription = false,
     this.onTap,
     this.readOnly = false,
     this.keyboardType,
+    this.inputFormatters,
+    this.maxLines,
   });
 
   @override
-  State<TextInput> createState() => _TextInputState();
+  State<TextInputField> createState() => _TextInputFieldState();
 }
 
-class _TextInputState extends State<TextInput> {
+class _TextInputFieldState extends State<TextInputField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      inputFormatters: widget.inputFormatters,
+      onTapOutside: (event) {
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       keyboardType: widget.keyboardType,
       readOnly: widget.readOnly,
       onTap: widget.onTap,
       controller: widget.controller,
+      initialValue: widget.initialValue,
       validator: widget.validator,
       onSaved: widget.onSaved,
       onChanged: widget.onChanged,
       enabled: widget.enabled,
-      maxLines: null,
-      style: widget.isDescription
-          ? const TextStyle(
-              color: Color(0xFF181E25),
-              fontFamily: 'Inter',
-              fontSize: 14,
-              fontStyle: FontStyle.normal,
-              fontWeight: FontWeight.w400,
-            )
-          : const TextStyle(
-              color: Color(0xFF181E25),
-              fontFamily: 'Inter',
-              fontSize: 16,
-              fontStyle: FontStyle.normal,
-              fontWeight: FontWeight.w600,
-            ),
+      maxLines: widget.maxLines,
+      style: const TextStyle(
+        color: Color(0xFF181E25),
+        fontFamily: 'Inter',
+        fontSize: 16,
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w600,
+      ),
       decoration: InputDecoration(
-        contentPadding: widget.isDescription
-            ? const EdgeInsets.all(20)
-            : const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+        contentPadding:
+            const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
         labelText: widget.label,
         labelStyle: MaterialStateTextStyle.resolveWith(
           (Set<MaterialState> states) {
