@@ -11,7 +11,6 @@ class ShopCard extends StatelessWidget {
   final String category;
   final String image;
   final VoidCallback? onTap;
-  final bool isSelected;
 
   const ShopCard({
     super.key,
@@ -23,7 +22,6 @@ class ShopCard extends StatelessWidget {
     required this.category,
     required this.image,
     this.onTap,
-    this.isSelected = false,
     required this.id,
   });
 

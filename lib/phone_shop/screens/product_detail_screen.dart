@@ -32,8 +32,18 @@ class ProductDetailScreen extends StatelessWidget {
           child: Column(
             children: [
               _Gallery(images: shopItemModel.images),
-              _Overview(shopItemModel: shopItemModel),
-              _Availability(shopItemModel: shopItemModel),
+              _Overview(
+                title: shopItemModel.title,
+                brand: shopItemModel.brand,
+                discountPercentage: shopItemModel.discountPercentage,
+                price: shopItemModel.price,
+                rating: shopItemModel.rating,
+                description: shopItemModel.description,
+              ),
+              _Availability(
+                category: shopItemModel.category,
+                stock: shopItemModel.stock,
+              ),
             ],
           ),
         ),
@@ -132,9 +142,21 @@ class _Gallery extends StatelessWidget {
 }
 
 class _Overview extends StatelessWidget {
-  final ShopItemModel shopItemModel;
+  final String title;
+  final String brand;
+  final double discountPercentage;
+  final double price;
+  final double rating;
+  final String description;
 
-  const _Overview({required this.shopItemModel});
+  const _Overview({
+    required this.title,
+    required this.brand,
+    required this.discountPercentage,
+    required this.price,
+    required this.rating,
+    required this.description,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -143,12 +165,12 @@ class _Overview extends StatelessWidget {
       child: ShopSection(
         title: 'Overview',
         child: OverviewCard(
-          title: shopItemModel.title,
-          brand: shopItemModel.brand,
-          discountPercentage: shopItemModel.discountPercentage,
-          price: shopItemModel.price,
-          rating: shopItemModel.rating,
-          description: shopItemModel.description,
+          title: title,
+          brand: brand,
+          discountPercentage: discountPercentage,
+          price: price,
+          rating: rating,
+          description: description,
         ),
       ),
     );
@@ -156,9 +178,10 @@ class _Overview extends StatelessWidget {
 }
 
 class _Availability extends StatelessWidget {
-  final ShopItemModel shopItemModel;
+  final String category;
+  final int stock;
 
-  const _Availability({required this.shopItemModel});
+  const _Availability({required this.category, required this.stock});
 
   @override
   Widget build(BuildContext context) {
@@ -167,8 +190,8 @@ class _Availability extends StatelessWidget {
       child: ShopSection(
         title: 'Availability',
         child: AvailabilityCard(
-          category: shopItemModel.category,
-          stock: shopItemModel.stock,
+          category: category,
+          stock: stock,
         ),
       ),
     );

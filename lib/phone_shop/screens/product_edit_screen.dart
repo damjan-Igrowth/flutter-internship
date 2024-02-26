@@ -87,9 +87,7 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
                                 sheetTitleText: 'Company',
                                 itemsList: companyListItems,
                                 onItemSelected: (String selectedItem) async {
-                                  setState(() {
-                                    companyController.text = selectedItem;
-                                  });
+                                  companyController.text = selectedItem;
                                 },
                                 selectedItem: companyController.text,
                               ),
@@ -114,9 +112,7 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
                                 sheetTitleText: 'Category',
                                 itemsList: categoryListItems,
                                 onItemSelected: (String selectedItem) async {
-                                  setState(() {
-                                    categoryController.text = selectedItem;
-                                  });
+                                  categoryController.text = selectedItem;
                                 },
                                 selectedItem: categoryController.text,
                               ),
