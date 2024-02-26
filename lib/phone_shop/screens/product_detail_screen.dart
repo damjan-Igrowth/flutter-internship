@@ -6,24 +6,44 @@ import 'package:flutter_internship/phone_shop/widgets/components/shop_gallery.da
 import 'package:flutter_internship/phone_shop/widgets/components/shop_section.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/title_back_icon.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/title_text.dart';
-import 'package:flutter_internship/phone_shop/widgets/data/product_details.dart';
+import 'package:flutter_internship/phone_shop/widgets/data/shop_item_model.dart';
 import 'package:flutter_internship/sneakers_shop/helpers/shop_icons_icons.dart';
 
 class ProductDetailScreen extends StatelessWidget {
-  const ProductDetailScreen({super.key});
+  final ShopItemModel shopItemModel;
+  final Function(ShopItemModel) onUpdate;
+
+  const ProductDetailScreen({
+    super.key,
+    required this.shopItemModel,
+    required this.onUpdate,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF8F8F8),
-      appBar: _ProductDetailAppBar(),
+      appBar: _ProductDetailAppBar(
+        shopItemModel: shopItemModel,
+        onUpdate: onUpdate,
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             children: [
-              _Gallery(),
-              _Overview(),
-              _Availability(),
+              _Gallery(images: shopItemModel.images),
+              _Overview(
+                title: shopItemModel.title,
+                brand: shopItemModel.brand,
+                discountPercentage: shopItemModel.discountPercentage,
+                price: shopItemModel.price,
+                rating: shopItemModel.rating,
+                description: shopItemModel.description,
+              ),
+              _Availability(
+                category: shopItemModel.category,
+                stock: shopItemModel.stock,
+              ),
             ],
           ),
         ),
@@ -34,6 +54,12 @@ class ProductDetailScreen extends StatelessWidget {
 
 class _ProductDetailAppBar extends StatelessWidget
     implements PreferredSizeWidget {
+  final ShopItemModel shopItemModel;
+  final Function(ShopItemModel) onUpdate;
+
+  const _ProductDetailAppBar(
+      {required this.shopItemModel, required this.onUpdate});
+
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 
@@ -53,12 +79,22 @@ class _ProductDetailAppBar extends StatelessWidget
       centerTitle: false,
       titleSpacing: 8,
       title: const TitleText(title: 'Product details'),
-      actions: [_TitleEditIcon()],
+      actions: [
+        _TitleEditIcon(
+          shopItemModel: shopItemModel,
+          onUpdate: onUpdate,
+        )
+      ],
     );
   }
 }
 
 class _TitleEditIcon extends StatelessWidget {
+  final ShopItemModel shopItemModel;
+  final Function(ShopItemModel) onUpdate;
+
+  const _TitleEditIcon({required this.shopItemModel, required this.onUpdate});
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -70,7 +106,10 @@ class _TitleEditIcon extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const ProductEditScreen(),
+                builder: (context) => ProductEditScreen(
+                  shopItemModel: shopItemModel,
+                  onUpdate: onUpdate,
+                ),
               ),
             );
           },
@@ -86,12 +125,16 @@ class _TitleEditIcon extends StatelessWidget {
 }
 
 class _Gallery extends StatelessWidget {
+  final List<String> images;
+
+  const _Gallery({required this.images});
+
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 20),
       child: ShopGallery(
-        images: productDetails.images,
+        images: images,
         padding: const EdgeInsets.symmetric(horizontal: 20),
       ),
     );
@@ -99,6 +142,22 @@ class _Gallery extends StatelessWidget {
 }
 
 class _Overview extends StatelessWidget {
+  final String title;
+  final String brand;
+  final double discountPercentage;
+  final double price;
+  final double rating;
+  final String description;
+
+  const _Overview({
+    required this.title,
+    required this.brand,
+    required this.discountPercentage,
+    required this.price,
+    required this.rating,
+    required this.description,
+  });
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -106,12 +165,12 @@ class _Overview extends StatelessWidget {
       child: ShopSection(
         title: 'Overview',
         child: OverviewCard(
-          title: productDetails.title,
-          brand: productDetails.brand,
-          discountPercentage: productDetails.discountPercentage,
-          price: productDetails.price,
-          rating: productDetails.rating,
-          description: productDetails.description,
+          title: title,
+          brand: brand,
+          discountPercentage: discountPercentage,
+          price: price,
+          rating: rating,
+          description: description,
         ),
       ),
     );
@@ -119,6 +178,11 @@ class _Overview extends StatelessWidget {
 }
 
 class _Availability extends StatelessWidget {
+  final String category;
+  final int stock;
+
+  const _Availability({required this.category, required this.stock});
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -126,8 +190,8 @@ class _Availability extends StatelessWidget {
       child: ShopSection(
         title: 'Availability',
         child: AvailabilityCard(
-          category: productDetails.category,
-          stock: productDetails.stock,
+          category: category,
+          stock: stock,
         ),
       ),
     );
