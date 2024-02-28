@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_internship/phone_shop/screens/product_detail_screen.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/fill_button.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/shop_card.dart';
 import 'package:flutter_internship/phone_shop/widgets/data/shop_item_model.dart';
 import 'package:flutter_svg/svg.dart';
+
+final productsProvider =
+    StateProvider<List<ShopItemModel>>((ref) => shopItemModels);
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -101,43 +105,33 @@ class _TitleText extends StatelessWidget {
   }
 }
 
-class _ShopCardList extends StatefulWidget {
+class _ShopCardList extends ConsumerWidget {
   @override
-  State<_ShopCardList> createState() => _ShopCardListState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final shopItems = ref.watch(productsProvider);
 
-class _ShopCardListState extends State<_ShopCardList> {
-  List<ShopItemModel> initialShopItemModels = shopItemModels;
-
-  @override
-  Widget build(BuildContext context) {
     return Column(
       children: [
         Expanded(
           child: ListView.separated(
             padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-            itemCount: shopItemModels.length,
+            itemCount: shopItems.length,
             itemBuilder: (context, index) {
               return ShopCard(
-                id: shopItemModels[index].id,
-                title: shopItemModels[index].title,
-                price: shopItemModels[index].price,
-                discountPercentage: shopItemModels[index].discountPercentage,
-                rating: shopItemModels[index].rating,
-                stock: shopItemModels[index].stock,
-                category: shopItemModels[index].category,
-                image: shopItemModels[index].image,
+                id: shopItems[index].id,
+                title: shopItems[index].title,
+                price: shopItems[index].price,
+                discountPercentage: shopItems[index].discountPercentage,
+                rating: shopItems[index].rating,
+                stock: shopItems[index].stock,
+                category: shopItems[index].category,
+                image: shopItems[index].image,
                 onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => ProductDetailScreen(
-                        shopItemModel: shopItemModels[index],
-                        onUpdate: (ShopItemModel shopItemModel) {
-                          setState(() {
-                            shopItemModels[index] = shopItemModel;
-                          });
-                        },
+                      builder: (_) => ProductDetailScreen(
+                        id: shopItems[index].id,
                       ),
                     ),
                   );

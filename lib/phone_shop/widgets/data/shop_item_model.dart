@@ -7,7 +7,6 @@ class ShopItemModel {
   final int stock;
   final String category;
   final double price;
-  final bool isSelected;
 
   final String brand;
   final String description;
@@ -25,7 +24,6 @@ class ShopItemModel {
     required this.stock,
     required this.category,
     required this.price,
-    this.isSelected = false,
   });
 }
 
