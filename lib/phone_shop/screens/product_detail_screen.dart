@@ -8,7 +8,6 @@ import 'package:flutter_internship/phone_shop/widgets/components/shop_gallery.da
 import 'package:flutter_internship/phone_shop/widgets/components/shop_section.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/title_back_icon.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/title_text.dart';
-import 'package:flutter_internship/phone_shop/widgets/data/shop_item_model.dart';
 import 'package:flutter_internship/sneakers_shop/helpers/shop_icons_icons.dart';
 
 class ProductDetailScreen extends ConsumerWidget {
