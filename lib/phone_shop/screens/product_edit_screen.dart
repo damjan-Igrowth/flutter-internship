@@ -10,23 +10,20 @@ import 'package:flutter_internship/phone_shop/widgets/components/title_text.dart
 import 'package:flutter_internship/phone_shop/widgets/data/bottom_sheet_item.dart';
 import 'package:flutter_internship/phone_shop/widgets/data/shop_item_model.dart';
 import 'package:flutter_internship/phone_shop/widgets/helpers/validators.dart';
+import 'package:flutter_internship/phone_shop/widgets/providers/product.dart';
 import 'package:flutter_internship/sneakers_shop/helpers/shop_icons_icons.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ProductEditScreen extends StatefulWidget {
-  final ShopItemModel shopItemModel;
-  final Function(ShopItemModel) onUpdate;
+class ProductEditScreen extends ConsumerStatefulWidget {
+  final int id;
 
-  const ProductEditScreen({
-    super.key,
-    required this.shopItemModel,
-    required this.onUpdate,
-  });
+  const ProductEditScreen({super.key, required this.id});
 
   @override
-  State<ProductEditScreen> createState() => _ProductEditScreenState();
+  ConsumerState<ProductEditScreen> createState() => _ProductEditScreenState();
 }
 
-class _ProductEditScreenState extends State<ProductEditScreen> {
+class _ProductEditScreenState extends ConsumerState<ProductEditScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   TextEditingController companyController = TextEditingController();
   TextEditingController categoryController = TextEditingController();
@@ -38,19 +35,69 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
   @override
   void initState() {
     super.initState();
-    companyController.text = widget.shopItemModel.brand;
-    categoryController.text = widget.shopItemModel.category;
-    nameController.text = widget.shopItemModel.title;
-    descriptionController.text = widget.shopItemModel.description;
-    discountPercentageController.text =
-        widget.shopItemModel.discountPercentage.toStringAsFixed(2);
-    priceController.text = widget.shopItemModel.price.toStringAsFixed(2);
+    final product = ref.read(productProvider(id: widget.id));
+
+    companyController.text = product.brand;
+    categoryController.text = product.category;
+    nameController.text = product.title;
+    descriptionController.text = product.description;
+    final discount = product.discountPercentage;
+    discountPercentageController.text = discount.toStringAsFixed(2);
+    priceController.text = product.price.toStringAsFixed(2);
   }
 
-  bool isLoading = false;
+  @override
+  void dispose() {
+    companyController.dispose();
+    categoryController.dispose();
+    nameController.dispose();
+    descriptionController.dispose();
+    discountPercentageController.dispose();
+    priceController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
+    final product = ref.read(productProvider(id: widget.id));
+
+    final actionState = ref.watch(editProductProvider);
+    final actionNotifier = ref.watch(editProductProvider.notifier);
+
+    ref.listen(editProductProvider, (previous, next) {
+      if (previous is! AsyncLoading) return;
+
+      next.maybeWhen(
+        data: (data) => showDialog(
+          barrierDismissible: false,
+          context: context,
+          builder: (context) => Dialogs.success(
+            description: 'The product has been successfully edited!',
+            onTap: () {
+              int count = 3;
+              Navigator.of(context).popUntil((_) => count-- <= 0);
+            },
+          ),
+        ),
+        error: (error, stackTrace) => showDialog(
+          barrierDismissible: false,
+          context: context,
+          builder: (context) => Dialogs.error(
+            description: 'Something went wrong while editing product!',
+            onTap: () {
+              Navigator.pop(context);
+            },
+          ),
+        ),
+        orElse: () {},
+      );
+    });
+
+    final isLoading = actionState.maybeWhen(
+      loading: () => true,
+      orElse: () => false,
+    );
+
     return Scaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor: const Color(0xFFF8F8F8),
@@ -60,7 +107,7 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
           reverse: true,
           child: Column(
             children: [
-              _Gallery(images: widget.shopItemModel.images),
+              _Gallery(images: product.images),
               Form(
                 key: _formKey,
                 child: Padding(
@@ -149,7 +196,8 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
                               validator: numericValidator,
                               keyboardType:
                                   const TextInputType.numberWithOptions(
-                                      decimal: true),
+                                decimal: true,
+                              ),
                               enabled: !isLoading,
                             ),
                           ),
@@ -167,7 +215,8 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
                               validator: numericValidator,
                               keyboardType:
                                   const TextInputType.numberWithOptions(
-                                      decimal: true),
+                                decimal: true,
+                              ),
                               enabled: !isLoading,
                             ),
                           ),
@@ -186,53 +235,34 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
       floatingActionButton: _EnabledButton(
         formKey: _formKey,
         isLoading: isLoading,
-        onLoadingChanged: _setLoading,
-        onPressed: _saveChanges,
-        shopItemModel: widget.shopItemModel,
+        onPressed: () {
+          String title = nameController.text;
+          String brand = companyController.text;
+          String category = categoryController.text;
+          String description = descriptionController.text;
+          double discountPercentage =
+              double.parse(discountPercentageController.text);
+          double price = double.parse(priceController.text);
+
+          ShopItemModel updatedItem = ShopItemModel(
+            title: title,
+            brand: brand,
+            category: category,
+            description: description,
+            discountPercentage: discountPercentage,
+            price: price,
+            id: product.id,
+            images: product.images,
+            image: product.image,
+            rating: product.rating,
+            stock: product.stock,
+          );
+
+          actionNotifier.edit(updatedItem);
+        },
+        shopItemModel: product,
       ),
     );
-  }
-
-  void _saveChanges() {
-    String title = nameController.text;
-    String brand = companyController.text;
-    String category = categoryController.text;
-    String description = descriptionController.text;
-    double discountPercentage = double.parse(discountPercentageController.text);
-    double price = double.parse(priceController.text);
-
-    ShopItemModel updatedItem = ShopItemModel(
-      title: title,
-      brand: brand,
-      category: category,
-      description: description,
-      discountPercentage: discountPercentage,
-      price: price,
-      id: widget.shopItemModel.id,
-      images: widget.shopItemModel.images,
-      image: widget.shopItemModel.image,
-      rating: widget.shopItemModel.rating,
-      stock: widget.shopItemModel.stock,
-    );
-
-    widget.onUpdate(updatedItem);
-  }
-
-  void _setLoading(bool loading) {
-    setState(() {
-      isLoading = loading;
-    });
-  }
-
-  @override
-  void dispose() {
-    companyController.dispose();
-    categoryController.dispose();
-    nameController.dispose();
-    descriptionController.dispose();
-    discountPercentageController.dispose();
-    priceController.dispose();
-    super.dispose();
   }
 }
 
@@ -284,12 +314,10 @@ class _EnabledButton extends StatelessWidget {
 
   final GlobalKey<FormState> formKey;
   final bool isLoading;
-  final void Function(bool loading) onLoadingChanged;
 
   const _EnabledButton({
     required this.formKey,
     required this.isLoading,
-    required this.onLoadingChanged,
     required this.onPressed,
     required this.shopItemModel,
   });
@@ -315,39 +343,8 @@ class _EnabledButton extends StatelessWidget {
               : FillButton(
                   buttonText: 'Save changes',
                   onTap: () {
-                    if (!isLoading) {
-                      onLoadingChanged(true);
-                      Future.delayed(const Duration(seconds: 3), () {
-                        if (formKey.currentState!.validate()) {
-                          showDialog(
-                            barrierDismissible: false,
-                            context: context,
-                            builder: (context) => Dialogs.success(
-                              description:
-                                  'The product has been successfully edited!',
-                              onTap: () {
-                                onPressed();
-                                int count = 3;
-                                Navigator.of(context)
-                                    .popUntil((_) => count-- <= 0);
-                              },
-                            ),
-                          );
-                        } else {
-                          showDialog(
-                            barrierDismissible: false,
-                            context: context,
-                            builder: (context) => Dialogs.error(
-                              description:
-                                  'Something went wrong while editing product!',
-                              onTap: () {
-                                Navigator.pop(context);
-                              },
-                            ),
-                          );
-                        }
-                        onLoadingChanged(false);
-                      });
+                    if (!isLoading && formKey.currentState!.validate()) {
+                      onPressed();
                     }
                   },
                 ),

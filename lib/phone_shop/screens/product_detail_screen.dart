@@ -6,43 +6,40 @@ import 'package:flutter_internship/phone_shop/widgets/components/shop_gallery.da
 import 'package:flutter_internship/phone_shop/widgets/components/shop_section.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/title_back_icon.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/title_text.dart';
-import 'package:flutter_internship/phone_shop/widgets/data/shop_item_model.dart';
+import 'package:flutter_internship/phone_shop/widgets/providers/product.dart';
 import 'package:flutter_internship/sneakers_shop/helpers/shop_icons_icons.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ProductDetailScreen extends StatelessWidget {
-  final ShopItemModel shopItemModel;
-  final Function(ShopItemModel) onUpdate;
+class ProductDetailScreen extends ConsumerWidget {
+  final int id;
 
   const ProductDetailScreen({
     super.key,
-    required this.shopItemModel,
-    required this.onUpdate,
+    required this.id,
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final product = ref.watch(productProvider(id: id));
     return Scaffold(
       backgroundColor: const Color(0xFFF8F8F8),
-      appBar: _ProductDetailAppBar(
-        shopItemModel: shopItemModel,
-        onUpdate: onUpdate,
-      ),
+      appBar: _ProductDetailAppBar(id: id),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             children: [
-              _Gallery(images: shopItemModel.images),
+              _Gallery(images: product.images),
               _Overview(
-                title: shopItemModel.title,
-                brand: shopItemModel.brand,
-                discountPercentage: shopItemModel.discountPercentage,
-                price: shopItemModel.price,
-                rating: shopItemModel.rating,
-                description: shopItemModel.description,
+                title: product.title,
+                brand: product.brand,
+                discountPercentage: product.discountPercentage,
+                price: product.price,
+                rating: product.rating,
+                description: product.description,
               ),
               _Availability(
-                category: shopItemModel.category,
-                stock: shopItemModel.stock,
+                category: product.category,
+                stock: product.stock,
               ),
             ],
           ),
@@ -54,11 +51,8 @@ class ProductDetailScreen extends StatelessWidget {
 
 class _ProductDetailAppBar extends StatelessWidget
     implements PreferredSizeWidget {
-  final ShopItemModel shopItemModel;
-  final Function(ShopItemModel) onUpdate;
-
-  const _ProductDetailAppBar(
-      {required this.shopItemModel, required this.onUpdate});
+  final int id;
+  const _ProductDetailAppBar({required this.id});
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
@@ -79,21 +73,15 @@ class _ProductDetailAppBar extends StatelessWidget
       centerTitle: false,
       titleSpacing: 8,
       title: const TitleText(title: 'Product details'),
-      actions: [
-        _TitleEditIcon(
-          shopItemModel: shopItemModel,
-          onUpdate: onUpdate,
-        )
-      ],
+      actions: [_TitleEditIcon(id: id)],
     );
   }
 }
 
 class _TitleEditIcon extends StatelessWidget {
-  final ShopItemModel shopItemModel;
-  final Function(ShopItemModel) onUpdate;
+  final int id;
 
-  const _TitleEditIcon({required this.shopItemModel, required this.onUpdate});
+  const _TitleEditIcon({required this.id});
 
   @override
   Widget build(BuildContext context) {
@@ -106,10 +94,7 @@ class _TitleEditIcon extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => ProductEditScreen(
-                  shopItemModel: shopItemModel,
-                  onUpdate: onUpdate,
-                ),
+                builder: (context) => ProductEditScreen(id: id),
               ),
             );
           },
