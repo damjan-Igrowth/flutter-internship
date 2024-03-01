@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'product_provider.dart';
+part of 'product.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -154,7 +154,22 @@ class _ProductProviderElement extends AutoDisposeProviderElement<ShopItemModel>
   int get id => (origin as ProductProvider).id;
 }
 
-String _$editProductHash() => r'd7fffd489203d4e420910b427e76d7dc7cc014cb';
+String _$productsHash() => r'ac63c6311d40da56147fbe2ffac1f32974b89305';
+
+/// See also [Products].
+@ProviderFor(Products)
+final productsProvider =
+    AutoDisposeNotifierProvider<Products, List<ShopItemModel>>.internal(
+  Products.new,
+  name: r'productsProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$productsHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$Products = AutoDisposeNotifier<List<ShopItemModel>>;
+String _$editProductHash() => r'f641f2080cf770083209906b05b145d8037a7e2f';
 
 /// See also [EditProduct].
 @ProviderFor(EditProduct)

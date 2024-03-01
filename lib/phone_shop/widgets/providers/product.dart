@@ -1,14 +1,26 @@
-import 'package:flutter_internship/phone_shop/screens/home_screen.dart';
 import 'package:flutter_internship/phone_shop/widgets/data/shop_item_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'product_provider.g.dart';
+part 'product.g.dart';
+
+@riverpod
+class Products extends _$Products {
+  @override
+  List<ShopItemModel> build() {
+    return shopItemModels;
+  }
+
+  void updateItem(ShopItemModel shopItemModel) {
+    final index = state.indexWhere((product) => product.id == shopItemModel.id);
+    state[index] = shopItemModel;
+    state = [...state];
+  }
+}
 
 @riverpod
 ShopItemModel product(Ref ref, {required int id}) {
   final products = ref.read(productsProvider);
-
   return products.where((product) => product.id == id).first;
 }
 
@@ -20,20 +32,10 @@ class EditProduct extends _$EditProduct {
     return;
   }
 
-  Future<void> edit(ShopItemModel edittedItem) async {
-    final id = edittedItem.id;
-
+  Future<void> edit(ShopItemModel editedItem) async {
     state = const AsyncValue.loading();
-
     await Future.delayed(const Duration(seconds: 2));
-
-    final productsNtifier = ref.read(productsProvider.notifier);
-    var products = productsNtifier.state;
-    final index = products.indexWhere((product) => product.id == id);
-    products[index] = edittedItem;
-
-    productsNtifier.state = [...products];
-
+    ref.read(productsProvider.notifier).updateItem(editedItem);
     state = const AsyncValue.data(null);
   }
 }

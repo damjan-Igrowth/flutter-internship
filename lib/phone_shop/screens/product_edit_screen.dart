@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_internship/phone_shop/providers/product_provider.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/bottom_list_sheet.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/dialogs.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/fill_button.dart';
@@ -11,6 +10,7 @@ import 'package:flutter_internship/phone_shop/widgets/components/title_text.dart
 import 'package:flutter_internship/phone_shop/widgets/data/bottom_sheet_item.dart';
 import 'package:flutter_internship/phone_shop/widgets/data/shop_item_model.dart';
 import 'package:flutter_internship/phone_shop/widgets/helpers/validators.dart';
+import 'package:flutter_internship/phone_shop/widgets/providers/product.dart';
 import 'package:flutter_internship/sneakers_shop/helpers/shop_icons_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -343,7 +343,9 @@ class _EnabledButton extends StatelessWidget {
               : FillButton(
                   buttonText: 'Save changes',
                   onTap: () {
-                    if (!isLoading) onPressed();
+                    if (!isLoading && formKey.currentState!.validate()) {
+                      onPressed();
+                    }
                   },
                 ),
         ),

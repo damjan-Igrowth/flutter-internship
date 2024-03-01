@@ -3,11 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_internship/phone_shop/screens/product_detail_screen.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/fill_button.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/shop_card.dart';
-import 'package:flutter_internship/phone_shop/widgets/data/shop_item_model.dart';
+import 'package:flutter_internship/phone_shop/widgets/providers/product.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
-
-final productsProvider =
-    StateProvider<List<ShopItemModel>>((ref) => shopItemModels);
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -109,7 +107,6 @@ class _ShopCardList extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final shopItems = ref.watch(productsProvider);
-
     return Column(
       children: [
         Expanded(
@@ -130,7 +127,7 @@ class _ShopCardList extends ConsumerWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => ProductDetailScreen(
+                      builder: (context) => ProductDetailScreen(
                         id: shopItems[index].id,
                       ),
                     ),

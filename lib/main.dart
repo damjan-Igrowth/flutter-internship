@@ -7,7 +7,11 @@ import 'package:flutter_internship/stopwatch/stop_watch.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
-  runApp(const ProviderScope(child: MaterialApp(home: MyApp())));
+  runApp(const ProviderScope(
+    child: MaterialApp(
+      home: MyApp(),
+    ),
+  ));
 }
 
 class MyApp extends StatelessWidget {

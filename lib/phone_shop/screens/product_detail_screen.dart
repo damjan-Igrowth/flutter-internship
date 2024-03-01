@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_internship/phone_shop/providers/product_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_internship/phone_shop/screens/product_edit_screen.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/availability_card.dart';
@@ -8,17 +7,21 @@ import 'package:flutter_internship/phone_shop/widgets/components/shop_gallery.da
 import 'package:flutter_internship/phone_shop/widgets/components/shop_section.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/title_back_icon.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/title_text.dart';
+import 'package:flutter_internship/phone_shop/widgets/providers/product.dart';
 import 'package:flutter_internship/sneakers_shop/helpers/shop_icons_icons.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ProductDetailScreen extends ConsumerWidget {
   final int id;
 
-  const ProductDetailScreen({required this.id, super.key});
+  const ProductDetailScreen({
+    super.key,
+    required this.id,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final product = ref.watch(productProvider(id: id));
-
     return Scaffold(
       backgroundColor: const Color(0xFFF8F8F8),
       appBar: _ProductDetailAppBar(id: id),
@@ -35,6 +38,10 @@ class ProductDetailScreen extends ConsumerWidget {
                 rating: product.rating,
                 description: product.description,
               ),
+              _Availability(
+                category: product.category,
+                stock: product.stock,
+              ),
               _Availability(category: product.category, stock: product.stock),
             ],
           ),
@@ -47,7 +54,6 @@ class ProductDetailScreen extends ConsumerWidget {
 class _ProductDetailAppBar extends StatelessWidget
     implements PreferredSizeWidget {
   final int id;
-
   const _ProductDetailAppBar({required this.id});
 
   @override
