@@ -9,7 +9,6 @@ import 'package:flutter_internship/phone_shop/widgets/components/title_back_icon
 import 'package:flutter_internship/phone_shop/widgets/components/title_text.dart';
 import 'package:flutter_internship/phone_shop/widgets/providers/product.dart';
 import 'package:flutter_internship/sneakers_shop/helpers/shop_icons_icons.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ProductDetailScreen extends ConsumerWidget {
   final int id;

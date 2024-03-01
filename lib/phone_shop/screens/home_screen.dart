@@ -4,7 +4,6 @@ import 'package:flutter_internship/phone_shop/screens/product_detail_screen.dart
 import 'package:flutter_internship/phone_shop/widgets/components/fill_button.dart';
 import 'package:flutter_internship/phone_shop/widgets/components/shop_card.dart';
 import 'package:flutter_internship/phone_shop/widgets/providers/product.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 
 class HomeScreen extends StatelessWidget {
